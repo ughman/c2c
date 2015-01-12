@@ -217,6 +217,32 @@ public:
 		address -= i * sizeof(T);
 		return *this;
 	}
+
+	emuptr &operator++()
+	{
+		address += sizeof(T);
+		return *this;
+	}
+
+	emuptr &operator--()
+	{
+		address -= sizeof(T);
+		return *this;
+	}
+
+	emuptr operator++(int)
+	{
+		emuptr result = *this;
+		address += sizeof(T);
+		return result;
+	}
+
+	emuptr operator--(int)
+	{
+		emuptr result = *this;
+		address -= sizeof(T);
+		return result;
+	}
 };
 
 static_assert(std::is_trivial<emuptr<int>>::value,"emuptr<T> must be a trivial type for ABI compatibility with uint32_t!");
