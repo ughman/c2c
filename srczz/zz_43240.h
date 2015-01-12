@@ -1,0 +1,23 @@
+#ifdef ZZ_INCLUDE_CODE
+ZZ_43240:
+	T8 = EMU_ReadU32(A0);
+	T9 = EMU_ReadU32(A0 + 4); //+ 0x4
+	GTE_SetControlRegister(0,T8);
+	GTE_SetControlRegister(1,T9);
+	T8 = EMU_ReadU32(A0 + 8); //+ 0x8
+	T9 = EMU_ReadU32(A0 + 12); //+ 0xC
+	A0 = EMU_ReadU32(A0 + 16); //+ 0x10
+	GTE_SetControlRegister(2,T8);
+	GTE_SetControlRegister(3,T9);
+	GTE_SetControlRegister(4,A0);
+#endif
+ZZ_MARK_TARGET(0x80043240,ZZ_43240);
+ZZ_MARK(0x80043244);
+ZZ_MARK(0x80043248);
+ZZ_MARK(0x8004324C);
+ZZ_MARK(0x80043250);
+ZZ_MARK(0x80043254);
+ZZ_MARK(0x80043258);
+ZZ_MARK(0x8004325C);
+ZZ_MARK(0x80043260);
+ZZ_MARK(0x80043264);
