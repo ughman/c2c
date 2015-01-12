@@ -171,6 +171,11 @@ public:
 		this->address = other.address;
 	}
 
+	explicit operator uint32_t()
+	{
+		return address;
+	}
+
 	operator T *() const
 	{
 		return EMU_TPointer<T>(address);
