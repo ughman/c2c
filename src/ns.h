@@ -10,28 +10,28 @@ extern "C" {
 
 struct nspage
 {
-	uint16_t magic;
-	uint16_t type;
-	uint32_t pagenum;
-	uint32_t entrycount;
-	uint32_t checksum;
+	unk16_t magic;
+	unk16_t type;
+	unk32_t pagenum;
+	unk32_t entrycount;
+	unk32_t checksum;
 };
 
 struct nspageinfo
 {
 	EMUPTR(struct nspage) page;
 	int16_t status;
-	uint16_t off_6;
+	unk16_t off_6;
 	int16_t unk_8;
-	uint16_t off_10;
-	uint32_t off_12;
+	unk16_t off_10;
+	unk32_t off_12;
 	EMUPTR(struct nspage) nextpage;
 	int32_t pagenum;
-	uint32_t off_24;
+	unk32_t off_24;
 	int32_t unk_28;
-	uint32_t off_32;
-	uint32_t off_36;
-	uint32_t off_40;
+	unk32_t off_32;
+	unk32_t off_36;
+	unk32_t off_40;
 };
 
 extern int NS_VerifyChecksum(EMUPTR(struct nspage) nspage);

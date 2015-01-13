@@ -4,6 +4,10 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+typedef uint8_t unk8_t;
+typedef uint16_t unk16_t;
+typedef uint32_t unk32_t;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
