@@ -1,6 +1,28 @@
 #include "ns.h"
 #include "emu.h"
 
+int32_t NS_1254C(emuptr<struct nspage> nspage)
+{
+	if (nspage->type == 0x1)
+	{
+		return -255;
+	}
+	if (nspage->magic != 0x1234)
+	{
+		return -18;
+	}
+	for (int32_t i = nspage->entrycount - 1;i >= 0;i--)
+	{
+		*(uint32_t *)&nspage->entries[i] += (uint32_t)nspage;
+		for (int32_t ii = nspage->entries[i]->itemcount;ii >= 0;ii--)
+		{
+			*(uint32_t *)&nspage->entries[i]->items[ii] += (uint32_t)nspage->entries[i];
+		}
+	}
+	*(uint32_t *)&nspage->entries[nspage->entrycount] += (uint32_t)nspage;
+	return -255;
+}
+
 int NS_VerifyChecksum(emuptr<struct nspage> nspage)
 {
 	return nspage->checksum == EMU_Invoke(0x800125F8,1,nspage);

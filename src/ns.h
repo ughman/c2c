@@ -8,13 +8,23 @@
 extern "C" {
 #endif
 
+struct nsentry
+{
+	unk32_t magic;
+	unk32_t id;
+	unk32_t type;
+	int32_t itemcount;
+	EMUPTR(uint8_t) items[];
+};
+
 struct nspage
 {
-	unk16_t magic;
-	unk16_t type;
+	uint16_t magic;
+	uint16_t type;
 	unk32_t pagenum;
-	unk32_t entrycount;
+	int32_t entrycount;
 	unk32_t checksum;
+	EMUPTR(struct nsentry) entries[];
 };
 
 struct nspageinfo
@@ -33,6 +43,8 @@ struct nspageinfo
 	unk32_t off_36;
 	unk32_t off_40;
 };
+
+extern int32_t NS_1254C(EMUPTR(struct nspage) nspage);
 
 extern int NS_VerifyChecksum(EMUPTR(struct nspage) nspage);
 
