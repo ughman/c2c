@@ -15,13 +15,13 @@ clean:
 	rm -f $(DEPENDS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -MMD -o $@ -c $<
+	$(CC) -MMD -o $@ -c $< $(CFLAGS)
 
 %.o: %.cc
-	$(C++) $(C++FLAGS) -MMD -o $@ -c $<
+	$(C++) -MMD -o $@ -c $< $(C++FLAGS)
 
 c2c: $(OBJECTS)
-	$(C++) $(LDFLAGS) -o $@ $^
+	$(C++) -o $@ $^ $(LDFLAGS)
 
 -include $(DEPENDS)
 
