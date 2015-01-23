@@ -600,7 +600,7 @@ Unlabeled functions have not yet been reverse engineered and can be found under 
 * `8004A624`
 * `8004A6BC`
 * `8004A71C`
-* `8004A864`
+* `8004A864` - `CORE_VSync`
 * `8004A900`
 * `8004A910`
 * `8004A940`
