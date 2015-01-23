@@ -215,7 +215,7 @@ void *EMU_Pointer(uint32_t address)
 {
 	if (address >= 0x80000000 && address <= 0x801FFFFF)
 	{
-		return &EMU_ram[(address & 0x1FFFFF) >> 2];
+		return (uint8_t *)&EMU_ram[(address & 0x1FFFFF) >> 2] + (address & 3);
 	}
 	abort();
 }
