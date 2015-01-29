@@ -60,8 +60,9 @@ uint8_t EMU_ReadU8(uint32_t address)
 		}
 		return EMU_ram[(address & 0x1FFFFF) >> 2] >> (address & 3) * 8;
 	}
-	else
+	else switch (address)
 	{
+	default:
 		return PCSX_Read8(address);
 	}
 }
@@ -81,8 +82,9 @@ uint16_t EMU_ReadU16(uint32_t address)
 		}
 		return EMU_ram[(address & 0x1FFFFF) >> 2] >> (address & 2) * 8;
 	}
-	else
+	else switch (address)
 	{
+	default:
 		return PCSX_Read16(address);
 	}
 }
@@ -102,8 +104,9 @@ uint32_t EMU_ReadU32(uint32_t address)
 		}
 		return EMU_ram[(address & 0x1FFFFF) >> 2];
 	}
-	else
+	else switch (address)
 	{
+	default:
 		return PCSX_Read32(address);
 	}
 }
@@ -123,9 +126,11 @@ void EMU_Write8(uint32_t address,uint8_t value)
 		*word &= ~(0xFF << (address & 3) * 8);
 		*word |= value << (address & 3) * 8;
 	}
-	else
+	else switch (address)
 	{
+	default:
 		PCSX_Write8(address,value);
+		break;
 	}
 }
 
@@ -146,9 +151,11 @@ void EMU_Write16(uint32_t address,uint16_t value)
 		*word &= ~(0xFFFF << (address & 2) * 8);
 		*word |= value << (address & 2) * 8;
 	}
-	else
+	else switch (address)
 	{
+	default:
 		PCSX_Write16(address,value);
+		break;
 	}
 }
 
@@ -167,9 +174,11 @@ void EMU_Write32(uint32_t address,uint32_t value)
 		}
 		EMU_ram[(address & 0x1FFFFF) >> 2] = value;
 	}
-	else
+	else switch (address)
 	{
+	default:
 		PCSX_Write32(address,value);
+		break;
 	}
 }
 
