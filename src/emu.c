@@ -7,6 +7,7 @@
 
 uint32_t *EMU_reg;
 uint32_t *EMU_ram;
+uint32_t *EMU_scratch;
 
 uint32_t (*EMU_codemap[EMU_RAMWORDS])(uint32_t address);
 
@@ -69,6 +70,10 @@ normal:
 	{
 		goto normal;
 	}
+	else if (address >= 0x1F800000 && address <= 0x1F8003FF)
+	{
+		return EMU_scratch[(address & 0x3FF) >> 2] >> (address & 3) * 8;
+	}
 	else switch (address)
 	{
 	default:
@@ -100,6 +105,10 @@ normal:
 	else if (address >= 0xA0000000 && address <= 0xA01FFFFF)
 	{
 		goto normal;
+	}
+	else if (address >= 0x1F800000 && address <= 0x1F8003FF)
+	{
+		return EMU_scratch[(address & 0x3FF) >> 2] >> (address & 2) * 8;
 	}
 	else switch (address)
 	{
@@ -133,6 +142,10 @@ normal:
 	{
 		goto normal;
 	}
+	else if (address >= 0x1F800000 && address <= 0x1F8003FF)
+	{
+		return EMU_scratch[(address & 0x3FF) >> 2];
+	}
 	else switch (address)
 	{
 	default:
@@ -164,6 +177,12 @@ normal:
 	else if (address >= 0xA0000000 && address <= 0xA01FFFFF)
 	{
 		goto normal;
+	}
+	else if (address >= 0x1F800000 && address <= 0x1F8003FF)
+	{
+		uint32_t *word = &EMU_scratch[(address & 0x3FF) >> 2];
+		*word &= ~(0xFF << (address & 3) * 8);
+		*word |= value << (address & 3) * 8;
 	}
 	else switch (address)
 	{
@@ -200,6 +219,12 @@ normal:
 	{
 		goto normal;
 	}
+	else if (address >= 0x1F800000 && address <= 0x1F8003FF)
+	{
+		uint32_t *word = &EMU_scratch[(address & 0x3FF) >> 2];
+		*word &= ~(0xFFFF << (address & 2) * 8);
+		*word |= value << (address & 2) * 8;
+	}
 	else switch (address)
 	{
 	default:
@@ -232,6 +257,10 @@ normal:
 	else if (address >= 0xA0000000 && address <= 0xA01FFFFF)
 	{
 		goto normal;
+	}
+	else if (address >= 0x1F800000 && address <= 0x1F8003FF)
+	{
+		EMU_scratch[(address & 0x3FF) >> 2] = value;
 	}
 	else switch (address)
 	{

@@ -29,6 +29,7 @@ extern struct nativeinfo
 	void (*reportnativecode)(int address,int wordcount);
 	void (*invoke)(int address,int zero);
 	unsigned char **ram;
+	unsigned char **scratchpad;
 } native;
 
 int SysInit();							// Init mem and plugins

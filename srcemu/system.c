@@ -169,6 +169,7 @@ DLLEXPORT(void) pcsxInit(const char *filename,void **regbase,struct nativeinfo *
 		abort();
 	LoadMcd(1,"memcard1");
 	*native.ram = psxM;
+	*native.scratchpad = psxH;
 }
 
 DLLEXPORT(int) pcsxReadGPR(int reg)

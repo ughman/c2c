@@ -83,9 +83,11 @@ extern "C" {
 #define HI (EMU_reg[EMU_REG_HI])
 
 #define EMU_RAMWORDS 524288
+#define EMU_SCRATCHWORDS 256
 
 extern uint32_t *EMU_reg;
 extern uint32_t *EMU_ram;
+extern uint32_t *EMU_scratch;
 
 extern uint32_t (*EMU_codemap[EMU_RAMWORDS])(uint32_t address);
 

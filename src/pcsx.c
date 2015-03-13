@@ -10,6 +10,7 @@ static struct pcsxinitinfo
 	void (*reportnativecode)(uint32_t address,uint32_t wordcount);
 	uint32_t (*invoke)(uint32_t address,int zero,...);
 	uint32_t **ram;
+	uint32_t **scratch;
 } info;
 
 static void (*PCSX_InitLibrary)(const char *filename,uint32_t **regbase,struct pcsxinitinfo *info);
@@ -83,5 +84,6 @@ void PCSX_Init(void)
 	info.reportnativecode = PCSX_ReportNativeCode;
 	info.invoke = EMU_Invoke;
 	info.ram = &EMU_ram;
+	info.scratch = &EMU_scratch;
 	PCSX_InitLibrary("c2c.bin",&EMU_reg,&info);
 }
