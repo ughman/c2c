@@ -51,6 +51,7 @@ uint8_t EMU_ReadU8(uint32_t address)
 {
 	if (address >= 0x80000000 && address <= 0x801FFFFF)
 	{
+normal:
 		{
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
 			if (codehandler != EMU_ExecuteUnrecognizedCode && codehandler != PCSX_ExecuteBlock)
@@ -59,6 +60,14 @@ uint8_t EMU_ReadU8(uint32_t address)
 			}
 		}
 		return EMU_ram[(address & 0x1FFFFF) >> 2] >> (address & 3) * 8;
+	}
+	else if (address >= 0x0 && address <= 0x1FFFFF)
+	{
+		goto normal;
+	}
+	else if (address >= 0xA0000000 && address <= 0xA01FFFFF)
+	{
+		goto normal;
 	}
 	else switch (address)
 	{
@@ -74,6 +83,7 @@ uint16_t EMU_ReadU16(uint32_t address)
 		fprintf(stderr,"Unaligned halfword load.\n");
 	if (address >= 0x80000000 && address <= 0x801FFFFF)
 	{
+normal:
 		{
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
 			if (codehandler != EMU_ExecuteUnrecognizedCode && codehandler != PCSX_ExecuteBlock)
@@ -82,6 +92,14 @@ uint16_t EMU_ReadU16(uint32_t address)
 			}
 		}
 		return EMU_ram[(address & 0x1FFFFF) >> 2] >> (address & 2) * 8;
+	}
+	else if (address >= 0x0 && address <= 0x1FFFFF)
+	{
+		goto normal;
+	}
+	else if (address >= 0xA0000000 && address <= 0xA01FFFFF)
+	{
+		goto normal;
 	}
 	else switch (address)
 	{
@@ -97,6 +115,7 @@ uint32_t EMU_ReadU32(uint32_t address)
 		fprintf(stderr,"Unaligned word load.\n");
 	if (address >= 0x80000000 && address <= 0x801FFFFF)
 	{
+normal:
 		{
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
 			if (codehandler != EMU_ExecuteUnrecognizedCode && codehandler != PCSX_ExecuteBlock)
@@ -105,6 +124,14 @@ uint32_t EMU_ReadU32(uint32_t address)
 			}
 		}
 		return EMU_ram[(address & 0x1FFFFF) >> 2];
+	}
+	else if (address >= 0x0 && address <= 0x1FFFFF)
+	{
+		goto normal;
+	}
+	else if (address >= 0xA0000000 && address <= 0xA01FFFFF)
+	{
+		goto normal;
 	}
 	else switch (address)
 	{
@@ -118,6 +145,7 @@ void EMU_Write8(uint32_t address,uint8_t value)
 {
 	if (address >= 0x80000000 && address <= 0x801FFFFF)
 	{
+normal:
 		{
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
 			if (codehandler != EMU_ExecuteUnrecognizedCode && codehandler != PCSX_ExecuteBlock)
@@ -128,6 +156,14 @@ void EMU_Write8(uint32_t address,uint8_t value)
 		uint32_t *word = &EMU_ram[(address & 0x1FFFFF) >> 2];
 		*word &= ~(0xFF << (address & 3) * 8);
 		*word |= value << (address & 3) * 8;
+	}
+	else if (address >= 0x0 && address <= 0x1FFFFF)
+	{
+		goto normal;
+	}
+	else if (address >= 0xA0000000 && address <= 0xA01FFFFF)
+	{
+		goto normal;
 	}
 	else switch (address)
 	{
@@ -144,6 +180,7 @@ void EMU_Write16(uint32_t address,uint16_t value)
 		fprintf(stderr,"Unaligned halfword store.\n");
 	if (address >= 0x80000000 && address <= 0x801FFFFF)
 	{
+normal:
 		{
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
 			if (codehandler != EMU_ExecuteUnrecognizedCode && codehandler != PCSX_ExecuteBlock)
@@ -154,6 +191,14 @@ void EMU_Write16(uint32_t address,uint16_t value)
 		uint32_t *word = &EMU_ram[(address & 0x1FFFFF) >> 2];
 		*word &= ~(0xFFFF << (address & 2) * 8);
 		*word |= value << (address & 2) * 8;
+	}
+	else if (address >= 0x0 && address <= 0x1FFFFF)
+	{
+		goto normal;
+	}
+	else if (address >= 0xA0000000 && address <= 0xA01FFFFF)
+	{
+		goto normal;
 	}
 	else switch (address)
 	{
@@ -170,6 +215,7 @@ void EMU_Write32(uint32_t address,uint32_t value)
 		fprintf(stderr,"Unaligned word store.\n");
 	if (address >= 0x80000000 && address <= 0x801FFFFF)
 	{
+normal:
 		{
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
 			if (codehandler != EMU_ExecuteUnrecognizedCode && codehandler != PCSX_ExecuteBlock)
@@ -178,6 +224,14 @@ void EMU_Write32(uint32_t address,uint32_t value)
 			}
 		}
 		EMU_ram[(address & 0x1FFFFF) >> 2] = value;
+	}
+	else if (address >= 0x0 && address <= 0x1FFFFF)
+	{
+		goto normal;
+	}
+	else if (address >= 0xA0000000 && address <= 0xA01FFFFF)
+	{
+		goto normal;
 	}
 	else switch (address)
 	{
