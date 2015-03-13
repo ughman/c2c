@@ -63,6 +63,7 @@ uint8_t EMU_ReadU8(uint32_t address)
 	else switch (address)
 	{
 	default:
+		fprintf(stderr,"Unrecognized 8-bit read address %.8X.\n",address);
 		return PCSX_Read8(address);
 	}
 }
@@ -85,6 +86,7 @@ uint16_t EMU_ReadU16(uint32_t address)
 	else switch (address)
 	{
 	default:
+		fprintf(stderr,"Unrecognized 16-bit read address %.8X.\n",address);
 		return PCSX_Read16(address);
 	}
 }
@@ -107,6 +109,7 @@ uint32_t EMU_ReadU32(uint32_t address)
 	else switch (address)
 	{
 	default:
+		fprintf(stderr,"Unrecognized 32-bit read address %.8X.\n",address);
 		return PCSX_Read32(address);
 	}
 }
@@ -129,6 +132,7 @@ void EMU_Write8(uint32_t address,uint8_t value)
 	else switch (address)
 	{
 	default:
+		fprintf(stderr,"Unrecognized 8-bit write address %.8X.\n",address);
 		PCSX_Write8(address,value);
 		break;
 	}
@@ -154,6 +158,7 @@ void EMU_Write16(uint32_t address,uint16_t value)
 	else switch (address)
 	{
 	default:
+		fprintf(stderr,"Unrecognized 16-bit write address %.8X.\n",address);
 		PCSX_Write16(address,value);
 		break;
 	}
@@ -177,6 +182,7 @@ void EMU_Write32(uint32_t address,uint32_t value)
 	else switch (address)
 	{
 	default:
+		fprintf(stderr,"Unrecognized 32-bit write address %.8X.\n",address);
 		PCSX_Write32(address,value);
 		break;
 	}
