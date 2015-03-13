@@ -4,6 +4,7 @@
 #include <string.h>
 #include "pcsx.h"
 #include "bios.h"
+#include "gpu.h"
 
 uint32_t *EMU_reg;
 uint32_t *EMU_ram;
@@ -148,6 +149,10 @@ normal:
 	}
 	else switch (address)
 	{
+	case 0x1F801810:
+		return GPU_Read();
+	case 0x1F801814:
+		return GPU_GetStatus();
 	default:
 		fprintf(stderr,"Unrecognized 32-bit read address %.8X.\n",address);
 		return PCSX_Read32(address);
@@ -264,6 +269,12 @@ normal:
 	}
 	else switch (address)
 	{
+	case 0x1F801810:
+		GPU_Write(value);
+		break;
+	case 0x1F801814:
+		GPU_WriteAlt(value);
+		break;
 	default:
 		fprintf(stderr,"Unrecognized 32-bit write address %.8X.\n",address);
 		PCSX_Write32(address,value);
