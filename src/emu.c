@@ -275,6 +275,9 @@ normal:
 	}
 	else switch (address)
 	{
+	case 0x1F801014:
+		// Unused waitstate configuration
+		return PCSX_Read16(address);
 	case 0x1F801074:
 		return IRQ_GetMask();
 	case 0x1F8010A8:
@@ -569,6 +572,12 @@ normal:
 	}
 	else switch (address)
 	{
+	case 0x1F801014:
+	case 0x1F801018:
+	case 0x1F801020:
+		// Unused waitstate configuration
+		PCSX_Write32(address,value);
+		break;
 	case 0x1F801074:
 		IRQ_SetMask(value);
 		break;
