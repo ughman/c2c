@@ -1,12 +1,12 @@
 CC := gcc
-C++ := g++
+CXX := g++
 CFLAGS := -g -Wall -std=c99
-C++FLAGS := -g -Wall -std=c++11
+CXXFLAGS := -g -Wall -std=c++11
 LDFLAGS := -g
 CSOURCES := $(shell find src -name "*.c")
-C++SOURCES := $(shell find src -name "*.cc")
-OBJECTS := $(CSOURCES:.c=.o) $(C++SOURCES:.cc=.o)
-DEPENDS := $(CSOURCES:.c=.d) $(C++SOURCES:.cc=.d)
+CXXSOURCES := $(shell find src -name "*.cc")
+OBJECTS := $(CSOURCES:.c=.o) $(CXXSOURCES:.cc=.o)
+DEPENDS := $(CSOURCES:.c=.d) $(CXXSOURCES:.cc=.d)
 
 all: c2c
 
@@ -18,10 +18,10 @@ clean:
 	$(CC) -MMD -o $@ -c $< $(CFLAGS)
 
 %.o: %.cc
-	$(C++) -MMD -o $@ -c $< $(C++FLAGS)
+	$(CXX) -MMD -o $@ -c $< $(CXXFLAGS)
 
 c2c: $(OBJECTS)
-	$(C++) -o $@ $^ $(LDFLAGS)
+	$(CXX) -o $@ $^ $(LDFLAGS)
 
 -include $(DEPENDS)
 
