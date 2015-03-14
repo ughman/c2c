@@ -8,6 +8,7 @@
 #include "spu.h"
 #include "cdr.h"
 #include "pad.h"
+#include "rcnt.h"
 
 uint32_t *EMU_reg;
 uint32_t *EMU_ram;
@@ -268,6 +269,8 @@ normal:
 	}
 	else switch (address)
 	{
+	case 0x1F801110:
+		return RCNT_GetValue(RCNT_HBLANK);
 	case 0x1F801810:
 		return GPU_Read();
 	case 0x1F801814:
@@ -368,6 +371,12 @@ normal:
 	{
 	case 0x1F80104A:
 		PAD_SetControl(value);
+		break;
+	case 0x1F801124:
+		RCNT_SetMode(RCNT_SYSDIV8,value);
+		break;
+	case 0x1F801128:
+		RCNT_SetTarget(RCNT_SYSDIV8,value);
 		break;
 	CASE_SPU_IO_PORT(0x0):
 		SPU_Voice_SetVolumeLeft((address & 0x1F0) >> 4,value);
@@ -538,6 +547,9 @@ normal:
 	}
 	else switch (address)
 	{
+	case 0x1F801114:
+		RCNT_SetMode(RCNT_HBLANK,value);
+		break;
 	case 0x1F801810:
 		GPU_Write(value);
 		break;
