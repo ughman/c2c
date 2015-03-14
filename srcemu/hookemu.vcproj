@@ -37,6 +37,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				DebugInformationFormat="3"
 				DisableSpecificWarnings="4996"
 			/>
 			<Tool
@@ -51,6 +52,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)\psx.dll"
+				GenerateDebugInformation="true"
 			/>
 			<Tool
 				Name="VCALinkTool"
