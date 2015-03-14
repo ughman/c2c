@@ -6,6 +6,7 @@
 #include "bios.h"
 #include "gpu.h"
 #include "spu.h"
+#include "cdr.h"
 
 uint32_t *EMU_reg;
 uint32_t *EMU_ram;
@@ -104,6 +105,14 @@ normal:
 	}
 	else switch (address)
 	{
+	case 0x1F801800:
+		return CDR_GetStatus();
+	case 0x1F801801:
+		return CDR_ReadResponse();
+	case 0x1F801802:
+		return CDR_Read();
+	case 0x1F801803:
+		return CDR_Read3();
 	default:
 		fprintf(stderr,"Unrecognized 8-bit read address %.8X.\n",address);
 		return PCSX_Read8(address);
@@ -298,6 +307,18 @@ normal:
 	}
 	else switch (address)
 	{
+	case 0x1F801800:
+		CDR_SetMode(value);
+		break;
+	case 0x1F801801:
+		CDR_Write1(value);
+		break;
+	case 0x1F801802:
+		CDR_Write2(value);
+		break;
+	case 0x1F801803:
+		CDR_Write3(value);
+		break;
 	default:
 		fprintf(stderr,"Unrecognized 8-bit write address %.8X.\n",address);
 		PCSX_Write8(address,value);
