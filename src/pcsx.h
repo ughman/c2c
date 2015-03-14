@@ -29,6 +29,10 @@ extern void (*PCSX_Cycle)(int cycles);
 extern uint32_t (*PCSX_RunInterrupts)(uint32_t pc);
 extern const char *(*PCSX_Disassemble)(uint32_t pc);
 
+extern const char *(*PCSX_A0Name)(int id);
+extern const char *(*PCSX_B0Name)(int id);
+extern const char *(*PCSX_C0Name)(int id);
+
 extern uint32_t (*PCSX_HLEA0)(void);
 extern uint32_t (*PCSX_HLEB0)(void);
 extern uint32_t (*PCSX_HLEC0)(void);

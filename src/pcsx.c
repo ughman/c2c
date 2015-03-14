@@ -36,6 +36,10 @@ void (*PCSX_Cycle)(int cycles);
 uint32_t (*PCSX_RunInterrupts)(uint32_t pc);
 const char *(*PCSX_Disassemble)(uint32_t pc);
 
+const char *(*PCSX_A0Name)(int id);
+const char *(*PCSX_B0Name)(int id);
+const char *(*PCSX_C0Name)(int id);
+
 uint32_t (*PCSX_HLEA0)(void);
 uint32_t (*PCSX_HLEB0)(void);
 uint32_t (*PCSX_HLEC0)(void);
@@ -69,6 +73,9 @@ void PCSX_Init(void)
 	METHOD(PCSX_Cycle,"pcsxCycle",void(*)(int));
 	METHOD(PCSX_RunInterrupts,"pcsxRunInterrupts",uint32_t(*)(uint32_t));
 	METHOD(PCSX_Disassemble,"pcsxDisassemble",const char *(*)(uint32_t));
+	METHOD(PCSX_A0Name,"pcsxA0Name",const char *(*)(int));
+	METHOD(PCSX_B0Name,"pcsxB0Name",const char *(*)(int));
+	METHOD(PCSX_C0Name,"pcsxC0Name",const char *(*)(int));
 	METHOD(PCSX_HLEA0,"pcsxHLEA0",uint32_t(*)(void));
 	METHOD(PCSX_HLEB0,"pcsxHLEB0",uint32_t(*)(void));
 	METHOD(PCSX_HLEC0,"pcsxHLEC0",uint32_t(*)(void));

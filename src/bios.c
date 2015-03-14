@@ -12,6 +12,7 @@ uint32_t BIOS_Execute(uint32_t address)
 		switch (T1)
 		{
 		default:
+			fprintf(stderr,"Unrecognized BIOS(A0) method: %i:%s\n",T1,PCSX_A0Name(T1));
 			return PCSX_HLEA0();
 		}
 		break;
@@ -19,6 +20,7 @@ uint32_t BIOS_Execute(uint32_t address)
 		switch (T1)
 		{
 		default:
+			fprintf(stderr,"Unrecognized BIOS(B0) method: %i:%s\n",T1,PCSX_B0Name(T1));
 			return PCSX_HLEB0();
 		}
 		break;
@@ -26,6 +28,7 @@ uint32_t BIOS_Execute(uint32_t address)
 		switch (T1)
 		{
 		default:
+			fprintf(stderr,"Unrecognized BIOS(C0) method: %i:%s\n",T1,PCSX_C0Name(T1));
 			return PCSX_HLEC0();
 		}
 		break;
