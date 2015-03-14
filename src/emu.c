@@ -5,6 +5,7 @@
 #include "pcsx.h"
 #include "bios.h"
 #include "gpu.h"
+#include "spu.h"
 
 uint32_t *EMU_reg;
 uint32_t *EMU_ram;
@@ -38,6 +39,32 @@ void EMU_Init(void)
 	}
 	ZZ_Init();
 }
+
+#define CASE_SPU_IO_PORT(offset) \
+	case 0x1F801C00 | (offset): \
+	case 0x1F801C10 | (offset): \
+	case 0x1F801C20 | (offset): \
+	case 0x1F801C30 | (offset): \
+	case 0x1F801C40 | (offset): \
+	case 0x1F801C50 | (offset): \
+	case 0x1F801C60 | (offset): \
+	case 0x1F801C70 | (offset): \
+	case 0x1F801C80 | (offset): \
+	case 0x1F801C90 | (offset): \
+	case 0x1F801CA0 | (offset): \
+	case 0x1F801CB0 | (offset): \
+	case 0x1F801CC0 | (offset): \
+	case 0x1F801CD0 | (offset): \
+	case 0x1F801CE0 | (offset): \
+	case 0x1F801CF0 | (offset): \
+	case 0x1F801D00 | (offset): \
+	case 0x1F801D10 | (offset): \
+	case 0x1F801D20 | (offset): \
+	case 0x1F801D30 | (offset): \
+	case 0x1F801D40 | (offset): \
+	case 0x1F801D50 | (offset): \
+	case 0x1F801D60 | (offset): \
+	case 0x1F801D70 | (offset)
 
 int8_t EMU_ReadS8(uint32_t address)
 {
@@ -113,6 +140,86 @@ normal:
 	}
 	else switch (address)
 	{
+	CASE_SPU_IO_PORT(0x0):
+		return SPU_Voice_GetVolumeLeft((address & 0x1F0) >> 4);
+	CASE_SPU_IO_PORT(0x2):
+		return SPU_Voice_GetVolumeRight((address & 0x1F0) >> 4);
+	CASE_SPU_IO_PORT(0x4):
+		return SPU_Voice_GetSampleRate((address & 0x1F0) >> 4);
+	CASE_SPU_IO_PORT(0x6):
+		return SPU_Voice_GetStartAddress((address & 0x1F0) >> 4);
+	CASE_SPU_IO_PORT(0x8):
+		return SPU_Voice_GetADSRLow((address & 0x1F0) >> 4);
+	CASE_SPU_IO_PORT(0xA):
+		return SPU_Voice_GetADSRHigh((address & 0x1F0) >> 4);
+	CASE_SPU_IO_PORT(0xC):
+		return SPU_Voice_GetADSRVolume((address & 0x1F0) >> 4);
+	CASE_SPU_IO_PORT(0xE):
+		return SPU_Voice_GetLoopAddress((address & 0x1F0) >> 4);
+	case 0x1F801D98:
+		return SPU_GetReverbLow();
+	case 0x1F801D9A:
+		return SPU_GetReverbHigh();
+	case 0x1F801DA6:
+		return SPU_GetTransferAddress();
+	case 0x1F801DAA:
+		return SPU_ReadControlRegister();
+	case 0x1F801DAE:
+		return SPU_ReadStatusRegister();
+	case 0x1F801DB8:
+		return SPU_GetCurrentVolumeLeft();
+	case 0x1F801DBA:
+		return SPU_GetCurrentVolumeRight();
+	case 0x1F801E00:
+	case 0x1F801E04:
+	case 0x1F801E08:
+	case 0x1F801E0C:
+	case 0x1F801E10:
+	case 0x1F801E14:
+	case 0x1F801E18:
+	case 0x1F801E1C:
+	case 0x1F801E20:
+	case 0x1F801E24:
+	case 0x1F801E28:
+	case 0x1F801E2C:
+	case 0x1F801E30:
+	case 0x1F801E34:
+	case 0x1F801E38:
+	case 0x1F801E3C:
+	case 0x1F801E40:
+	case 0x1F801E44:
+	case 0x1F801E48:
+	case 0x1F801E4C:
+	case 0x1F801E50:
+	case 0x1F801E54:
+	case 0x1F801E58:
+	case 0x1F801E5C:
+		return SPU_Voice_GetCurrentVolumeLeft((address & 0x7C) >> 2);
+	case 0x1F801E02:
+	case 0x1F801E06:
+	case 0x1F801E0A:
+	case 0x1F801E0E:
+	case 0x1F801E12:
+	case 0x1F801E16:
+	case 0x1F801E1A:
+	case 0x1F801E1E:
+	case 0x1F801E22:
+	case 0x1F801E26:
+	case 0x1F801E2A:
+	case 0x1F801E2E:
+	case 0x1F801E32:
+	case 0x1F801E36:
+	case 0x1F801E3A:
+	case 0x1F801E3E:
+	case 0x1F801E42:
+	case 0x1F801E46:
+	case 0x1F801E4A:
+	case 0x1F801E4E:
+	case 0x1F801E52:
+	case 0x1F801E56:
+	case 0x1F801E5A:
+	case 0x1F801E5E:
+		return SPU_Voice_GetCurrentVolumeRight((address & 0x7C) >> 2);
 	default:
 		fprintf(stderr,"Unrecognized 16-bit read address %.8X.\n",address);
 		return PCSX_Read16(address);
@@ -232,6 +339,138 @@ normal:
 	}
 	else switch (address)
 	{
+	CASE_SPU_IO_PORT(0x0):
+		SPU_Voice_SetVolumeLeft((address & 0x1F0) >> 4,value);
+		break;
+	CASE_SPU_IO_PORT(0x2):
+		SPU_Voice_SetVolumeRight((address & 0x1F0) >> 4,value);
+		break;
+	CASE_SPU_IO_PORT(0x4):
+		SPU_Voice_SetSampleRate((address & 0x1F0) >> 4,value);
+		break;
+	CASE_SPU_IO_PORT(0x6):
+		SPU_Voice_SetStartAddress((address & 0x1F0) >> 4,value);
+		break;
+	CASE_SPU_IO_PORT(0x8):
+		SPU_Voice_SetADSRLow((address & 0x1F0) >> 4,value);
+		break;
+	CASE_SPU_IO_PORT(0xA):
+		SPU_Voice_SetADSRHigh((address & 0x1F0) >> 4,value);
+		break;
+	CASE_SPU_IO_PORT(0xC):
+		SPU_Voice_SetADSRVolume((address & 0x1F0) >> 4,value);
+		break;
+	CASE_SPU_IO_PORT(0xE):
+		SPU_Voice_SetLoopAddress((address & 0x1F0) >> 4,value);
+		break;
+	case 0x1F801D80:
+		SPU_SetVolumeLeft(value);
+		break;
+	case 0x1F801D82:
+		SPU_SetVolumeRight(value);
+		break;
+	case 0x1F801D84:
+		SPU_SetReverbVolumeLeft(value);
+		break;
+	case 0x1F801D86:
+		SPU_SetReverbVolumeRight(value);
+		break;
+	case 0x1F801D88:
+		SPU_NoteOnLow(value);
+		break;
+	case 0x1F801D8A:
+		SPU_NoteOnHigh(value);
+		break;
+	case 0x1F801D8C:
+		SPU_NoteOffLow(value);
+		break;
+	case 0x1F801D8E:
+		SPU_NoteOffHigh(value);
+		break;
+	case 0x1F801D90:
+		SPU_SetFMLow(value);
+		break;
+	case 0x1F801D92:
+		SPU_SetFMHigh(value);
+		break;
+	case 0x1F801D94:
+		SPU_SetNoiseLow(value);
+		break;
+	case 0x1F801D96:
+		SPU_SetNoiseHigh(value);
+		break;
+	case 0x1F801D98:
+		SPU_SetReverbLow(value);
+		break;
+	case 0x1F801D9A:
+		SPU_SetReverbHigh(value);
+		break;
+	case 0x1F801D9C:
+	case 0x1F801D9E:
+		// nonsense write to read-only registers
+		PCSX_Write16(address,value);
+		break;
+	case 0x1F801DA2:
+		SPU_SetReverbStartAddress(value);
+		break;
+	case 0x1F801DA6:
+		SPU_SetTransferAddress(value);
+		break;
+	case 0x1F801DA8:
+		SPU_Write(value);
+		break;
+	case 0x1F801DAA:
+		SPU_WriteControlRegister(value);
+		break;
+	case 0x1F801DAC:
+		SPU_SetTransferMode(value);
+		break;
+	case 0x1F801DB0:
+		SPU_SetCDVolumeLeft(value);
+		break;
+	case 0x1F801DB2:
+		SPU_SetCDVolumeRight(value);
+		break;
+	case 0x1F801DB4:
+		SPU_SetExternVolumeLeft(value);
+		break;
+	case 0x1F801DB6:
+		SPU_SetExternVolumeRight(value);
+		break;
+	case 0x1F801DC0:
+	case 0x1F801DC2:
+	case 0x1F801DC4:
+	case 0x1F801DC6:
+	case 0x1F801DC8:
+	case 0x1F801DCA:
+	case 0x1F801DCC:
+	case 0x1F801DCE:
+	case 0x1F801DD0:
+	case 0x1F801DD2:
+	case 0x1F801DD4:
+	case 0x1F801DD6:
+	case 0x1F801DD8:
+	case 0x1F801DDA:
+	case 0x1F801DDC:
+	case 0x1F801DDE:
+	case 0x1F801DE0:
+	case 0x1F801DE2:
+	case 0x1F801DE4:
+	case 0x1F801DE6:
+	case 0x1F801DE8:
+	case 0x1F801DEA:
+	case 0x1F801DEC:
+	case 0x1F801DEE:
+	case 0x1F801DF0:
+	case 0x1F801DF2:
+	case 0x1F801DF4:
+	case 0x1F801DF6:
+	case 0x1F801DF8:
+	case 0x1F801DFA:
+	case 0x1F801DFC:
+	case 0x1F801DFE:
+		SPU_ConfigureReverb((address - 0x1F801DC0) / 2,value);
+		break;
 	default:
 		fprintf(stderr,"Unrecognized 16-bit write address %.8X.\n",address);
 		PCSX_Write16(address,value);
@@ -281,6 +520,8 @@ normal:
 		break;
 	}
 }
+
+#undef CASE_SPU_IO_PORT
 
 void EMU_ReadLeft(uint32_t address,uint32_t *valueref)
 {
