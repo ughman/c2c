@@ -9,6 +9,7 @@
 #include "cdr.h"
 #include "pad.h"
 #include "rcnt.h"
+#include "dma.h"
 
 uint32_t *EMU_reg;
 uint32_t *EMU_ram;
@@ -269,6 +270,14 @@ normal:
 	}
 	else switch (address)
 	{
+	case 0x1F8010A8:
+		return DMA_GetMode(DMA_GPU);
+	case 0x1F8010B8:
+		return DMA_GetMode(DMA_CDR);
+	case 0x1F8010F0:
+		return DMA_GetControlRegister();
+	case 0x1F8010F4:
+		return DMA_GetInterruptRegister();
 	case 0x1F801110:
 		return RCNT_GetValue(RCNT_HBLANK);
 	case 0x1F801810:
@@ -547,6 +556,39 @@ normal:
 	}
 	else switch (address)
 	{
+	case 0x1F8010A0:
+		DMA_SetAddress(DMA_GPU,value);
+		break;
+	case 0x1F8010A4:
+		DMA_SetBlockData(DMA_GPU,value);
+		break;
+	case 0x1F8010A8:
+		DMA_SetMode(DMA_GPU,value);
+		break;
+	case 0x1F8010B0:
+		DMA_SetAddress(DMA_CDR,value);
+		break;
+	case 0x1F8010B4:
+		DMA_SetBlockData(DMA_CDR,value);
+		break;
+	case 0x1F8010B8:
+		DMA_SetMode(DMA_CDR,value);
+		break;
+	case 0x1F8010C0:
+		DMA_SetAddress(DMA_SPU,value);
+		break;
+	case 0x1F8010C4:
+		DMA_SetBlockData(DMA_SPU,value);
+		break;
+	case 0x1F8010C8:
+		DMA_SetMode(DMA_SPU,value);
+		break;
+	case 0x1F8010F0:
+		DMA_SetControlRegister(value);
+		break;
+	case 0x1F8010F4:
+		DMA_SetInterruptRegister(value);
+		break;
 	case 0x1F801114:
 		RCNT_SetMode(RCNT_HBLANK,value);
 		break;
