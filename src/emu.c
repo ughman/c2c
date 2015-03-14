@@ -10,6 +10,7 @@
 #include "pad.h"
 #include "rcnt.h"
 #include "dma.h"
+#include "irq.h"
 
 uint32_t *EMU_reg;
 uint32_t *EMU_ram;
@@ -154,6 +155,10 @@ normal:
 	}
 	else switch (address)
 	{
+	case 0x1F801070:
+		return IRQ_GetStatus();
+	case 0x1F801074:
+		return IRQ_GetMask();
 	CASE_SPU_IO_PORT(0x0):
 		return SPU_Voice_GetVolumeLeft((address & 0x1F0) >> 4);
 	CASE_SPU_IO_PORT(0x2):
@@ -270,6 +275,8 @@ normal:
 	}
 	else switch (address)
 	{
+	case 0x1F801074:
+		return IRQ_GetMask();
 	case 0x1F8010A8:
 		return DMA_GetMode(DMA_GPU);
 	case 0x1F8010B8:
@@ -380,6 +387,12 @@ normal:
 	{
 	case 0x1F80104A:
 		PAD_SetControl(value);
+		break;
+	case 0x1F801070:
+		IRQ_AcknowledgeBits(value);
+		break;
+	case 0x1F801074:
+		IRQ_SetMask(value);
 		break;
 	case 0x1F801124:
 		RCNT_SetMode(RCNT_SYSDIV8,value);
@@ -556,6 +569,9 @@ normal:
 	}
 	else switch (address)
 	{
+	case 0x1F801074:
+		IRQ_SetMask(value);
+		break;
 	case 0x1F8010A0:
 		DMA_SetAddress(DMA_GPU,value);
 		break;
