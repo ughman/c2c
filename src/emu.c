@@ -793,9 +793,15 @@ void EMU_Cycle(int cycles)
 	PCSX_Cycle(cycles);
 }
 
-uint32_t EMU_RunInterrupts(uint32_t pc)
+void EMU_RunInterrupts(void)
 {
-	return PCSX_RunInterrupts(pc);
+	uint32_t pc = PCSX_RunInterrupts(0xDEADBEEF);
+	while (pc != 0xDEADBEEF)
+	{
+		if (pc & 3)
+			fprintf(stderr,"Unaligned program counter.\n");
+		pc = EMU_codemap[(pc & 0x1FFFFF) >> 2](pc);
+	}
 }
 
 void EMU_InvalidateICache(void)

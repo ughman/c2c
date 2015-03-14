@@ -129,7 +129,7 @@ extern void EMU_Break(uint32_t id);
 extern void EMU_NativeCall(void *method);
 
 extern void EMU_Cycle(int cycles);
-extern uint32_t EMU_RunInterrupts(uint32_t pc);
+extern void EMU_RunInterrupts(void);
 
 extern void EMU_InvalidateICache(void);
 

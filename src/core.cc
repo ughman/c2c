@@ -15,12 +15,6 @@ void CORE_VSync(int32_t count,int32_t timeout)
 			break;
 		}
 		EMU_Cycle(20);
-		uint32_t pc = EMU_RunInterrupts(0xDEADBEEF);
-		while (pc != 0xDEADBEEF)
-		{
-			if (pc & 3)
-				fprintf(stderr,"Unaligned program counter.\n");
-			pc = EMU_codemap[(pc & 0x1FFFFF) >> 2](pc);
-		}
+		EMU_RunInterrupts();
 	}
 }

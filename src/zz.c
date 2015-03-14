@@ -30,18 +30,14 @@ do \
 do \
 { \
 	EMU_Cycle(clocks); \
-	pc_after = EMU_RunInterrupts(address); \
-	if (pc_after != address) \
-		return pc_after; \
+	EMU_RunInterrupts(); \
 } while (0)
 
 #define ZZ_CLOCKCYCLES_JR(clocks) \
 do \
 { \
 	EMU_Cycle(clocks); \
-	pc_after = EMU_RunInterrupts(jr_dest); \
-	if (pc_after != jr_dest) \
-		return pc_after; \
+	EMU_RunInterrupts(); \
 } while (0)
 
 #define ZZ_ONCE(address) \
