@@ -1,5 +1,3 @@
-CC := gcc
-CXX := g++
 CFLAGS := -g -Wall -std=c99
 CXXFLAGS := -g -Wall -std=c++11
 LDFLAGS := -g
