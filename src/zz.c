@@ -4,9 +4,6 @@
 #include "cop0.h"
 #include "gte.h"
 
-static uint32_t pc_after;
-static uint32_t jr_dest;
-
 #define ZZ_JUMPREGISTER_BEGIN(reg) \
 do \
 { \
@@ -100,6 +97,8 @@ do \
 
 uint32_t ZZ_Native(uint32_t address)
 {
+	uint32_t pc_after;
+	uint32_t jr_dest;
 	switch (address)
 	{
 #define ZZ_MARK_NATIVE(address,label,function) ZZ_MARK_TARGET(address,label)
