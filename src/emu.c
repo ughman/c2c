@@ -7,6 +7,7 @@
 #include "gpu.h"
 #include "spu.h"
 #include "cdr.h"
+#include "pad.h"
 
 uint32_t *EMU_reg;
 uint32_t *EMU_ram;
@@ -105,6 +106,8 @@ normal:
 	}
 	else switch (address)
 	{
+	case 0x1F801040:
+		return PAD_Read();
 	case 0x1F801800:
 		return CDR_GetStatus();
 	case 0x1F801801:
@@ -307,6 +310,9 @@ normal:
 	}
 	else switch (address)
 	{
+	case 0x1F801040:
+		PAD_Write(value);
+		break;
 	case 0x1F801800:
 		CDR_SetMode(value);
 		break;
@@ -360,6 +366,9 @@ normal:
 	}
 	else switch (address)
 	{
+	case 0x1F80104A:
+		PAD_SetControl(value);
+		break;
 	CASE_SPU_IO_PORT(0x0):
 		SPU_Voice_SetVolumeLeft((address & 0x1F0) >> 4,value);
 		break;
