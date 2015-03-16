@@ -30,6 +30,11 @@ uint32_t EMU_ExecuteBadEntryPointCode(uint32_t pc)
 	return (EMU_codemap[(pc & 0x1FFFFF) >> 2] = PCSX_ExecuteBlock)(pc);
 }
 
+uint32_t EMU_DummyMethod(uint32_t pc)
+{
+	return RA;
+}
+
 void EMU_Init(void)
 {
 	extern void ZZ_Init(void);
@@ -37,6 +42,7 @@ void EMU_Init(void)
 	EMU_codemap[0x28] = BIOS_Execute;
 	EMU_codemap[0x2C] = BIOS_Execute;
 	EMU_codemap[0x30] = BIOS_Execute;
+	EMU_codemap[0x221] = EMU_DummyMethod;
 	for (int i = 0;i < EMU_RAMWORDS;i++)
 	{
 		if (!EMU_codemap[i])
