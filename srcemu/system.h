@@ -26,7 +26,6 @@ extern "C" {
 
 extern struct nativeinfo
 {
-	void (*reportnativecode)(int address,int wordcount);
 	void (*invoke)(int address,int zero);
 	unsigned char **ram;
 	unsigned char **scratchpad;

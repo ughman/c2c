@@ -40,7 +40,7 @@ void EMU_Init(void)
 	for (int i = 0;i < EMU_RAMWORDS;i++)
 	{
 		if (!EMU_codemap[i])
-			EMU_codemap[i] = PCSX_ExecuteBlock;
+			EMU_codemap[i] = EMU_ExecuteUnrecognizedCode;
 	}
 	ZZ_Init();
 }

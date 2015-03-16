@@ -7,7 +7,6 @@ static void *PCSX_library;
 
 static struct pcsxinitinfo
 {
-	void (*reportnativecode)(uint32_t address,uint32_t wordcount);
 	uint32_t (*invoke)(uint32_t address,int zero,...);
 	uint32_t **ram;
 	uint32_t **scratch;
@@ -49,15 +48,6 @@ do \
 		fprintf(stderr,"Failed to load symbol " #localname ".\n"); \
 } while (0)
 
-static void PCSX_ReportNativeCode(uint32_t address,uint32_t wordcount)
-{
-	while (wordcount--)
-	{
-		EMU_codemap[(address & 0x1FFFFF) >> 2] = EMU_ExecuteUnrecognizedCode;
-		address += 4;
-	}
-}
-
 void PCSX_Init(void)
 {
 	PCSX_library = dlopen("psx.dll",RTLD_LAZY);
@@ -83,7 +73,6 @@ void PCSX_Init(void)
 	METHOD(PCSX_ExecuteOnceNoCycle,"pcsxExecuteOnceNoCycle",uint32_t(*)(uint32_t));
 	METHOD(PCSX_ExecuteBlock,"pcsxExecuteBlock",uint32_t(*)(uint32_t));
 	METHOD(PCSX_InvalidateICache,"pcsxInvalidateICache",void(*)(void));
-	info.reportnativecode = PCSX_ReportNativeCode;
 	info.invoke = EMU_Invoke;
 	info.ram = &EMU_ram;
 	info.scratch = &EMU_scratch;

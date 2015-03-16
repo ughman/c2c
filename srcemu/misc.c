@@ -207,8 +207,6 @@ int LoadCdrom() {
 	tmpHead.t_size = SWAP32(tmpHead.t_size);
 	tmpHead.t_addr = SWAP32(tmpHead.t_addr);
 
-	native.reportnativecode(tmpHead.t_addr,tmpHead.t_size / 4);
-
 	// Read the rest of the main executable
 	while (tmpHead.t_size) {
 		void *ptr = (void *)PSXM(tmpHead.t_addr);
