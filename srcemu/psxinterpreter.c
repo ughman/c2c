@@ -469,7 +469,7 @@ static __inline void doBranch(u32 tar) {
 	branch = 0;
 	psxRegs.pc = branchPC;
 
-	psxBranchTest();
+	//psxBranchTest();
 }
 
 /*********************************************************

@@ -304,6 +304,12 @@ DLLEXPORT(void) pcsxExecuteCOP(int copid,int copargs)
 
 extern void intExecuteOnce();
 
+typedef const char *pcsxdisstring_t;
+DLLEXPORT(pcsxdisstring_t) pcsxDisassemble(int pc)
+{
+	return disR3000AF(psxMemRead32(pc),pc);
+}
+
 DLLEXPORT(int) pcsxExecuteOnce(int pc)
 {
 	psxRegs.pc = pc;

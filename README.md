@@ -39,7 +39,7 @@ As seen above, the disassembler's conversion is very direct and does little actu
 Located in `srcemu/` is a modified version of the _PCSX-R_ playstation emulator. The emulator has been repurposed into an external library to implement the I/O devices used by the disassembled code. The emulator is also used to emulate the system's processor in two cases:
 
 1. The game does an indirect branch to undetected code (see above) which has not been disassembled. A warning is issued in this case.
-2. The game invokes code which does not exist within the game engine. The primary case of this is native code sections used in GOOL scripts.
+2. The game invokes code which does not exist within the game engine. The primary case of this is native code sections used in GOOL scripts, however these are handled using a separate interpreter in `src/gool_mips.cc`.
 
 Additionally, the emulator implements the Geometry Transformation Engine (GTE) coprocessor used for matrix and vector math necessary for 3D rendering.
 
