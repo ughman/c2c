@@ -1647,7 +1647,6 @@ void psxBios_UnDeliverEvent() { // 0x20
 		if ((*ptr & 0xF0) != 0x50) continue; \
 		if (strcmp(FDesc[1 + mcd].name, ptr+0xa)) continue; \
 		FDesc[1 + mcd].mcfile = i; \
-		SysPrintf("open %s\n", ptr+0xa); \
 		v0 = 1 + mcd; \
 		break; \
 	} \
@@ -1668,7 +1667,6 @@ void psxBios_UnDeliverEvent() { // 0x20
 			for (j=0; j<127; j++) xor^= ptr[j]; \
 			ptr[127] = xor; \
 			FDesc[1 + mcd].mcfile = i; \
-			SysPrintf("openC %s\n", ptr); \
 			v0 = 1 + mcd; \
 			SaveMcd(Config.Mcd##mcd, Mcd##mcd##Data, 128 * i, 128); \
 			break; \
@@ -1728,7 +1726,6 @@ void psxBios_lseek() { // 0x33
 }
 
 #define buread(mcd) { \
-	SysPrintf("read %d: %x,%x (%s)\n", FDesc[1 + mcd].mcfile, FDesc[1 + mcd].offset, a2, Mcd##mcd##Data + 128 * FDesc[1 + mcd].mcfile + 0xa); \
 	ptr = Mcd##mcd##Data + 8192 * FDesc[1 + mcd].mcfile + FDesc[1 + mcd].offset; \
 	memcpy(Ra1, ptr, a2); \
 	if (FDesc[1 + mcd].mode & 0x8000) v0 = 0; \
@@ -1761,7 +1758,6 @@ void psxBios_read() { // 0x34
 
 #define buwrite(mcd) { \
 	u32 offset =  + 8192 * FDesc[1 + mcd].mcfile + FDesc[1 + mcd].offset; \
-	SysPrintf("write %d: %x,%x\n", FDesc[1 + mcd].mcfile, FDesc[1 + mcd].offset, a2); \
 	ptr = Mcd##mcd##Data + offset; \
 	memcpy(ptr, Ra1, a2); \
 	FDesc[1 + mcd].offset += a2; \
@@ -1871,7 +1867,6 @@ int nfile;
 				strcpy(dir->name+i, ptr+i); break; } \
 			match = 0; break; \
 		} \
-		SysPrintf("%d : %s = %s + %s (match=%d)\n", nfile, dir->name, pfile, ptr, match); \
 		if (match == 0) continue; \
 		dir->size = 8192; \
 		v0 = _dir; \
@@ -1987,7 +1982,6 @@ void psxBios_rename() { // 44
 		if (strcmp(Ra0+5, ptr+0xa)) continue; \
 		*ptr = (*ptr & 0xf) | 0xA0; \
 		SaveMcd(Config.Mcd##mcd, Mcd##mcd##Data, 128 * i, 1); \
-		SysPrintf("delete %s\n", ptr+0xa); \
 		v0 = 1; \
 		break; \
 	} \
