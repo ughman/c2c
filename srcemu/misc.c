@@ -250,10 +250,6 @@ int LoadCdromFile(const char *filename, EXE_HEADER *head) {
 	size = head->t_size;
 	addr = head->t_addr;
 
-	// Cache clear/invalidate dynarec/int. Fixes startup of Casper/X-Files and possibly others.
-	psxCpu->Clear(addr, size / 4);
-	psxRegs.ICache_valid = FALSE;
-
 	while (size) {
 		incTime();
 		READTRACK();

@@ -359,11 +359,6 @@ DLLEXPORT(int) pcsxRunInterrupts(int pc)
 	return psxRegs.pc;
 }
 
-DLLEXPORT(void) pcsxInvalidateICache(void)
-{
-	psxRegs.ICache_valid = FALSE;
-}
-
 typedef const char *biosname_t;
 
 DLLEXPORT(biosname_t) pcsxA0Name(unsigned int id)

@@ -1518,8 +1518,6 @@ void psxDma3(u32 madr, u32 bcr, u32 chcr) {
 				adjustTransferIndex();
 			}
 
-			psxCpu->Clear(madr, cdsize / 4);
-
 			// burst vs normal
 			if( chcr == 0x11400100 ) {
 				CDRDMA_INT( (cdsize/4) / 4 );

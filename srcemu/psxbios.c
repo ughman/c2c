@@ -1077,11 +1077,6 @@ void psxBios_FlushCache() { // 44
 #ifdef PSXBIOS_LOG
 	PSXBIOS_LOG("psxBios_%s\n", biosA0n[0x44]);
 #endif
-
-	psxRegs.ICache_valid = FALSE;
-	fprintf(stderr,"psxBios_FlushCache called\n");
-	fflush(stderr);
-
 	pc0 = ra;
 }
 

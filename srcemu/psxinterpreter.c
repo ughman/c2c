@@ -1067,7 +1067,6 @@ static int intInit() {
 }
 
 static void intReset() {
-	psxRegs.ICache_valid = FALSE;
 }
 
 static void intExecute() {
@@ -1078,9 +1077,6 @@ static void intExecute() {
 static void intExecuteBlock() {
 	branch2 = 0;
 	while (!branch2) execI();
-}
-
-static void intClear(u32 Addr, u32 Size) {
 }
 
 static void intShutdown() {
@@ -1104,7 +1100,6 @@ R3000Acpu psxInt = {
 	intReset,
 	intExecute,
 	intExecuteBlock,
-	intClear,
 	intShutdown
 };
 

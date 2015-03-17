@@ -145,7 +145,6 @@ ZZ_3AC50_110:
 	ZZ_CLOCKCYCLES(3,0x8003A25C);
 	goto ZZ_3A234_28;
 ZZ_3AC50_11C:
-	EMU_InvalidateICache();
 	{
 		extern void GOOL_MIPS_ExecuteFromZZ(uint32_t pc);
 		GOOL_MIPS_ExecuteFromZZ(S5);

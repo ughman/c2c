@@ -809,8 +809,3 @@ void EMU_RunInterrupts(void)
 		pc = EMU_codemap[(pc & 0x1FFFFF) >> 2](pc);
 	}
 }
-
-void EMU_InvalidateICache(void)
-{
-	PCSX_InvalidateICache();
-}

@@ -38,7 +38,6 @@ const char *(*PCSX_Disassemble)(uint32_t pc);
 uint32_t (*PCSX_ExecuteOnce)(uint32_t pc);
 uint32_t (*PCSX_ExecuteOnceNoCycle)(uint32_t pc);
 uint32_t (*PCSX_ExecuteBlock)(uint32_t address);
-void (*PCSX_InvalidateICache)(void);
 
 uint32_t (*PCSX_HLEA0)(void);
 uint32_t (*PCSX_HLEB0)(void);
@@ -76,7 +75,6 @@ void PCSX_Init(void)
 	METHOD(PCSX_ExecuteOnce,"pcsxExecuteOnce",uint32_t(*)(uint32_t));
 	METHOD(PCSX_ExecuteOnceNoCycle,"pcsxExecuteOnceNoCycle",uint32_t(*)(uint32_t));
 	METHOD(PCSX_ExecuteBlock,"pcsxExecuteBlock",uint32_t(*)(uint32_t));
-	METHOD(PCSX_InvalidateICache,"pcsxInvalidateICache",void(*)(void));
 	METHOD(PCSX_HLEA0,"pcsxHLEA0",uint32_t(*)(void));
 	METHOD(PCSX_HLEB0,"pcsxHLEB0",uint32_t(*)(void));
 	METHOD(PCSX_HLEC0,"pcsxHLEC0",uint32_t(*)(void));

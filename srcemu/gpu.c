@@ -116,7 +116,6 @@ void psxDma2(u32 madr, u32 bcr, u32 chcr) { // GPU
 			// BA blocks * BS words (word = 32-bits)
 			size = (bcr >> 16) * (bcr & 0xffff);
 			GPU_readDataMem(ptr, size);
-			psxCpu->Clear(madr, size);
 
 #if 1
 			// already 32-bit word size ((size * 4) / 4)
