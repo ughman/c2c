@@ -12,21 +12,21 @@ uint32_t BIOS_Execute(uint32_t address)
 		switch (T1)
 		{
 		default:
-			return PCSX_ExecuteOnce(0xA0);
+			return PCSX_HLEA0();
 		}
 		break;
 	case 0xB0:
 		switch (T1)
 		{
 		default:
-			return PCSX_ExecuteOnce(0xB0);
+			return PCSX_HLEB0();
 		}
 		break;
 	case 0xC0:
 		switch (T1)
 		{
 		default:
-			return PCSX_ExecuteOnce(0xC0);
+			return PCSX_HLEC0();
 		}
 		break;
 	default:

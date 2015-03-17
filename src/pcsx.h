@@ -33,6 +33,10 @@ extern uint32_t (*PCSX_ExecuteOnceNoCycle)(uint32_t pc);
 extern uint32_t (*PCSX_ExecuteBlock)(uint32_t address);
 extern void (*PCSX_InvalidateICache)(void);
 
+extern uint32_t (*PCSX_HLEA0)(void);
+extern uint32_t (*PCSX_HLEB0)(void);
+extern uint32_t (*PCSX_HLEC0)(void);
+
 extern void PCSX_Init(void);
 
 #ifdef __cplusplus

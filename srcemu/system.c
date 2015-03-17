@@ -402,6 +402,28 @@ DLLEXPORT(biosname_t) pcsxC0Name(unsigned int id)
 	return result;
 }
 
+extern void hleA0();
+extern void hleB0();
+extern void hleC0();
+
+DLLEXPORT(int) pcsxHLEA0(void)
+{
+	hleA0();
+	return psxRegs.pc;
+}
+
+DLLEXPORT(int) pcsxHLEB0(void)
+{
+	hleB0();
+	return psxRegs.pc;
+}
+
+DLLEXPORT(int) pcsxHLEC0(void)
+{
+	hleC0();
+	return psxRegs.pc;
+}
+
 DLLEXPORT(int) pcsxGetBaseMemoryAddress()
 {
 	return (int)psxM;
