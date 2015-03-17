@@ -36,12 +36,23 @@ ZZ_12AE4_38:
 As seen above, the disassembler's conversion is very direct and does little actual decompiling, only basic expression simplification. It is up to the programmer to do all necessary analysis to detect code structures such as loops or conditional execution. As an additional barrier, the disassembler does no analysis of indirect branches such as function pointer calls or jump tables for switch statements. Therefore, it is also up to the programmer to specify all code regions which have not been automatically detected by the disassembler. This can be seen in `srcdisasm/Main.cs`.
 
 ## The Emulator ##
-Located in `srcemu/` is a modified version of the _PCSX-R_ playstation emulator. The emulator has been repurposed into an external library to implement the I/O devices used by the disassembled code. The emulator is also used to emulate the system's processor in two cases:
+Located in `srcemu/` is a modified version of the _PCSX-R_ playstation emulator. The emulator has been repurposed into an external library to implement some important devices:
+
+* System Control Coprocessor (COP0)
+* Geometry Transformation Engine (COP2)
+* HLE BIOS
+* Interrupt System
+* Root Counters (Timers)
+* DMA Controller
+* Graphics Processing Unit (with plugin)
+* Sound Processing Unit (with plugin)
+* CDROM Drive
+* Gamepads (with plugin)
+
+The emulator is also used to emulate the system's processor in two cases:
 
 1. The game does an indirect branch to undetected code (see above) which has not been disassembled. A warning is issued in this case.
 2. The game invokes code which does not exist within the game engine. The primary case of this is native code sections used in GOOL scripts, however these are handled using a separate interpreter in `src/gool_mips.cc`.
-
-Additionally, the emulator implements the Geometry Transformation Engine (GTE) coprocessor used for matrix and vector math necessary for 3D rendering.
 
 ## The Disassembled Code ##
 Located in `srczz/` is the output from the disassembler, one file for each function. Each destination of a direct "jump-and-link" is considered to be the start of a new function and thus begins a new file. At the top half of each file is a list of addresses occupied by the function, linking addresses to C labels as well as enabling warnings for two conditions:
