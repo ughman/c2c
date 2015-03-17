@@ -1,5 +1,6 @@
 #include "system.h"
 #include "r3000a.h"
+#include "gte.h"
 #include <stdio.h>
 #include <stdarg.h>
 #include <windows.h>
@@ -242,12 +243,47 @@ DLLEXPORT(void) pcsxWriteMemory32(int address,int value)
 	psxMemWrite32(address,value);
 }
 
-extern u32 MFC2(int reg);
-extern void MTC0(int reg, u32 val);
-extern void MTC2(u32 value, int reg);
-extern void CTC2(u32 value, int reg);
-extern void psxCOP0();
-extern void psxCOP2();
+////
+// from psxinterpreter.c
+static void psxTestSWInts() {
+	// the next code is untested, if u know please
+	// tell me if it works ok or not (linuzappz)
+	if (psxRegs.CP0.n.Cause & psxRegs.CP0.n.Status & 0x0300 &&
+		psxRegs.CP0.n.Status & 0x1) {
+		psxException(psxRegs.CP0.n.Cause, 0);
+	}
+}
+
+static void MTC0(int reg, u32 val) {
+//	SysPrintf("MTC0 %d: %x\n", reg, val);
+	switch (reg) {
+		case 12: // Status
+			psxRegs.CP0.r[12] = val;
+			psxTestSWInts();
+			break;
+
+		case 13: // Cause
+			psxRegs.CP0.n.Cause = val & ~(0xfc00);
+			psxTestSWInts();
+			break;
+
+		default:
+			psxRegs.CP0.r[reg] = val;
+			break;
+	}
+}
+
+static void (*psxCP2[64])() = {
+	   NULL , gteRTPS ,    NULL ,    NULL,    NULL,    NULL , gteNCLIP,    NULL, // 00
+	   NULL ,    NULL ,    NULL ,    NULL, gteOP  ,    NULL ,    NULL ,    NULL, // 08
+	gteDPCS , gteINTPL, gteMVMVA, gteNCDS, gteCDP ,    NULL , gteNCDT ,    NULL, // 10
+	   NULL ,    NULL ,    NULL , gteNCCS, gteCC  ,    NULL , gteNCS  ,    NULL, // 18
+	gteNCT  ,    NULL ,    NULL ,    NULL,    NULL,    NULL ,    NULL ,    NULL, // 20
+	gteSQR  , gteDCPL , gteDPCT ,    NULL,    NULL, gteAVSZ3, gteAVSZ4,    NULL, // 28
+	gteRTPT ,    NULL ,    NULL ,    NULL,    NULL,    NULL ,    NULL ,    NULL, // 30
+	   NULL ,    NULL ,    NULL ,    NULL,    NULL, gteGPF  , gteGPL  , gteNCCT  // 38
+};
+////
 
 DLLEXPORT(int) pcsxReadCOPData(int copid,int copregister)
 {
@@ -295,41 +331,23 @@ DLLEXPORT(void) pcsxExecuteCOP(int copid,int copargs)
 {
 	psxRegs.code = 16 << 26 | copid << 24 | copargs;
 	if (copid == 0)
-		psxCOP0();
+	{
+		if (_Rs_ == 16)
+		{
+			psxRegs.CP0.n.Status = (psxRegs.CP0.n.Status & 0xfffffff0) |
+				((psxRegs.CP0.n.Status & 0x3c) >> 2);
+		}
+	}
 	else if (copid == 2)
-		psxCOP2();
+		psxCP2[_Funct_]();
 	else
 		abort();
 }
-
-extern void intExecuteOnce();
 
 typedef const char *pcsxdisstring_t;
 DLLEXPORT(pcsxdisstring_t) pcsxDisassemble(int pc)
 {
 	return disR3000AF(psxMemRead32(pc),pc);
-}
-
-DLLEXPORT(int) pcsxExecuteOnce(int pc)
-{
-	psxRegs.pc = pc;
-	intExecuteOnce();
-	return psxRegs.pc;
-}
-
-DLLEXPORT(int) pcsxExecuteOnceNoCycle(int pc)
-{
-	psxRegs.pc = pc;
-	intExecuteOnce();
-	psxRegs.cycle -= BIAS;
-	return psxRegs.pc;
-}
-
-DLLEXPORT(int) pcsxExecuteBlock(int pc)
-{
-	psxRegs.pc = pc;
-	psxCpu->ExecuteBlock();
-	return psxRegs.pc;
 }
 
 DLLEXPORT(void) pcsxSyscall(int pc)

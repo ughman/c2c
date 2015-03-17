@@ -24,13 +24,7 @@ static uint32_t dummy_r0; // for discarding writes to $R0
 static void GOOL_MIPS_OP_Invalid(struct goolenv *env,uint32_t instruction)
 {
 	fprintf(stderr,"GOOL_MIPS_OP_Invalid: %s\n",PCSX_Disassemble(env->oldpc));
-	if (env->pc == env->oldpc + 4)
-	{
-		env->pc = PCSX_ExecuteOnce(env->oldpc);
-		env->pcfar = env->pc + 4;
-	}
-	else
-		PCSX_ExecuteOnce(env->oldpc);
+	abort();
 }
 
 static void GOOL_MIPS_OP_ShiftLeftLogical(struct goolenv *env,uint32_t instruction)

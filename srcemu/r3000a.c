@@ -27,30 +27,19 @@
 #include "gpu.h"
 #include "gte.h"
 
-R3000Acpu *psxCpu = NULL;
 psxRegisters psxRegs;
 
 int psxInit() {
 	SysPrintf(_("Running PCSXR Version %s (%s).\n"), PACKAGE_VERSION, __DATE__);
 
-#ifdef PSXREC
-	if (Config.Cpu == CPU_INTERPRETER) {
-		psxCpu = &psxInt;
-	} else psxCpu = &psxRec;
-#else
-	psxCpu = &psxInt;
-#endif
-
 	Log = 0;
 
 	if (psxMemInit() == -1) return -1;
 
-	return psxCpu->Init();
+	return 0;
 }
 
 void psxReset() {
-	psxCpu->Reset();
-
 	psxMemReset();
 
 	memset(&psxRegs, 0, sizeof(psxRegs));
@@ -63,9 +52,6 @@ void psxReset() {
 	psxHwReset();
 	psxBiosInit();
 
-	if (!Config.HLE)
-		psxExecuteBios();
-
 #ifdef EMU_LOG
 	EMU_LOG("*BIOS END*\n");
 #endif
@@ -75,8 +61,6 @@ void psxReset() {
 void psxShutdown() {
 	psxMemShutdown();
 	psxBiosShutdown();
-
-	psxCpu->Shutdown();
 }
 
 void psxException(u32 code, u32 bd) {
@@ -265,9 +249,4 @@ void psxJumpTest() {
 				break;
 		}
 	}
-}
-
-void psxExecuteBios() {
-	while (psxRegs.pc != 0x80030000)
-		psxCpu->ExecuteBlock();
 }

@@ -661,7 +661,6 @@ static int LoadSIO1plugin(const char *SIO1dll) {
 #endif
 
 void CALLBACK clearDynarec(void) {
-	psxCpu->Reset();
 }
 
 int LoadPlugins() {

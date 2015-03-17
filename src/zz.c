@@ -40,28 +40,6 @@ do \
 	EMU_RunInterrupts(); \
 } while (0)
 
-#define ZZ_ONCE(address) \
-do \
-{ \
-	pc_after = PCSX_ExecuteOnceNoCycle(address); \
-	if (pc_after != address + 4) \
-	{ \
-		/*fprintf(stderr,"Return to addr %X for %X\n",pc_after,address);*/ \
-		abort(); \
-	} \
-} while (0)
-
-#define ZZ_ONCEBRANCH(address,clocks) \
-do \
-{ \
-	pc_after = PCSX_ExecuteOnceNoCycle(address); \
-	if (pc_after != address + 4) \
-	{ \
-		EMU_Cycle(clocks); \
-		return pc_after; \
-	} \
-} while (0)
-
 static uint32_t ZZ_Native(uint32_t address);
 
 void ZZ_Init(void)
@@ -93,7 +71,6 @@ do \
 
 uint32_t ZZ_Native(uint32_t address)
 {
-	uint32_t pc_after;
 	uint32_t jr_dest;
 	switch (address)
 	{

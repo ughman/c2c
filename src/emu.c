@@ -21,13 +21,13 @@ uint32_t (*EMU_codemap[EMU_RAMWORDS])(uint32_t address);
 uint32_t EMU_ExecuteUnrecognizedCode(uint32_t pc)
 {
 	fprintf(stderr,"Unrecognized code at PC := %X\n",pc);
-	return (EMU_codemap[(pc & 0x1FFFFF) >> 2] = PCSX_ExecuteBlock)(pc);
+	abort();
 }
 
 uint32_t EMU_ExecuteBadEntryPointCode(uint32_t pc)
 {
 	fprintf(stderr,"Bad entry point for native code at PC := %X\n",pc);
-	return (EMU_codemap[(pc & 0x1FFFFF) >> 2] = PCSX_ExecuteBlock)(pc);
+	abort();
 }
 
 uint32_t EMU_DummyMethod(uint32_t pc)
@@ -94,7 +94,7 @@ uint8_t EMU_ReadU8(uint32_t address)
 normal:
 		{
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
-			if (codehandler != EMU_ExecuteUnrecognizedCode && codehandler != PCSX_ExecuteBlock)
+			if (codehandler != EMU_ExecuteUnrecognizedCode)
 			{
 				fprintf(stderr,"Reading code as data.\n");
 			}
@@ -140,7 +140,7 @@ uint16_t EMU_ReadU16(uint32_t address)
 normal:
 		{
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
-			if (codehandler != EMU_ExecuteUnrecognizedCode && codehandler != PCSX_ExecuteBlock)
+			if (codehandler != EMU_ExecuteUnrecognizedCode)
 			{
 				fprintf(stderr,"Reading code as data.\n");
 			}
@@ -260,7 +260,7 @@ uint32_t EMU_ReadU32(uint32_t address)
 normal:
 		{
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
-			if (codehandler != EMU_ExecuteUnrecognizedCode && codehandler != PCSX_ExecuteBlock)
+			if (codehandler != EMU_ExecuteUnrecognizedCode)
 			{
 				fprintf(stderr,"Reading code as data.\n");
 			}
@@ -313,7 +313,7 @@ void EMU_Write8(uint32_t address,uint8_t value)
 normal:
 		{
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
-			if (codehandler != EMU_ExecuteUnrecognizedCode && codehandler != PCSX_ExecuteBlock)
+			if (codehandler != EMU_ExecuteUnrecognizedCode)
 			{
 				fprintf(stderr,"Writing code.\n");
 			}
@@ -369,7 +369,7 @@ void EMU_Write16(uint32_t address,uint16_t value)
 normal:
 		{
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
-			if (codehandler != EMU_ExecuteUnrecognizedCode && codehandler != PCSX_ExecuteBlock)
+			if (codehandler != EMU_ExecuteUnrecognizedCode)
 			{
 				fprintf(stderr,"Writing code.\n");
 			}
@@ -557,7 +557,7 @@ void EMU_Write32(uint32_t address,uint32_t value)
 normal:
 		{
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
-			if (codehandler != EMU_ExecuteUnrecognizedCode && codehandler != PCSX_ExecuteBlock)
+			if (codehandler != EMU_ExecuteUnrecognizedCode)
 			{
 				fprintf(stderr,"Writing code.\n");
 			}

@@ -49,11 +49,6 @@ Located in `srcemu/` is a modified version of the _PCSX-R_ playstation emulator.
 * CDROM Drive
 * Gamepads (with plugin)
 
-The emulator is also used to emulate the system's processor in two cases:
-
-1. The game does an indirect branch to undetected code (see above) which has not been disassembled. A warning is issued in this case.
-2. The game invokes code which does not exist within the game engine. The primary case of this is native code sections used in GOOL scripts, however these are handled using a separate interpreter in `src/gool_mips.cc`.
-
 ## The Disassembled Code ##
 Located in `srczz/` is the output from the disassembler, one file for each function. Each destination of a direct "jump-and-link" is considered to be the start of a new function and thus begins a new file. At the top half of each file is a list of addresses occupied by the function, linking addresses to C labels as well as enabling warnings for two conditions:
 

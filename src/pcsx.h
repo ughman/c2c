@@ -28,9 +28,6 @@ extern void (*PCSX_Syscall)(uint32_t pc);
 extern void (*PCSX_Cycle)(int cycles);
 extern uint32_t (*PCSX_RunInterrupts)(uint32_t pc);
 extern const char *(*PCSX_Disassemble)(uint32_t pc);
-extern uint32_t (*PCSX_ExecuteOnce)(uint32_t pc);
-extern uint32_t (*PCSX_ExecuteOnceNoCycle)(uint32_t pc);
-extern uint32_t (*PCSX_ExecuteBlock)(uint32_t address);
 
 extern uint32_t (*PCSX_HLEA0)(void);
 extern uint32_t (*PCSX_HLEB0)(void);

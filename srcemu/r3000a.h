@@ -29,21 +29,6 @@ extern "C" {
 #include "psxcounters.h"
 #include "psxbios.h"
 
-typedef struct {
-	int  (*Init)();
-	void (*Reset)();
-	void (*Execute)();		/* executes up to a break */
-	void (*ExecuteBlock)();	/* executes up to a jump */
-	void (*Shutdown)();
-} R3000Acpu;
-
-extern R3000Acpu *psxCpu;
-extern R3000Acpu psxInt;
-#if (defined(__x86_64__) || defined(__i386__) || defined(__sh__) || defined(__ppc__)) && !defined(NOPSXREC)
-extern R3000Acpu psxRec;
-#define PSXREC
-#endif
-
 typedef union {
 #if defined(__BIGENDIAN__)
 	struct { u8 h3, h2, h, l; } b;
@@ -266,7 +251,6 @@ void psxReset();
 void psxShutdown();
 void psxException(u32 code, u32 bd);
 void psxBranchTest();
-void psxExecuteBios();
 int  psxTestLoadDelay(int reg, u32 tmp);
 void psxDelayTest(int reg, u32 bpc);
 void psxTestSWInts();
