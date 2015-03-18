@@ -624,20 +624,6 @@ void psxBios_bcmp() { // 0x29
 	v0 = 0; pc0 = ra;
 }
 
-void psxBios_memcpy() { // 0x2a
-	char *p1 = (char *)Ra0, *p2 = (char *)Ra1;
-	while (a2-- > 0) *p1++ = *p2++;
-
-	v0 = a0; pc0 = ra;
-}
-
-void psxBios_memset() { // 0x2b
-	char *p = (char *)Ra0;
-	while (a2-- > 0) *p++ = (char)a1;
-
-	v0 = a0; pc0 = ra;
-}
-
 void psxBios_memmove() { // 0x2c
 	char *p1 = (char *)Ra0, *p2 = (char *)Ra1;
 
@@ -2273,8 +2259,8 @@ void psxBiosInit() {
 	biosA0[0x27] = psxBios_bcopy;
 	biosA0[0x28] = psxBios_bzero;
 	biosA0[0x29] = psxBios_bcmp;
-	biosA0[0x2a] = psxBios_memcpy;
-	biosA0[0x2b] = psxBios_memset;
+	//biosA0[0x2a] = psxBios_memcpy;
+	//biosA0[0x2b] = psxBios_memset;
 	biosA0[0x2c] = psxBios_memmove;
 	biosA0[0x2d] = psxBios_memcmp;
 	biosA0[0x2e] = psxBios_memchr;
