@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <dlfcn.h>
 #include "emu.h"
+#include "bios.h"
 
 static void *PCSX_library;
 
@@ -9,6 +10,7 @@ static struct pcsxinitinfo
 {
 	uint32_t (*invoke)(uint32_t address,int zero,...);
 	void (*saveregisters)(void);
+	void (*deliverevent)(uint32_t evclass,uint32_t spec);
 	uint32_t **ram;
 	uint32_t **scratch;
 } info;
@@ -82,6 +84,7 @@ void PCSX_Init(void)
 	METHOD(PCSX_HLEC0,"pcsxHLEC0",uint32_t(*)(void));
 	info.invoke = EMU_Invoke;
 	info.saveregisters = EMU_SaveRegisters;
+	info.deliverevent = BIOS_DeliverEvent;
 	info.ram = &EMU_ram;
 	info.scratch = &EMU_scratch;
 	PCSX_InitLibrary("c2c.bin",&EMU_reg,&info);

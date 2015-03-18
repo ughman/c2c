@@ -239,13 +239,6 @@ static int *pad_buf = NULL;
 static char *pad_buf1 = NULL, *pad_buf2 = NULL;
 static int pad_buf1len, pad_buf2len;
 
-static EvCB *Event;
-static EvCB *HwEV; // 0xf0
-static EvCB *EvEV; // 0xf1
-static EvCB *RcEV; // 0xf2
-static EvCB *UeEV; // 0xf3
-static EvCB *SwEV; // 0xf4
-static EvCB *ThEV; // 0xff
 static u32 *heap_addr = NULL;
 static u32 *heap_end = NULL;
 static u32 SysIntRP[8];
@@ -283,15 +276,6 @@ static inline void softCall2(u32 pc) {
 	native.invoke(pc,0);
 
 	hleSoftCall = FALSE;
-}
-
-static inline void DeliverEvent(u32 ev, u32 spec) {
-	if (Event[ev][spec].status != EvStACTIVE) return;
-
-//	Event[ev][spec].status = EvStALREADY;
-	if (Event[ev][spec].mode == EvMdINTR) {
-		softCall2(Event[ev][spec].fhandler);
-	} else Event[ev][spec].status = EvStALREADY;
 }
 
 /*                                           *
@@ -1161,8 +1145,8 @@ void psxBios__bu_init() { // 70
 	PSXBIOS_LOG("psxBios_%s\n", biosA0n[0x70]);
 #endif
 
-	DeliverEvent(0x11, 0x2); // 0xf0000011, 0x0004
-	DeliverEvent(0x81, 0x2); // 0xf4000001, 0x0004
+	native.deliverevent(0xF0000011,4);
+	native.deliverevent(0xF4000001,4);
 
 	pc0 = ra;
 }
@@ -1218,7 +1202,7 @@ void psxBios__card_info() { // ab
 	card_active_chan = a0;
 
 //	DeliverEvent(0x11, 0x2); // 0xf0000011, 0x0004
-	DeliverEvent(0x81, 0x2); // 0xf4000001, 0x0004
+	native.deliverevent(0xF4000001,4);
 
 	v0 = 1; pc0 = ra;
 }
@@ -1231,7 +1215,7 @@ void psxBios__card_load() { // ac
 	card_active_chan = a0;
 
 //	DeliverEvent(0x11, 0x2); // 0xf0000011, 0x0004
-	DeliverEvent(0x81, 0x2); // 0xf4000001, 0x0004
+	native.deliverevent(0xF4000001,4);
 
 	v0 = 1; pc0 = ra;
 }
@@ -1306,136 +1290,6 @@ void psxBios_ResetRCnt() { // 06
 	pc0 = ra;
 }
 
-
-/* gets ev for use with Event */
-#define GetEv() \
-	ev = (a0 >> 24) & 0xf; \
-	if (ev == 0xf) ev = 0x5; \
-	ev*= 32; \
-	ev+= a0&0x1f;
-
-/* gets spec for use with Event */
-#define GetSpec() \
-	spec = 0; \
-	switch (a1) { \
-		case 0x0301: spec = 16; break; \
-		case 0x0302: spec = 17; break; \
-		default: \
-			for (i=0; i<16; i++) if (a1 & (1 << i)) { spec = i; break; } \
-			break; \
-	}
-
-void psxBios_DeliverEvent() { // 07
-	int ev, spec;
-	int i;
-
-	GetEv();
-	GetSpec();
-
-#ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s %x,%x\n", biosB0n[0x07], ev, spec);
-#endif
-
-	DeliverEvent(ev, spec);
-
-	pc0 = ra;
-}
-
-void psxBios_OpenEvent() { // 08
-	int ev, spec;
-	int i;
-
-	GetEv();
-	GetSpec();
-
-#ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s %x,%x (class:%x, spec:%x, mode:%x, func:%x)\n", biosB0n[0x08], ev, spec, a0, a1, a2, a3);
-#endif
-
-	Event[ev][spec].status = EvStWAIT;
-	Event[ev][spec].mode = a2;
-	Event[ev][spec].fhandler = a3;
-
-	v0 = ev | (spec << 8);
-	pc0 = ra;
-}
-
-void psxBios_CloseEvent() { // 09
-	int ev, spec;
-
-	ev   = a0 & 0xff;
-	spec = (a0 >> 8) & 0xff;
-
-#ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s %x,%x\n", biosB0n[0x09], ev, spec);
-#endif
-
-	Event[ev][spec].status = EvStUNUSED;
-
-	v0 = 1; pc0 = ra;
-}
-
-void psxBios_WaitEvent() { // 0a
-	int ev, spec;
-
-	ev   = a0 & 0xff;
-	spec = (a0 >> 8) & 0xff;
-
-#ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s %x,%x\n", biosB0n[0x0a], ev, spec);
-#endif
-
-	Event[ev][spec].status = EvStACTIVE;
-
-	v0 = 1; pc0 = ra;
-}
-
-void psxBios_TestEvent() { // 0b
-	int ev, spec;
-
-	ev   = a0 & 0xff;
-	spec = (a0 >> 8) & 0xff;
-
-	if (Event[ev][spec].status == EvStALREADY) {
-		Event[ev][spec].status = EvStACTIVE; v0 = 1;
-	} else v0 = 0;
-
-#ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s %x,%x: %x\n", biosB0n[0x0b], ev, spec, v0);
-#endif
-
-	pc0 = ra;
-}
-
-void psxBios_EnableEvent() { // 0c
-	int ev, spec;
-
-	ev   = a0 & 0xff;
-	spec = (a0 >> 8) & 0xff;
-
-#ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s %x,%x\n", biosB0n[0x0c], ev, spec);
-#endif
-
-	Event[ev][spec].status = EvStACTIVE;
-
-	v0 = 1; pc0 = ra;
-}
-
-void psxBios_DisableEvent() { // 0d
-	int ev, spec;
-
-	ev   = a0 & 0xff;
-	spec = (a0 >> 8) & 0xff;
-
-#ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s %x,%x\n", biosB0n[0x0d], ev, spec);
-#endif
-
-	Event[ev][spec].status = EvStWAIT;
-
-	v0 = 1; pc0 = ra;
-}
 
 /*
  *	long OpenTh(long (*func)(), unsigned long sp, unsigned long gp);
@@ -1581,24 +1435,6 @@ void psxBios_HookEntryInt() { // 19
 	pc0 = ra;
 }
 
-void psxBios_UnDeliverEvent() { // 0x20
-	int ev, spec;
-	int i;
-
-	GetEv();
-	GetSpec();
-
-#ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s %x,%x\n", biosB0n[0x20], ev, spec);
-#endif
-
-	if (Event[ev][spec].status == EvStALREADY &&
-		Event[ev][spec].mode == EvMdNOINTR)
-		Event[ev][spec].status = EvStACTIVE;
-
-	pc0 = ra;
-}
-
 #define buopen(mcd) { \
 	strcpy(FDesc[1 + mcd].name, Ra0+5); \
 	FDesc[1 + mcd].offset = 0; \
@@ -1693,8 +1529,8 @@ void psxBios_lseek() { // 0x33
 	if (FDesc[1 + mcd].mode & 0x8000) v0 = 0; \
 	else v0 = a2; \
 	FDesc[1 + mcd].offset += v0; \
-	DeliverEvent(0x11, 0x2); /* 0xf0000011, 0x0004 */ \
-	DeliverEvent(0x81, 0x2); /* 0xf4000001, 0x0004 */ \
+	native.deliverevent(0xF0000011,4); \
+	native.deliverevent(0xF4000001,4); \
 }
 
 /*
@@ -1726,8 +1562,8 @@ void psxBios_read() { // 0x34
 	SaveMcd(Config.Mcd##mcd, Mcd##mcd##Data, offset, a2); \
 	if (FDesc[1 + mcd].mode & 0x8000) v0 = 0; \
 	else v0 = a2; \
-	DeliverEvent(0x11, 0x2); /* 0xf0000011, 0x0004 */ \
-	DeliverEvent(0x81, 0x2); /* 0xf4000001, 0x0004 */ \
+	native.deliverevent(0xF0000011,4); \
+	native.deliverevent(0xF4000001,4); \
 }
 
 /*
@@ -1862,7 +1698,7 @@ void psxBios_firstfile() { // 42
 	}
 
 	// firstfile() calls _card_read() internally, so deliver it's event
-	DeliverEvent(0x11, 0x2);
+	native.deliverevent(0xF0000011,4);
 
 	pc0 = ra;
 }
@@ -2022,8 +1858,8 @@ void psxBios__card_write() { // 0x4e
 		SaveMcd(Config.Mcd2, Mcd2Data, a1 * 128, 128);
 	}
 
-	DeliverEvent(0x11, 0x2); // 0xf0000011, 0x0004
 //	DeliverEvent(0x81, 0x2); // 0xf4000001, 0x0004
+	native.deliverevent(0xF0000011,4);
 
 	v0 = 1; pc0 = ra;
 }
@@ -2044,8 +1880,8 @@ void psxBios__card_read() { // 0x4f
 		memcpy(Ra2, Mcd2Data + a1 * 128, 128);
 	}
 
-	DeliverEvent(0x11, 0x2); // 0xf0000011, 0x0004
 //	DeliverEvent(0x81, 0x2); // 0xf4000001, 0x0004
+	native.deliverevent(0xF0000011,4);
 
 	v0 = 1; pc0 = ra;
 }
@@ -2404,13 +2240,13 @@ void psxBiosInit() {
 	biosB0[0x04] = psxBios_StartRCnt;
 	biosB0[0x05] = psxBios_StopRCnt;
 	biosB0[0x06] = psxBios_ResetRCnt;
-	biosB0[0x07] = psxBios_DeliverEvent;
-	biosB0[0x08] = psxBios_OpenEvent;
-	biosB0[0x09] = psxBios_CloseEvent;
-	biosB0[0x0a] = psxBios_WaitEvent;
-	biosB0[0x0b] = psxBios_TestEvent;
-	biosB0[0x0c] = psxBios_EnableEvent;
-	biosB0[0x0d] = psxBios_DisableEvent;
+	//biosB0[0x07] = psxBios_DeliverEvent;
+	//biosB0[0x08] = psxBios_OpenEvent;
+	//biosB0[0x09] = psxBios_CloseEvent;
+	//biosB0[0x0a] = psxBios_WaitEvent;
+	//biosB0[0x0b] = psxBios_TestEvent;
+	//biosB0[0x0c] = psxBios_EnableEvent;
+	//biosB0[0x0d] = psxBios_DisableEvent;
 	biosB0[0x0e] = psxBios_OpenTh;
 	biosB0[0x0f] = psxBios_CloseTh;
 	biosB0[0x10] = psxBios_ChangeTh;
@@ -2429,7 +2265,7 @@ void psxBiosInit() {
 	//biosB0[0x1d] = psxBios_sys_b0_1d;
 	//biosB0[0x1e] = psxBios_sys_b0_1e;
 	//biosB0[0x1f] = psxBios_sys_b0_1f;
-	biosB0[0x20] = psxBios_UnDeliverEvent;
+	//biosB0[0x20] = psxBios_UnDeliverEvent;
 	//biosB0[0x21] = psxBios_sys_b0_21;
 	//biosB0[0x22] = psxBios_sys_b0_22;
 	//biosB0[0x23] = psxBios_sys_b0_23;
@@ -2523,14 +2359,6 @@ void psxBiosInit() {
 /**/
 	base = 0x1000;
 	size = sizeof(EvCB) * 32;
-	Event = (void *)&psxR[base]; base += size * 6;
-	memset(Event, 0, size * 6);
-	HwEV = Event;
-	EvEV = Event + 32;
-	RcEV = Event + 32 * 2;
-	UeEV = Event + 32 * 3;
-	SwEV = Event + 32 * 4;
-	ThEV = Event + 32 * 5;
 
 	ptr = (u32 *)&psxM[0x0874]; // b0 table
 	ptr[0] = SWAPu32(0x4c54 - 0x884);
@@ -2655,10 +2483,7 @@ void biosInterrupt() {
 		}
 
 	if (psxHu32(0x1070) & 0x1) { // Vsync
-		if (RcEV[3][1].status == EvStACTIVE) {
-			softCall(RcEV[3][1].fhandler);
-//			hwWrite32(0x1f801070, ~(1));
-		}
+		native.deliverevent(0xF2000003,2);
 	}
 
 	if (psxHu32(0x1070) & 0x70) { // Rcnt 0,1,2
@@ -2666,9 +2491,7 @@ void biosInterrupt() {
 
 		for (i = 0; i < 3; i++) {
 			if (psxHu32(0x1070) & (1 << (i + 4))) {
-				if (RcEV[i][1].status == EvStACTIVE) {
-					softCall(RcEV[i][1].fhandler);
-				}
+				native.deliverevent(0xF2000000 + i,2);
 				psxHwWrite32(0x1f801070, ~(1 << (i + 4)));
 			}
 		}

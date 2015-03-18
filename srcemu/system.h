@@ -28,6 +28,7 @@ extern struct nativeinfo
 {
 	void (*invoke)(int address,int zero);
 	void (*saveregisters)();
+	void (*deliverevent)(int ev,int spec);
 	unsigned char **ram;
 	unsigned char **scratchpad;
 } native;
