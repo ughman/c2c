@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "pcsx.h"
 #include "emu.h"
+#include "cop0.h"
 
 uint32_t BIOS_Execute(uint32_t address)
 {
@@ -19,6 +20,10 @@ uint32_t BIOS_Execute(uint32_t address)
 	case 0xB0:
 		switch (T1)
 		{
+		case 0x17:
+			EMU_LoadRegisters();
+			PCSX_ExecuteCOP(0,16 << 21);
+			return COP0_GetRegister(14);
 		default:
 			fprintf(stderr,"Unrecognized BIOS(B0) method: %i:%s\n",T1,PCSX_B0Name(T1));
 			return PCSX_HLEB0();

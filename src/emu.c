@@ -809,3 +809,15 @@ void EMU_RunInterrupts(void)
 		pc = EMU_codemap[(pc & 0x1FFFFF) >> 2](pc);
 	}
 }
+
+static uint32_t EMU_savedreg[34];
+
+extern void EMU_SaveRegisters(void)
+{
+	memcpy(EMU_savedreg,EMU_reg,sizeof(EMU_savedreg));
+}
+
+extern void EMU_LoadRegisters(void)
+{
+	memcpy(EMU_reg,EMU_savedreg,sizeof(EMU_savedreg));
+}

@@ -131,6 +131,9 @@ extern void EMU_NativeCall(void *method);
 extern void EMU_Cycle(int cycles);
 extern void EMU_RunInterrupts(void);
 
+extern void EMU_SaveRegisters(void);
+extern void EMU_LoadRegisters(void);
+
 #ifdef __cplusplus
 }
 

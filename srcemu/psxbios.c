@@ -239,7 +239,6 @@ static int *pad_buf = NULL;
 static char *pad_buf1 = NULL, *pad_buf2 = NULL;
 static int pad_buf1len, pad_buf2len;
 
-static u32 regs[35];
 static EvCB *Event;
 static EvCB *HwEV; // 0xf0
 static EvCB *EvEV; // 0xf1
@@ -293,19 +292,6 @@ static inline void DeliverEvent(u32 ev, u32 spec) {
 	if (Event[ev][spec].mode == EvMdINTR) {
 		softCall2(Event[ev][spec].fhandler);
 	} else Event[ev][spec].status = EvStALREADY;
-}
-
-static inline void SaveRegs() {
-	memcpy(regs, psxRegs.GPR.r, 32*4);
-	regs[32] = psxRegs.GPR.n.lo;
-	regs[33] = psxRegs.GPR.n.hi;
-	regs[34] = psxRegs.pc;
-}
-
-static inline void LoadRegs() {
-	memcpy(psxRegs.GPR.r, regs, 32*4);
-	psxRegs.GPR.n.lo = regs[32];
-	psxRegs.GPR.n.hi = regs[33];
 }
 
 /*                                           *
@@ -1591,16 +1577,6 @@ void psxBios_PAD_dr() { // 16
 	v0 = -1; pc0 = ra;
 }
 
-void psxBios_ReturnFromException() { // 17
-	LoadRegs();
-
-	pc0 = psxRegs.CP0.n.EPC;
-	if (psxRegs.CP0.n.Cause & 0x80000000) pc0 += 4;
-
-	psxRegs.CP0.n.Status = (psxRegs.CP0.n.Status & 0xfffffff0) |
-						  ((psxRegs.CP0.n.Status & 0x3c) >> 2);
-}
-
 void psxBios_ResetEntryInt() { // 18
 #ifdef PSXBIOS_LOG
 	PSXBIOS_LOG("psxBios_%s\n", biosB0n[0x18]);
@@ -2458,7 +2434,7 @@ void psxBiosInit() {
 	biosB0[0x14] = psxBios_StopPAD;
 	biosB0[0x15] = psxBios_PAD_init;
 	biosB0[0x16] = psxBios_PAD_dr;
-	biosB0[0x17] = psxBios_ReturnFromException;
+	//biosB0[0x17] = psxBios_ReturnFromException;
 	biosB0[0x18] = psxBios_ResetEntryInt;
 	biosB0[0x19] = psxBios_HookEntryInt;
 	//biosB0[0x1a] = psxBios_sys_b0_1a;
@@ -2721,7 +2697,7 @@ void psxBiosException() {
 #ifdef PSXCPU_LOG
 //			PSXCPU_LOG("interrupt\n");
 #endif
-			SaveRegs();
+			native.saveregisters();
 
 			sp = psxMu32(0x6c80); // create new stack for interrupt handlers
 
@@ -2819,7 +2795,6 @@ void psxBiosFreeze(int Mode) {
 	bfreezepsxMptr(heap_addr, u32);
 	bfreezel(&pad_buf1len);
 	bfreezel(&pad_buf2len);
-	bfreezes(regs);
 	bfreezes(SysIntRP);
 	bfreezel(&CardState);
 	bfreezes(Thread);

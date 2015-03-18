@@ -27,6 +27,7 @@ extern "C" {
 extern struct nativeinfo
 {
 	void (*invoke)(int address,int zero);
+	void (*saveregisters)();
 	unsigned char **ram;
 	unsigned char **scratchpad;
 } native;
