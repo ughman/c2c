@@ -5,6 +5,11 @@
 #include "emu.h"
 #include "cop0.h"
 
+int32_t BIOS_AToI(uint32_t str)
+{
+	return atoi(EMU_Pointer(str));
+}
+
 uint32_t BIOS_MemCpy(uint32_t dest,uint32_t src,int32_t len)
 {
 	if (!dest)
@@ -106,6 +111,7 @@ uint32_t BIOS_Execute(uint32_t address)
 	case 0xA0:
 		switch (T1)
 		{
+		CASE_METHOD(0x10,BIOS_AToI);
 		CASE_METHOD(0x2A,BIOS_MemCpy);
 		CASE_METHOD(0x2B,BIOS_MemSet);
 		default:

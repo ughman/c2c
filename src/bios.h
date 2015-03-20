@@ -7,6 +7,7 @@
 extern "C" {
 #endif
 
+extern int32_t BIOS_AToI(uint32_t str);
 extern uint32_t BIOS_MemCpy(uint32_t dest,uint32_t src,int32_t len);
 extern uint32_t BIOS_MemSet(uint32_t dest,uint8_t value,int32_t len);
 

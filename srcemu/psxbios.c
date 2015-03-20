@@ -294,31 +294,6 @@ void psxBios_labs() { // 0x0f
 	psxBios_abs();
 }
 
-void psxBios_atoi() { // 0x10
-	s32 n = 0, f = 0;
-	char *p = (char *)Ra0;
-
-	for (;;p++) {
-		switch (*p) {
-			case ' ': case '\t': continue;
-			case '-': f++;
-			case '+': p++;
-		}
-		break;
-	}
-
-	while (*p >= '0' && *p <= '9') {
-		n = n * 10 + *p++ - '0';
-	}
-
-	v0 = (f ? -n : n);
-	pc0 = ra;
-}
-
-void psxBios_atol() { // 0x11
-	psxBios_atoi();
-}
-
 void psxBios_setjmp() { // 0x13
 	u32 *jmp_buf = (u32 *)Ra0;
 	int i;
@@ -2069,8 +2044,8 @@ void psxBiosInit() {
 	//biosA0[0x0d] = psxBios_strtol;
 	biosA0[0x0e] = psxBios_abs;
 	biosA0[0x0f] = psxBios_labs;
-	biosA0[0x10] = psxBios_atoi;
-	biosA0[0x11] = psxBios_atol;
+	//biosA0[0x10] = psxBios_atoi;
+	//biosA0[0x11] = psxBios_atol;
 	//biosA0[0x12] = psxBios_atob;
 	biosA0[0x13] = psxBios_setjmp;
 	biosA0[0x14] = psxBios_longjmp;
