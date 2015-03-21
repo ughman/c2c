@@ -330,20 +330,6 @@ void psxBios_longjmp() { // 0x14
 	v0 = a1; pc0 = ra;
 }
 
-void psxBios_strcat() { // 0x15
-	char *p1 = (char *)Ra0, *p2 = (char *)Ra1;
-
-#ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s: %s, %s\n", biosA0n[0x15], Ra0, Ra1);
-#endif
-
-	while (*p1++);
-	--p1;
-	while ((*p1++ = *p2++) != '\0');
-
-	v0 = a0; pc0 = ra;
-}
-
 void psxBios_strncat() { // 0x16
 	char *p1 = (char *)Ra0, *p2 = (char *)Ra1;
 	s32 n = a2;
@@ -364,52 +350,6 @@ void psxBios_strncat() { // 0x16
 	v0 = a0; pc0 = ra;
 }
 
-void psxBios_strcmp() { // 0x17
-	char *p1 = (char *)Ra0, *p2 = (char *)Ra1;
-
-#ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s: %s (%x), %s (%x)\n", biosA0n[0x17], Ra0, a0, Ra1, a1);
-#endif
-
-	while (*p1 == *p2++) {
-		if (*p1++ == '\0') {
-			v0 = 0;
-			pc0 = ra;
-			return;
-		}
-	}
-
-	v0 = (*p1 - *--p2);
-	pc0 = ra;
-}
-
-void psxBios_strncmp() { // 0x18
-	char *p1 = (char *)Ra0, *p2 = (char *)Ra1;
-	s32 n = a2;
-
-#ifdef PSXBIOS_LOG
-	PSXBIOS_LOG("psxBios_%s: %s (%x), %s (%x), %d\n", biosA0n[0x18], Ra0, a0, Ra1, a1, a2);
-#endif
-
-	while (--n >= 0 && *p1 == *p2++) {
-		if (*p1++ == '\0') {
-			v0 = 0;
-			pc0 = ra;
-			return;
-		}
-	}
-
-	v0 = (n < 0 ? 0 : *p1 - *--p2);
-	pc0 = ra;
-}
-
-void psxBios_strcpy() { // 0x19
-	char *p1 = (char *)Ra0, *p2 = (char *)Ra1;
-	while ((*p1++ = *p2++) != '\0');
-
-	v0 = a0; pc0 = ra;
-}
-
 void psxBios_strncpy() { // 0x1a
 	char *p1 = (char *)Ra0, *p2 = (char *)Ra1;
 	s32 n = a2, i;
@@ -425,13 +365,6 @@ void psxBios_strncpy() { // 0x1a
 	}
 
 	v0 = a0; pc0 = ra;
-}
-
-void psxBios_strlen() { // 0x1b
-	char *p = (char *)Ra0;
-	v0 = 0;
-	while (*p++) v0++;
-	pc0 = ra;
 }
 
 void psxBios_index() { // 0x1c
@@ -553,20 +486,6 @@ void psxBios_tolower() { // 0x26
 	pc0 = ra;
 }
 
-void psxBios_bcopy() { // 0x27
-	char *p1 = (char *)Ra1, *p2 = (char *)Ra0;
-	while (a2-- > 0) *p1++ = *p2++;
-
-	pc0 = ra;
-}
-
-void psxBios_bzero() { // 0x28
-	char *p = (char *)Ra0;
-	while (a1-- > 0) *p++ = '\0';
-
-	pc0 = ra;
-}
-
 void psxBios_bcmp() { // 0x29
 	char *p1 = (char *)Ra0, *p2 = (char *)Ra1;
 
@@ -600,19 +519,6 @@ void psxBios_memmove() { // 0x2c
 
 void psxBios_memcmp() { // 0x2d
 	psxBios_bcmp();
-}
-
-void psxBios_memchr() { // 0x2e
-	char *p = (char *)Ra0;
-
-	while (a2-- > 0) {
-		if (*p++ != (s8)a1) continue;
-		v0 = a0 + (p - (char *)Ra0 - 1);
-		pc0 = ra;
-		return;
-	}
-
-	v0 = 0; pc0 = ra;
 }
 
 void psxBios_rand() { // 0x2f
@@ -2049,13 +1955,13 @@ void psxBiosInit() {
 	//biosA0[0x12] = psxBios_atob;
 	biosA0[0x13] = psxBios_setjmp;
 	biosA0[0x14] = psxBios_longjmp;
-	biosA0[0x15] = psxBios_strcat;
+	//biosA0[0x15] = psxBios_strcat;
 	biosA0[0x16] = psxBios_strncat;
-	biosA0[0x17] = psxBios_strcmp;
-	biosA0[0x18] = psxBios_strncmp;
-	biosA0[0x19] = psxBios_strcpy;
+	//biosA0[0x17] = psxBios_strcmp;
+	//biosA0[0x18] = psxBios_strncmp;
+	//biosA0[0x19] = psxBios_strcpy;
 	biosA0[0x1a] = psxBios_strncpy;
-	biosA0[0x1b] = psxBios_strlen;
+	//biosA0[0x1b] = psxBios_strlen;
 	biosA0[0x1c] = psxBios_index;
 	biosA0[0x1d] = psxBios_rindex;
 	biosA0[0x1e] = psxBios_strchr;
@@ -2067,14 +1973,14 @@ void psxBiosInit() {
 	biosA0[0x24] = psxBios_strstr;
 	biosA0[0x25] = psxBios_toupper;
 	biosA0[0x26] = psxBios_tolower;
-	biosA0[0x27] = psxBios_bcopy;
-	biosA0[0x28] = psxBios_bzero;
+	//biosA0[0x27] = psxBios_bcopy;
+	//biosA0[0x28] = psxBios_bzero;
 	biosA0[0x29] = psxBios_bcmp;
 	//biosA0[0x2a] = psxBios_memcpy;
 	//biosA0[0x2b] = psxBios_memset;
 	biosA0[0x2c] = psxBios_memmove;
 	biosA0[0x2d] = psxBios_memcmp;
-	biosA0[0x2e] = psxBios_memchr;
+	//biosA0[0x2e] = psxBios_memchr;
 	biosA0[0x2f] = psxBios_rand;
 	biosA0[0x30] = psxBios_srand;
 	biosA0[0x31] = psxBios_qsort;

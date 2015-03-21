@@ -10,6 +10,86 @@ int32_t BIOS_AToI(uint32_t str)
 	return atoi(EMU_Pointer(str));
 }
 
+uint32_t BIOS_StrCat(uint32_t dest,uint32_t src)
+{
+	uint32_t len;
+	uint32_t i = 0;
+	uint8_t c = 1;
+	for (len = 0;EMU_ReadU8(dest + len);len++);
+	while (c)
+	{
+		EMU_Write8(dest + len + i,c = EMU_ReadU8(src + i));
+		i++;
+	}
+	return dest;
+}
+
+int32_t BIOS_StrCmp(uint32_t str1,uint32_t str2)
+{
+	uint32_t i = 0;
+	while (1)
+	{
+		int8_t c1 = EMU_ReadS8(str1 + i);
+		int8_t c2 = EMU_ReadS8(str2 + i);
+		if (c1 != c2)
+			return c1 - c2;
+		else if (c1 == 0)
+			return 0;
+		i++;
+	}
+}
+
+int32_t BIOS_StrNCmp(uint32_t str1,uint32_t str2,uint32_t maxlen)
+{
+	uint32_t i = 0;
+	while (i < maxlen)
+	{
+		int8_t c1 = EMU_ReadS8(str1 + i);
+		int8_t c2 = EMU_ReadS8(str2 + i);
+		if (c1 != c2)
+			return c1 - c2;
+		else if (c1 == 0)
+			return 0;
+		i++;
+	}
+	return 0;
+}
+
+uint32_t BIOS_StrCpy(uint32_t dest,uint32_t src)
+{
+	uint32_t i = 0;
+	uint8_t c = 1;
+	while (c)
+	{
+		EMU_Write8(dest + i,c = EMU_ReadU8(src + i));
+		i++;
+	}
+	return dest;
+}
+
+uint32_t BIOS_StrLen(uint32_t str)
+{
+	uint32_t len;
+	for (len = 0;EMU_ReadU8(str + len);len++);
+	return len;
+}
+
+uint32_t BIOS_BCopy(uint32_t src,uint32_t dest,int32_t len)
+{
+	if (!src)
+		return src;
+	if (len < 0)
+		return src;
+	for (uint32_t i = 0;i < len;i++)
+		EMU_Write8(dest + i,EMU_ReadU8(src + i));
+	return src;
+}
+
+void BIOS_BZero(uint32_t dest,uint32_t len)
+{
+	BIOS_MemSet(dest,0,len);
+}
+
 uint32_t BIOS_MemCpy(uint32_t dest,uint32_t src,int32_t len)
 {
 	if (!dest)
@@ -30,6 +110,16 @@ uint32_t BIOS_MemSet(uint32_t dest,uint8_t value,int32_t len)
 	for (uint32_t i = 0;i < len;i++)
 		EMU_Write8(dest + i,value);
 	return dest;
+}
+
+uint32_t BIOS_MemChr(uint32_t str,uint8_t value,uint32_t len)
+{
+	for (uint32_t i = 0;i < len;i++)
+	{
+		if (EMU_ReadU8(str + i) == value)
+			return str + i;
+	}
+	return 0;
 }
 
 #define BIOS_MAXEVENTS 16
@@ -112,8 +202,16 @@ uint32_t BIOS_Execute(uint32_t address)
 		switch (T1)
 		{
 		CASE_METHOD(0x10,BIOS_AToI);
+		CASE_METHOD(0x15,BIOS_StrCat);
+		CASE_METHOD(0x17,BIOS_StrCmp);
+		CASE_METHOD(0x18,BIOS_StrNCmp);
+		CASE_METHOD(0x19,BIOS_StrCpy);
+		CASE_METHOD(0x1B,BIOS_StrLen);
+		CASE_METHOD(0x27,BIOS_BCopy);
+		CASE_METHOD(0x28,BIOS_BZero);
 		CASE_METHOD(0x2A,BIOS_MemCpy);
 		CASE_METHOD(0x2B,BIOS_MemSet);
+		CASE_METHOD(0x2E,BIOS_MemChr);
 		default:
 			fprintf(stderr,"Unrecognized BIOS(A0) method: %i:%s\n",T1,PCSX_A0Name(T1));
 			return PCSX_HLEA0();
