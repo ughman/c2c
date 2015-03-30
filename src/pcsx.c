@@ -1,5 +1,4 @@
 #include "pcsx.h"
-#include <stdio.h>
 #include <dlfcn.h>
 #include "emu.h"
 #include "bios.h"

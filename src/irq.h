@@ -1,7 +1,7 @@
 #ifndef H_IRQ_H
 #define H_IRQ_H
 
-#include <stdint.h>
+#include "common.h"
 
 #ifdef __cplusplus
 extern "C" {

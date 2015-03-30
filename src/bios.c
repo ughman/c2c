@@ -1,6 +1,4 @@
 #include "bios.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include "pcsx.h"
 #include "emu.h"
 #include "cop0.h"

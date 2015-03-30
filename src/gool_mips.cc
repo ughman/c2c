@@ -1,5 +1,4 @@
 #include "gool_mips.h"
-#include <stdio.h>
 #include "pcsx.h"
 #include "emu.h"
 

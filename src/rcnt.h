@@ -1,7 +1,7 @@
 #ifndef H_RCNT_H
 #define H_RCNT_H
 
-#include <stdint.h>
+#include "common.h"
 
 #ifdef __cplusplus
 extern "C" {

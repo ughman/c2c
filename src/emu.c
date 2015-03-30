@@ -1,7 +1,4 @@
 #include "emu.h"
-#include <stdio.h>
-#include <stdarg.h>
-#include <string.h>
 #include "pcsx.h"
 #include "bios.h"
 #include "gpu.h"

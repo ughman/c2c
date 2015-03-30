@@ -1,8 +1,7 @@
 #ifndef H_EMU_H
 #define H_EMU_H
 
-#include <stdlib.h>
-#include <stdint.h>
+#include "common.h"
 
 typedef uint8_t unk8_t;
 typedef uint16_t unk16_t;

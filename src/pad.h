@@ -1,7 +1,7 @@
 #ifndef H_PAD_H
 #define H_PAD_H
 
-#include <stdint.h>
+#include "common.h"
 
 #ifdef __cplusplus
 extern "C" {

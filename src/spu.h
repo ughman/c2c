@@ -1,7 +1,7 @@
 #ifndef H_SPU_H
 #define H_SPU_H
 
-#include <stdint.h>
+#include "common.h"
 
 #ifdef __cplusplus
 extern "C" {

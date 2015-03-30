@@ -1,7 +1,7 @@
 #ifndef H_GTE_H
 #define H_GTE_H
 
-#include <stdint.h>
+#include "common.h"
 
 #ifdef __cplusplus
 extern "C" {

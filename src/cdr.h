@@ -1,7 +1,7 @@
 #ifndef H_CDR_H
 #define H_CDR_H
 
-#include <stdint.h>
+#include "common.h"
 
 #ifdef __cplusplus
 extern "C" {

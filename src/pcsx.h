@@ -1,7 +1,7 @@
 #ifndef H_PCSX_H
 #define H_PCSX_H
 
-#include <stdint.h>
+#include "common.h"
 
 #ifdef __cplusplus
 extern "C" {

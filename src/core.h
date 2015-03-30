@@ -1,6 +1,7 @@
 #ifndef H_CORE_H
 #define H_CORE_H
 
+#include "common.h"
 #include "emu.h"
 
 #ifdef __cplusplus

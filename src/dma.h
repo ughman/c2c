@@ -1,7 +1,7 @@
 #ifndef H_DMA_H
 #define H_DMA_H
 
-#include <stdint.h>
+#include "common.h"
 
 #ifdef __cplusplus
 extern "C" {

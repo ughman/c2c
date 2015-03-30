@@ -1,5 +1,4 @@
 #include "core.h"
-#include <stdio.h>
 #include "emu.h"
 
 void CORE_VSync(int32_t count,int32_t timeout)

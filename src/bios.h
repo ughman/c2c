@@ -1,7 +1,7 @@
 #ifndef H_BIOS_H
 #define H_BIOS_H
 
-#include <stdint.h>
+#include "common.h"
 
 #ifdef __cplusplus
 extern "C" {

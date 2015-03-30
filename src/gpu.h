@@ -1,7 +1,7 @@
 #ifndef H_GPU_H
 #define H_GPU_H
 
-#include <stdint.h>
+#include "common.h"
 
 #ifdef __cplusplus
 extern "C" {

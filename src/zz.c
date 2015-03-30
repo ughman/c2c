@@ -1,5 +1,4 @@
-#include <stdint.h>
-#include <stdio.h>
+#include "common.h"
 #include "emu.h"
 #include "cop0.h"
 #include "gte.h"

@@ -1,7 +1,7 @@
 #ifndef H_COP0_H
 #define H_COP0_H
 
-#include <stdint.h>
+#include "common.h"
 
 #ifdef __cplusplus
 extern "C" {

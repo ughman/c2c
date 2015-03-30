@@ -1,7 +1,7 @@
 #ifndef H_NS_H
 #define H_NS_H
 
-#include <stdint.h>
+#include "common.h"
 #include "emu.h"
 
 #ifdef __cplusplus
