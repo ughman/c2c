@@ -1,5 +1,4 @@
 #include "pcsx.h"
-#include <dlfcn.h>
 #include "emu.h"
 #include "bios.h"
 
@@ -49,14 +48,14 @@ uint32_t (*PCSX_HLEC0)(void);
 #define METHOD(localname,libname,type) \
 do \
 { \
-	localname = (type)dlsym(PCSX_library,libname); \
+	localname = (type)SDL_LoadFunction(PCSX_library,libname); \
 	if (!localname) \
 		fprintf(stderr,"Failed to load symbol " #localname ".\n"); \
 } while (0)
 
 void PCSX_Init(void)
 {
-	PCSX_library = dlopen("psx.dll",RTLD_LAZY);
+	PCSX_library = SDL_LoadObject("psx.dll");
 	if (!PCSX_library)
 		fprintf(stderr,"Failed to load PCSX library.\n");
 	METHOD(PCSX_InitLibrary,"pcsxInit",void(*)(const char *,uint32_t **,struct pcsxinitinfo *));
