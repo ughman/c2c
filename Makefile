@@ -13,13 +13,13 @@ clean:
 	rm -f $(DEPENDS)
 
 %.o: %.c
-	$(CC) -MMD -o $@ -c $< $(CFLAGS)
+	$(CC) -MMD -o $@ -c $< $(CFLAGS) `sdl2-config --cflags`
 
 %.o: %.cc
-	$(CXX) -MMD -o $@ -c $< $(CXXFLAGS)
+	$(CXX) -MMD -o $@ -c $< $(CXXFLAGS) `sdl2-config --cflags`
 
 c2c: $(OBJECTS)
-	$(CXX) -o $@ $^ $(LDFLAGS)
+	$(CXX) -o $@ $^ $(LDFLAGS) `sdl2-config --libs`
 
 -include $(DEPENDS)
 

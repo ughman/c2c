@@ -10,6 +10,11 @@
 #include <string.h>
 
 
+// Library headers
+
+#include <SDL.h>
+
+
 // Application information
 
 #define APP_NAME "C2C"
