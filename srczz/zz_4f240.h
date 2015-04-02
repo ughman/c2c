@@ -1,8 +1,8 @@
 #ifdef ZZ_INCLUDE_CODE
 ZZ_4F240:
-	EMU_Write32(A0,GTE_GetDataRegister(17));
-	EMU_Write32(A1,GTE_GetDataRegister(18));
-	EMU_Write32(A2,GTE_GetDataRegister(19));
+	EMU_Write32(A0,GTE_GetDataRegister(GTE_DREG_SZ1));
+	EMU_Write32(A1,GTE_GetDataRegister(GTE_DREG_SZ2));
+	EMU_Write32(A2,GTE_GetDataRegister(GTE_DREG_SZ3));
 	ZZ_JUMPREGISTER_BEGIN(RA);
 	ZZ_CLOCKCYCLES_JR(5);
 	ZZ_JUMPREGISTER(0x8001F088,ZZ_1EFA8_E0);

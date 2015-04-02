@@ -8,11 +8,11 @@ ZZ_3ED6C:
 	T5 = EMU_ReadU32(A3);
 	T6 = EMU_ReadU32(A3 + 4); //+ 0x4
 	T7 = EMU_ReadU32(A3 + 8); //+ 0x8
-	GTE_SetControlRegister(0,T0);
-	GTE_SetControlRegister(1,T1);
-	GTE_SetControlRegister(2,T2);
-	GTE_SetControlRegister(3,T3);
-	GTE_SetControlRegister(4,T4);
+	GTE_SetControlRegister(GTE_CREG_RT11_RT12,T0);
+	GTE_SetControlRegister(GTE_CREG_RT13_RT21,T1);
+	GTE_SetControlRegister(GTE_CREG_RT22_RT23,T2);
+	GTE_SetControlRegister(GTE_CREG_RT31_RT32,T3);
+	GTE_SetControlRegister(GTE_CREG_RT33_NONE,T4);
 	A3 = EMU_ReadU32(SP + 16); //+ 0x10
 	T3 = EMU_ReadU32(SP + 20); //+ 0x14
 	ZZ_CLOCKCYCLES(16,0x8003EE14);
@@ -27,14 +27,14 @@ ZZ_3ED6C_40:
 	T1 <<= 16;
 	T0 &= 0xFFFF;
 	T0 |= T1;
-	GTE_SetDataRegister(0,T0);
-	GTE_SetDataRegister(1,T2);
+	GTE_SetDataRegister(GTE_DREG_VXY0,T0);
+	GTE_SetDataRegister(GTE_DREG_VZ0,T2);
 	A1 = EMU_CheckedAdd(A1,12);
 	A0 = EMU_CheckedAdd(A0,12);
 	GTE_Execute(4743186);
-	T0 = GTE_GetDataRegister(9);
-	T1 = GTE_GetDataRegister(10);
-	T2 = GTE_GetDataRegister(11);
+	T0 = GTE_GetDataRegister(GTE_DREG_IR1);
+	T1 = GTE_GetDataRegister(GTE_DREG_IR2);
+	T2 = GTE_GetDataRegister(GTE_DREG_IR3);
 	T0 <<= T3;
 	T1 <<= T3;
 	T2 <<= T3;
@@ -59,9 +59,9 @@ ZZ_3ED6C_A8:
 	ZZ_JUMPREGISTER(0x8002D068,ZZ_2CF64_104);
 	ZZ_JUMPREGISTER_END();
 ZZ_3ED6C_F0:
-	V0 = GTE_GetDataRegister(17);
-	T8 = GTE_GetDataRegister(18);
-	T9 = GTE_GetDataRegister(19);
+	V0 = GTE_GetDataRegister(GTE_DREG_SZ1);
+	T8 = GTE_GetDataRegister(GTE_DREG_SZ2);
+	T9 = GTE_GetDataRegister(GTE_DREG_SZ3);
 	if ((int32_t)V0 <= 0)
 	{
 		V0 += T8;
@@ -89,7 +89,7 @@ ZZ_3ED6C_F0:
 	A1 = A3 & 0xFFFF;
 	V0 = T8 - V0;
 	T9 = T0 << 2;
-	T8 = GTE_GetDataRegister(24);
+	T8 = GTE_GetDataRegister(GTE_DREG_MAC0);
 	T9 ^= A3;
 	if (!T8)
 	{
@@ -111,10 +111,10 @@ ZZ_3ED6C_F0:
 	}
 	ZZ_CLOCKCYCLES(24,0x8003EEBC);
 ZZ_3ED6C_150:
-	GTE_SetDataRegister(20,T5);
-	GTE_SetDataRegister(21,T6);
-	GTE_SetDataRegister(22,T7);
-	GTE_SetDataRegister(8,A1);
+	GTE_SetDataRegister(GTE_DREG_RGB0,T5);
+	GTE_SetDataRegister(GTE_DREG_RGB1,T6);
+	GTE_SetDataRegister(GTE_DREG_RGB2,T7);
+	GTE_SetDataRegister(GTE_DREG_IR0,A1);
 	T9 = T0 << 7;
 	if ((int32_t)T9 < 0)
 	{
@@ -159,15 +159,15 @@ ZZ_3ED6C_194:
 		goto ZZ_3ED6C_1C8;
 	}
 	T8 = 0x30000000;
-	EMU_Write32(S7 + 8,GTE_GetDataRegister(12)); //+ 0x8
-	EMU_Write32(S7 + 16,GTE_GetDataRegister(13)); //+ 0x10
-	EMU_Write32(S7 + 24,GTE_GetDataRegister(14)); //+ 0x18
-	T9 = GTE_GetDataRegister(20);
+	EMU_Write32(S7 + 8,GTE_GetDataRegister(GTE_DREG_SXY0)); //+ 0x8
+	EMU_Write32(S7 + 16,GTE_GetDataRegister(GTE_DREG_SXY1)); //+ 0x10
+	EMU_Write32(S7 + 24,GTE_GetDataRegister(GTE_DREG_SXY2)); //+ 0x18
+	T9 = GTE_GetDataRegister(GTE_DREG_RGB0);
 	A0 = 28;
 	T8 |= T9;
 	EMU_Write32(S7 + 4,T8); //+ 0x4
-	EMU_Write32(S7 + 12,GTE_GetDataRegister(21)); //+ 0xC
-	EMU_Write32(S7 + 20,GTE_GetDataRegister(22)); //+ 0x14
+	EMU_Write32(S7 + 12,GTE_GetDataRegister(GTE_DREG_RGB1)); //+ 0xC
+	EMU_Write32(S7 + 20,GTE_GetDataRegister(GTE_DREG_RGB2)); //+ 0x14
 	T9 = 0x6000000;
 	ZZ_CLOCKCYCLES(13,0x8003EF88);
 	goto ZZ_3ED6C_21C;
@@ -175,13 +175,13 @@ ZZ_3ED6C_1C8:
 	T8 = EMU_ReadU32(A0 - 12); //+ 0xFFFFFFF4
 	T9 = EMU_ReadU32(A0 - 8); //+ 0xFFFFFFF8
 	A0 = EMU_ReadU32(A0 - 4); //+ 0xFFFFFFFC
-	EMU_Write32(S7 + 8,GTE_GetDataRegister(12)); //+ 0x8
-	EMU_Write32(S7 + 20,GTE_GetDataRegister(13)); //+ 0x14
-	EMU_Write32(S7 + 32,GTE_GetDataRegister(14)); //+ 0x20
+	EMU_Write32(S7 + 8,GTE_GetDataRegister(GTE_DREG_SXY0)); //+ 0x8
+	EMU_Write32(S7 + 20,GTE_GetDataRegister(GTE_DREG_SXY1)); //+ 0x14
+	EMU_Write32(S7 + 32,GTE_GetDataRegister(GTE_DREG_SXY2)); //+ 0x20
 	EMU_Write32(S7 + 12,T8); //+ 0xC
 	EMU_Write32(S7 + 24,T9); //+ 0x18
 	EMU_Write32(S7 + 36,A0); //+ 0x24
-	A0 = GTE_GetDataRegister(20);
+	A0 = GTE_GetDataRegister(GTE_DREG_RGB0);
 	T8 = 0x600000;
 	T9 &= T8;
 	if (T8 == T9)
@@ -196,8 +196,8 @@ ZZ_3ED6C_1C8:
 ZZ_3ED6C_204:
 	T8 |= A0;
 	EMU_Write32(S7 + 4,T8); //+ 0x4
-	EMU_Write32(S7 + 16,GTE_GetDataRegister(21)); //+ 0x10
-	EMU_Write32(S7 + 28,GTE_GetDataRegister(22)); //+ 0x1C
+	EMU_Write32(S7 + 16,GTE_GetDataRegister(GTE_DREG_RGB1)); //+ 0x10
+	EMU_Write32(S7 + 28,GTE_GetDataRegister(GTE_DREG_RGB2)); //+ 0x1C
 	A0 = 40;
 	T9 = 0x9000000;
 	ZZ_CLOCKCYCLES(6,0x8003EF88);

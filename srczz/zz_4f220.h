@@ -3,9 +3,9 @@ ZZ_4F220:
 	T0 = EMU_ReadU32(A0 + 20); //+ 0x14
 	T1 = EMU_ReadU32(A0 + 24); //+ 0x18
 	T2 = EMU_ReadU32(A0 + 28); //+ 0x1C
-	GTE_SetControlRegister(5,T0);
-	GTE_SetControlRegister(6,T1);
-	GTE_SetControlRegister(7,T2);
+	GTE_SetControlRegister(GTE_CREG_TRX,T0);
+	GTE_SetControlRegister(GTE_CREG_TRY,T1);
+	GTE_SetControlRegister(GTE_CREG_TRZ,T2);
 	ZZ_JUMPREGISTER_BEGIN(RA);
 	ZZ_CLOCKCYCLES_JR(8);
 	ZZ_JUMPREGISTER(0x8001EFF4,ZZ_1EFA8_4C);

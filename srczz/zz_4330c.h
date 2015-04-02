@@ -1,13 +1,13 @@
 #ifdef ZZ_INCLUDE_CODE
 	ZZ_CLOCKCYCLES(41,0x8004330C);
 ZZ_4330C:
-	GTE_SetControlRegister(0,T0);
+	GTE_SetControlRegister(GTE_CREG_RT11_RT12,T0);
 	ZZ_CLOCKCYCLES(1,0x80043310);
 ZZ_4330C_4:
-	GTE_SetControlRegister(1,T1);
-	GTE_SetControlRegister(2,T2);
-	GTE_SetControlRegister(3,T3);
-	GTE_SetControlRegister(4,T4);
+	GTE_SetControlRegister(GTE_CREG_RT13_RT21,T1);
+	GTE_SetControlRegister(GTE_CREG_RT22_RT23,T2);
+	GTE_SetControlRegister(GTE_CREG_RT31_RT32,T3);
+	GTE_SetControlRegister(GTE_CREG_RT33_NONE,T4);
 	ZZ_JUMPREGISTER_BEGIN(RA);
 	ZZ_CLOCKCYCLES_JR(6);
 	ZZ_JUMPREGISTER(0x8003DF08,ZZ_3DE2C_DC);

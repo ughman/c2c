@@ -1,12 +1,12 @@
 #ifdef ZZ_INCLUDE_CODE
 ZZ_4F2B0:
-	GTE_SetDataRegister(0,EMU_ReadU32(A0));
-	GTE_SetDataRegister(1,EMU_ReadU32(A0 + 4)); //+ 0x4
+	GTE_SetDataRegister(GTE_DREG_VXY0,EMU_ReadU32(A0));
+	GTE_SetDataRegister(GTE_DREG_VZ0,EMU_ReadU32(A0 + 4)); //+ 0x4
 	GTE_Execute(1572865);
-	EMU_Write32(A1,GTE_GetDataRegister(14));
-	EMU_Write32(A2,GTE_GetDataRegister(8));
-	V1 = GTE_GetControlRegister(31);
-	V0 = GTE_GetDataRegister(19);
+	EMU_Write32(A1,GTE_GetDataRegister(GTE_DREG_SXY2));
+	EMU_Write32(A2,GTE_GetDataRegister(GTE_DREG_IR0));
+	V1 = GTE_GetControlRegister(GTE_CREG_FLAG);
+	V0 = GTE_GetDataRegister(GTE_DREG_SZ3);
 	EMU_Write32(A3,V1);
 	ZZ_JUMPREGISTER_BEGIN(RA);
 	V0 = (int32_t)V0 >> 2;

@@ -208,21 +208,21 @@ ZZ_40FAC_210:
 	T8 = A0 + A1;
 	T8 >>= 7;
 	T8 += AT;
-	GTE_SetDataRegister(0,T9);
-	GTE_SetDataRegister(1,T8);
-	GTE_SetDataRegister(2,T9);
-	GTE_SetDataRegister(3,T8);
-	GTE_SetDataRegister(4,T9);
-	GTE_SetDataRegister(5,T8);
+	GTE_SetDataRegister(GTE_DREG_VXY0,T9);
+	GTE_SetDataRegister(GTE_DREG_VZ0,T8);
+	GTE_SetDataRegister(GTE_DREG_VXY1,T9);
+	GTE_SetDataRegister(GTE_DREG_VZ1,T8);
+	GTE_SetDataRegister(GTE_DREG_VXY2,T9);
+	GTE_SetDataRegister(GTE_DREG_VZ2,T8);
 	GTE_Execute(4907026);
-	T9 = GTE_GetDataRegister(10);
+	T9 = GTE_GetDataRegister(GTE_DREG_IR2);
 	GTE_Execute(4874258);
-	T8 = GTE_GetDataRegister(9);
+	T8 = GTE_GetDataRegister(GTE_DREG_IR1);
 	T9 <<= 16;
 	T8 &= 0xFFFF;
 	T9 |= T8;
 	GTE_Execute(4939794);
-	T8 = GTE_GetDataRegister(11);
+	T8 = GTE_GetDataRegister(GTE_DREG_IR3);
 	EMU_Write32(V0 + 320,T9); //+ 0x140
 	EMU_Write32(V0 + 324,T8); //+ 0x144
 	ZZ_CLOCKCYCLES(30,0x80041234);
@@ -306,11 +306,11 @@ ZZ_40FAC_2F0:
 	T2 = EMU_ReadU32(T8 + 8); //+ 0x8
 	T3 = EMU_ReadU32(T8 + 12); //+ 0xC
 	T4 = EMU_ReadU32(T8 + 16); //+ 0x10
-	GTE_SetControlRegister(8,T0);
-	GTE_SetControlRegister(9,T1);
-	GTE_SetControlRegister(10,T2);
-	GTE_SetControlRegister(11,T3);
-	GTE_SetControlRegister(12,T4);
+	GTE_SetControlRegister(GTE_CREG_L11_L12,T0);
+	GTE_SetControlRegister(GTE_CREG_L13_L21,T1);
+	GTE_SetControlRegister(GTE_CREG_L22_L23,T2);
+	GTE_SetControlRegister(GTE_CREG_L31_L32,T3);
+	GTE_SetControlRegister(GTE_CREG_L33_NONE,T4);
 	T0 = EMU_ReadU32(V1 + 32); //+ 0x20
 	T1 = EMU_ReadU32(V1 + 36); //+ 0x24
 	T2 = EMU_ReadU32(V1 + 40); //+ 0x28
@@ -342,8 +342,8 @@ ZZ_40FAC_358:
 	ZZ_CLOCKCYCLES(4,0x80040FAC);
 	goto ZZ_40FAC;
 ZZ_40FAC_368:
-	GTE_SetDataRegister(0,T9);
-	GTE_SetDataRegister(1,T8);
+	GTE_SetDataRegister(GTE_DREG_VXY0,T9);
+	GTE_SetDataRegister(GTE_DREG_VZ0,T8);
 	EMU_Write32(V1 + 128,T9); //+ 0x80
 	EMU_Write32(V1 + 132,T8); //+ 0x84
 	T8 = EMU_ReadU32(V1 + 296); //+ 0x128
@@ -356,8 +356,8 @@ ZZ_40FAC_368:
 	ZZ_CLOCKCYCLES(11,0x80040FAC);
 	goto ZZ_40FAC;
 ZZ_40FAC_394:
-	GTE_SetDataRegister(2,T9);
-	GTE_SetDataRegister(3,T8);
+	GTE_SetDataRegister(GTE_DREG_VXY1,T9);
+	GTE_SetDataRegister(GTE_DREG_VZ1,T8);
 	EMU_Write32(V1 + 144,T9); //+ 0x90
 	EMU_Write32(V1 + 148,T8); //+ 0x94
 	T8 = EMU_ReadU32(V1 + 296); //+ 0x128
@@ -373,8 +373,8 @@ ZZ_40FAC_3C0:
 	ZZ_CLOCKCYCLES(2,0x80040FAC);
 	goto ZZ_40FAC;
 ZZ_40FAC_3C8:
-	GTE_SetDataRegister(4,T9);
-	GTE_SetDataRegister(5,T8);
+	GTE_SetDataRegister(GTE_DREG_VXY2,T9);
+	GTE_SetDataRegister(GTE_DREG_VZ2,T8);
 	EMU_Write32(V1 + 160,T9); //+ 0xA0
 	EMU_Write32(V1 + 164,T8); //+ 0xA4
 	T8 = EMU_ReadU32(V1 + 296); //+ 0x128

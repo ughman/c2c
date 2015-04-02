@@ -43,8 +43,8 @@ ZZ_45B10_124:
 	ZZ_JUMPREGISTER(0x800458A4,ZZ_454B0_3F4);
 	ZZ_JUMPREGISTER_END();
 ZZ_45B10_130:
-	GTE_SetDataRegister(8,EMU_ReadU32(V1 + 144)); //+ 0x90
-	GTE_SetDataRegister(6,T5);
+	GTE_SetDataRegister(GTE_DREG_IR0,EMU_ReadU32(V1 + 144)); //+ 0x90
+	GTE_SetDataRegister(GTE_DREG_RGBC,T5);
 	AT <<= 13;
 	if ((int32_t)AT < 0)
 	{
@@ -53,9 +53,9 @@ ZZ_45B10_130:
 		goto ZZ_45B10_1BC;
 	}
 	T9 = 512;
-	GTE_SetControlRegister(21,T9);
-	GTE_SetControlRegister(22,T9);
-	GTE_SetControlRegister(23,T9);
+	GTE_SetControlRegister(GTE_CREG_RFC,T9);
+	GTE_SetControlRegister(GTE_CREG_GFC,T9);
+	GTE_SetControlRegister(GTE_CREG_BFC,T9);
 	GTE_Execute(7864336);
 	A3 <<= 13;
 	if ((int32_t)A3 >= 0)
@@ -65,13 +65,13 @@ ZZ_45B10_130:
 		goto ZZ_45B10_1F0;
 	}
 	T9 = 4080;
-	GTE_SetControlRegister(21,T9);
-	GTE_SetControlRegister(22,T9);
-	GTE_SetControlRegister(23,T9);
+	GTE_SetControlRegister(GTE_CREG_RFC,T9);
+	GTE_SetControlRegister(GTE_CREG_GFC,T9);
+	GTE_SetControlRegister(GTE_CREG_BFC,T9);
 	ZZ_CLOCKCYCLES(17,0x80045C84);
 ZZ_45B10_174:
-	T5 = GTE_GetDataRegister(22);
-	GTE_SetDataRegister(6,T6);
+	T5 = GTE_GetDataRegister(GTE_DREG_RGB2);
+	GTE_SetDataRegister(GTE_DREG_RGBC,T6);
 	GTE_Execute(7864336);
 	T0 <<= 13;
 	if ((int32_t)T0 < 0)
@@ -81,24 +81,24 @@ ZZ_45B10_174:
 		goto ZZ_45B10_21C;
 	}
 	T9 = 512;
-	GTE_SetControlRegister(21,T9);
-	GTE_SetControlRegister(22,T9);
-	GTE_SetControlRegister(23,T9);
+	GTE_SetControlRegister(GTE_CREG_RFC,T9);
+	GTE_SetControlRegister(GTE_CREG_GFC,T9);
+	GTE_SetControlRegister(GTE_CREG_BFC,T9);
 	ZZ_CLOCKCYCLES(11,0x80045CB0);
 ZZ_45B10_1A0:
-	T6 = GTE_GetDataRegister(22);
-	GTE_SetDataRegister(6,T7);
+	T6 = GTE_GetDataRegister(GTE_DREG_RGB2);
+	GTE_SetDataRegister(GTE_DREG_RGBC,T7);
 	GTE_Execute(7864336);
-	T7 = GTE_GetDataRegister(22);
+	T7 = GTE_GetDataRegister(GTE_DREG_RGB2);
 	T9 = 4080;
 	ZZ_CLOCKCYCLES(8,0x800427E0);
 	goto ZZ_420F4_6EC;
 	ZZ_CLOCKCYCLES(7,0x80045CCC);
 ZZ_45B10_1BC:
 	T9 = 4080;
-	GTE_SetControlRegister(21,T9);
-	GTE_SetControlRegister(22,T9);
-	GTE_SetControlRegister(23,T9);
+	GTE_SetControlRegister(GTE_CREG_RFC,T9);
+	GTE_SetControlRegister(GTE_CREG_GFC,T9);
+	GTE_SetControlRegister(GTE_CREG_BFC,T9);
 	GTE_Execute(7864336);
 	A3 <<= 13;
 	if ((int32_t)A3 < 0)
@@ -108,13 +108,13 @@ ZZ_45B10_1BC:
 		goto ZZ_45B10_174;
 	}
 	T9 = 512;
-	GTE_SetControlRegister(21,T9);
-	GTE_SetControlRegister(22,T9);
-	GTE_SetControlRegister(23,T9);
+	GTE_SetControlRegister(GTE_CREG_RFC,T9);
+	GTE_SetControlRegister(GTE_CREG_GFC,T9);
+	GTE_SetControlRegister(GTE_CREG_BFC,T9);
 	ZZ_CLOCKCYCLES(13,0x80045D00);
 ZZ_45B10_1F0:
-	T5 = GTE_GetDataRegister(22);
-	GTE_SetDataRegister(6,T6);
+	T5 = GTE_GetDataRegister(GTE_DREG_RGB2);
+	GTE_SetDataRegister(GTE_DREG_RGBC,T6);
 	GTE_Execute(7864336);
 	T0 <<= 13;
 	if ((int32_t)T0 >= 0)
@@ -124,20 +124,20 @@ ZZ_45B10_1F0:
 		goto ZZ_45B10_1A0;
 	}
 	T9 = 4080;
-	GTE_SetControlRegister(21,T9);
-	GTE_SetControlRegister(22,T9);
-	GTE_SetControlRegister(23,T9);
+	GTE_SetControlRegister(GTE_CREG_RFC,T9);
+	GTE_SetControlRegister(GTE_CREG_GFC,T9);
+	GTE_SetControlRegister(GTE_CREG_BFC,T9);
 	ZZ_CLOCKCYCLES(11,0x80045D2C);
 ZZ_45B10_21C:
-	T6 = GTE_GetDataRegister(22);
-	GTE_SetDataRegister(6,T7);
+	T6 = GTE_GetDataRegister(GTE_DREG_RGB2);
+	GTE_SetDataRegister(GTE_DREG_RGBC,T7);
 	GTE_Execute(7864336);
-	T7 = GTE_GetDataRegister(22);
+	T7 = GTE_GetDataRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(8,0x800427E0);
 	goto ZZ_420F4_6EC;
 ZZ_45B10_23C:
-	GTE_SetDataRegister(8,EMU_ReadU32(V1 + 144)); //+ 0x90
-	GTE_SetDataRegister(6,T5);
+	GTE_SetDataRegister(GTE_DREG_IR0,EMU_ReadU32(V1 + 144)); //+ 0x90
+	GTE_SetDataRegister(GTE_DREG_RGBC,T5);
 	AT <<= 13;
 	if ((int32_t)AT < 0)
 	{
@@ -146,9 +146,9 @@ ZZ_45B10_23C:
 		goto ZZ_45B10_2F4;
 	}
 	T9 = 512;
-	GTE_SetControlRegister(21,T9);
-	GTE_SetControlRegister(22,T9);
-	GTE_SetControlRegister(23,T9);
+	GTE_SetControlRegister(GTE_CREG_RFC,T9);
+	GTE_SetControlRegister(GTE_CREG_GFC,T9);
+	GTE_SetControlRegister(GTE_CREG_BFC,T9);
 	GTE_Execute(7864336);
 	A3 <<= 13;
 	if ((int32_t)A3 >= 0)
@@ -158,13 +158,13 @@ ZZ_45B10_23C:
 		goto ZZ_45B10_328;
 	}
 	T9 = 4080;
-	GTE_SetControlRegister(21,T9);
-	GTE_SetControlRegister(22,T9);
-	GTE_SetControlRegister(23,T9);
+	GTE_SetControlRegister(GTE_CREG_RFC,T9);
+	GTE_SetControlRegister(GTE_CREG_GFC,T9);
+	GTE_SetControlRegister(GTE_CREG_BFC,T9);
 	ZZ_CLOCKCYCLES(17,0x80045D90);
 ZZ_45B10_280:
-	T5 = GTE_GetDataRegister(22);
-	GTE_SetDataRegister(6,T6);
+	T5 = GTE_GetDataRegister(GTE_DREG_RGB2);
+	GTE_SetDataRegister(GTE_DREG_RGBC,T6);
 	GTE_Execute(7864336);
 	T0 <<= 13;
 	if ((int32_t)T0 < 0)
@@ -174,13 +174,13 @@ ZZ_45B10_280:
 		goto ZZ_45B10_354;
 	}
 	T9 = 512;
-	GTE_SetControlRegister(21,T9);
-	GTE_SetControlRegister(22,T9);
-	GTE_SetControlRegister(23,T9);
+	GTE_SetControlRegister(GTE_CREG_RFC,T9);
+	GTE_SetControlRegister(GTE_CREG_GFC,T9);
+	GTE_SetControlRegister(GTE_CREG_BFC,T9);
 	ZZ_CLOCKCYCLES(11,0x80045DBC);
 ZZ_45B10_2AC:
-	T6 = GTE_GetDataRegister(22);
-	GTE_SetDataRegister(6,T7);
+	T6 = GTE_GetDataRegister(GTE_DREG_RGB2);
+	GTE_SetDataRegister(GTE_DREG_RGBC,T7);
 	GTE_Execute(7864336);
 	A0 <<= 13;
 	if ((int32_t)A0 >= 0)
@@ -190,24 +190,24 @@ ZZ_45B10_2AC:
 		goto ZZ_45B10_380;
 	}
 	T9 = 4080;
-	GTE_SetControlRegister(21,T9);
-	GTE_SetControlRegister(22,T9);
-	GTE_SetControlRegister(23,T9);
+	GTE_SetControlRegister(GTE_CREG_RFC,T9);
+	GTE_SetControlRegister(GTE_CREG_GFC,T9);
+	GTE_SetControlRegister(GTE_CREG_BFC,T9);
 	ZZ_CLOCKCYCLES(11,0x80045DE8);
 ZZ_45B10_2D8:
-	T7 = GTE_GetDataRegister(22);
-	GTE_SetDataRegister(6,A1);
+	T7 = GTE_GetDataRegister(GTE_DREG_RGB2);
+	GTE_SetDataRegister(GTE_DREG_RGBC,A1);
 	GTE_Execute(7864336);
-	A1 = GTE_GetDataRegister(22);
+	A1 = GTE_GetDataRegister(GTE_DREG_RGB2);
 	T9 = 4080;
 	ZZ_CLOCKCYCLES(8,0x80042AB0);
 	goto ZZ_420F4_9BC;
 	ZZ_CLOCKCYCLES(7,0x80045E04);
 ZZ_45B10_2F4:
 	T9 = 4080;
-	GTE_SetControlRegister(21,T9);
-	GTE_SetControlRegister(22,T9);
-	GTE_SetControlRegister(23,T9);
+	GTE_SetControlRegister(GTE_CREG_RFC,T9);
+	GTE_SetControlRegister(GTE_CREG_GFC,T9);
+	GTE_SetControlRegister(GTE_CREG_BFC,T9);
 	GTE_Execute(7864336);
 	A3 <<= 13;
 	if ((int32_t)A3 < 0)
@@ -217,13 +217,13 @@ ZZ_45B10_2F4:
 		goto ZZ_45B10_280;
 	}
 	T9 = 512;
-	GTE_SetControlRegister(21,T9);
-	GTE_SetControlRegister(22,T9);
-	GTE_SetControlRegister(23,T9);
+	GTE_SetControlRegister(GTE_CREG_RFC,T9);
+	GTE_SetControlRegister(GTE_CREG_GFC,T9);
+	GTE_SetControlRegister(GTE_CREG_BFC,T9);
 	ZZ_CLOCKCYCLES(13,0x80045E38);
 ZZ_45B10_328:
-	T5 = GTE_GetDataRegister(22);
-	GTE_SetDataRegister(6,T6);
+	T5 = GTE_GetDataRegister(GTE_DREG_RGB2);
+	GTE_SetDataRegister(GTE_DREG_RGBC,T6);
 	GTE_Execute(7864336);
 	T0 <<= 13;
 	if ((int32_t)T0 >= 0)
@@ -233,13 +233,13 @@ ZZ_45B10_328:
 		goto ZZ_45B10_2AC;
 	}
 	T9 = 4080;
-	GTE_SetControlRegister(21,T9);
-	GTE_SetControlRegister(22,T9);
-	GTE_SetControlRegister(23,T9);
+	GTE_SetControlRegister(GTE_CREG_RFC,T9);
+	GTE_SetControlRegister(GTE_CREG_GFC,T9);
+	GTE_SetControlRegister(GTE_CREG_BFC,T9);
 	ZZ_CLOCKCYCLES(11,0x80045E64);
 ZZ_45B10_354:
-	T6 = GTE_GetDataRegister(22);
-	GTE_SetDataRegister(6,T7);
+	T6 = GTE_GetDataRegister(GTE_DREG_RGB2);
+	GTE_SetDataRegister(GTE_DREG_RGBC,T7);
 	GTE_Execute(7864336);
 	A0 <<= 13;
 	if ((int32_t)A0 < 0)
@@ -249,22 +249,22 @@ ZZ_45B10_354:
 		goto ZZ_45B10_2D8;
 	}
 	T9 = 512;
-	GTE_SetControlRegister(21,T9);
-	GTE_SetControlRegister(22,T9);
-	GTE_SetControlRegister(23,T9);
+	GTE_SetControlRegister(GTE_CREG_RFC,T9);
+	GTE_SetControlRegister(GTE_CREG_GFC,T9);
+	GTE_SetControlRegister(GTE_CREG_BFC,T9);
 	ZZ_CLOCKCYCLES(11,0x80045E90);
 ZZ_45B10_380:
-	T7 = GTE_GetDataRegister(22);
-	GTE_SetDataRegister(6,A1);
+	T7 = GTE_GetDataRegister(GTE_DREG_RGB2);
+	GTE_SetDataRegister(GTE_DREG_RGBC,A1);
 	GTE_Execute(7864336);
-	A1 = GTE_GetDataRegister(22);
+	A1 = GTE_GetDataRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(8,0x80042AB0);
 	goto ZZ_420F4_9BC;
 ZZ_45B10_3A0:
-	GTE_SetControlRegister(21,R0);
-	GTE_SetControlRegister(22,R0);
-	GTE_SetControlRegister(23,R0);
-	GTE_SetDataRegister(8,R0);
+	GTE_SetControlRegister(GTE_CREG_RFC,R0);
+	GTE_SetControlRegister(GTE_CREG_GFC,R0);
+	GTE_SetControlRegister(GTE_CREG_BFC,R0);
+	GTE_SetDataRegister(GTE_DREG_IR0,R0);
 	T8 = EMU_ReadS16(A2 + 140); //+ 0x8C
 	T9 = EMU_ReadU32(A2 + 144); //+ 0x90
 	A0 = EMU_ReadU32(A2 + 148); //+ 0x94

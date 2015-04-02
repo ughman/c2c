@@ -5,30 +5,30 @@ ZZ_4EF50:
 	T2 = EMU_ReadU32(A0 + 8); //+ 0x8
 	T3 = EMU_ReadU32(A0 + 12); //+ 0xC
 	T4 = EMU_ReadU32(A0 + 16); //+ 0x10
-	GTE_SetControlRegister(0,T0);
-	GTE_SetControlRegister(1,T1);
-	GTE_SetControlRegister(2,T2);
-	GTE_SetControlRegister(3,T3);
-	GTE_SetControlRegister(4,T4);
+	GTE_SetControlRegister(GTE_CREG_RT11_RT12,T0);
+	GTE_SetControlRegister(GTE_CREG_RT13_RT21,T1);
+	GTE_SetControlRegister(GTE_CREG_RT22_RT23,T2);
+	GTE_SetControlRegister(GTE_CREG_RT31_RT32,T3);
+	GTE_SetControlRegister(GTE_CREG_RT33_NONE,T4);
 	T0 = EMU_ReadU16(A1);
 	T1 = EMU_ReadU32(A1 + 4); //+ 0x4
 	T2 = EMU_ReadU32(A1 + 12); //+ 0xC
 	AT = 0xFFFF0000;
 	T1 &= AT;
 	T0 |= T1;
-	GTE_SetDataRegister(0,T0);
-	GTE_SetDataRegister(1,T2);
+	GTE_SetDataRegister(GTE_DREG_VXY0,T0);
+	GTE_SetDataRegister(GTE_DREG_VZ0,T2);
 	GTE_Execute(4743186);
 	T0 = EMU_ReadU16(A1 + 2); //+ 0x2
 	T1 = EMU_ReadU32(A1 + 8); //+ 0x8
 	T2 = EMU_ReadS16(A1 + 14); //+ 0xE
 	T1 <<= 16;
 	T0 |= T1;
-	T3 = GTE_GetDataRegister(9);
-	T4 = GTE_GetDataRegister(10);
-	T5 = GTE_GetDataRegister(11);
-	GTE_SetDataRegister(0,T0);
-	GTE_SetDataRegister(1,T2);
+	T3 = GTE_GetDataRegister(GTE_DREG_IR1);
+	T4 = GTE_GetDataRegister(GTE_DREG_IR2);
+	T5 = GTE_GetDataRegister(GTE_DREG_IR3);
+	GTE_SetDataRegister(GTE_DREG_VXY0,T0);
+	GTE_SetDataRegister(GTE_DREG_VZ0,T2);
 	GTE_Execute(4743186);
 	T0 = EMU_ReadU16(A1 + 4); //+ 0x4
 	T1 = EMU_ReadU32(A1 + 8); //+ 0x8
@@ -36,11 +36,11 @@ ZZ_4EF50:
 	AT = 0xFFFF0000;
 	T1 &= AT;
 	T0 |= T1;
-	T6 = GTE_GetDataRegister(9);
-	T7 = GTE_GetDataRegister(10);
-	T8 = GTE_GetDataRegister(11);
-	GTE_SetDataRegister(0,T0);
-	GTE_SetDataRegister(1,T2);
+	T6 = GTE_GetDataRegister(GTE_DREG_IR1);
+	T7 = GTE_GetDataRegister(GTE_DREG_IR2);
+	T8 = GTE_GetDataRegister(GTE_DREG_IR3);
+	GTE_SetDataRegister(GTE_DREG_VXY0,T0);
+	GTE_SetDataRegister(GTE_DREG_VZ0,T2);
 	GTE_Execute(4743186);
 	T3 &= 0xFFFF;
 	T6 <<= 16;
@@ -50,8 +50,8 @@ ZZ_4EF50:
 	T8 <<= 16;
 	T8 |= T5;
 	EMU_Write32(A0 + 12,T8); //+ 0xC
-	T0 = GTE_GetDataRegister(9);
-	T1 = GTE_GetDataRegister(10);
+	T0 = GTE_GetDataRegister(GTE_DREG_IR1);
+	T1 = GTE_GetDataRegister(GTE_DREG_IR2);
 	T0 &= 0xFFFF;
 	T4 <<= 16;
 	T0 |= T4;
@@ -60,7 +60,7 @@ ZZ_4EF50:
 	T1 <<= 16;
 	T1 |= T7;
 	EMU_Write32(A0 + 8,T1); //+ 0x8
-	EMU_Write32(A0 + 16,GTE_GetDataRegister(11)); //+ 0x10
+	EMU_Write32(A0 + 16,GTE_GetDataRegister(GTE_DREG_IR3)); //+ 0x10
 	V0 = A0;
 	ZZ_JUMPREGISTER_BEGIN(RA);
 	ZZ_CLOCKCYCLES_JR(67);

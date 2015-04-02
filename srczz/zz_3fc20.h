@@ -1,11 +1,11 @@
 #ifdef ZZ_INCLUDE_CODE
 ZZ_3FC20:
-	EMU_Write32(V1 + 208,GTE_GetDataRegister(12)); //+ 0xD0
-	EMU_Write32(V1 + 212,GTE_GetDataRegister(17)); //+ 0xD4
-	EMU_Write32(V1 + 216,GTE_GetDataRegister(13)); //+ 0xD8
-	EMU_Write32(V1 + 220,GTE_GetDataRegister(18)); //+ 0xDC
-	EMU_Write32(V1 + 224,GTE_GetDataRegister(14)); //+ 0xE0
-	EMU_Write32(V1 + 228,GTE_GetDataRegister(19)); //+ 0xE4
+	EMU_Write32(V1 + 208,GTE_GetDataRegister(GTE_DREG_SXY0)); //+ 0xD0
+	EMU_Write32(V1 + 212,GTE_GetDataRegister(GTE_DREG_SZ1)); //+ 0xD4
+	EMU_Write32(V1 + 216,GTE_GetDataRegister(GTE_DREG_SXY1)); //+ 0xD8
+	EMU_Write32(V1 + 220,GTE_GetDataRegister(GTE_DREG_SZ2)); //+ 0xDC
+	EMU_Write32(V1 + 224,GTE_GetDataRegister(GTE_DREG_SXY2)); //+ 0xE0
+	EMU_Write32(V1 + 228,GTE_GetDataRegister(GTE_DREG_SZ3)); //+ 0xE4
 	EMU_Write32(V1 + 136,T5); //+ 0x88
 	EMU_Write32(V1 + 152,T6); //+ 0x98
 	EMU_Write32(V1 + 168,T7); //+ 0xA8

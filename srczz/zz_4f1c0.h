@@ -5,11 +5,11 @@ ZZ_4F1C0:
 	T2 = EMU_ReadU32(A0 + 8); //+ 0x8
 	T3 = EMU_ReadU32(A0 + 12); //+ 0xC
 	T4 = EMU_ReadU32(A0 + 16); //+ 0x10
-	GTE_SetControlRegister(0,T0);
-	GTE_SetControlRegister(1,T1);
-	GTE_SetControlRegister(2,T2);
-	GTE_SetControlRegister(3,T3);
-	GTE_SetControlRegister(4,T4);
+	GTE_SetControlRegister(GTE_CREG_RT11_RT12,T0);
+	GTE_SetControlRegister(GTE_CREG_RT13_RT21,T1);
+	GTE_SetControlRegister(GTE_CREG_RT22_RT23,T2);
+	GTE_SetControlRegister(GTE_CREG_RT31_RT32,T3);
+	GTE_SetControlRegister(GTE_CREG_RT33_NONE,T4);
 	ZZ_JUMPREGISTER_BEGIN(RA);
 	ZZ_CLOCKCYCLES_JR(12);
 	ZZ_JUMPREGISTER(0x8001EFE4,ZZ_1EFA8_3C);
