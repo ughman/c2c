@@ -211,7 +211,7 @@ uint32_t BIOS_Execute(uint32_t address)
 		CASE_METHOD(0x2B,BIOS_MemSet);
 		CASE_METHOD(0x2E,BIOS_MemChr);
 		default:
-			fprintf(stderr,"Unrecognized BIOS(A0) method: %i:%s\n",T1,PCSX_A0Name(T1));
+			SDL_LogDebug(LOG_BIOS,"Unrecognized BIOS(A0) method: %i:%s",T1,PCSX_A0Name(T1));
 			return PCSX_HLEA0();
 		}
 		break;
@@ -227,7 +227,7 @@ uint32_t BIOS_Execute(uint32_t address)
 			PCSX_ExecuteCOP(0,16 << 21);
 			return COP0_GetRegister(14);
 		default:
-			fprintf(stderr,"Unrecognized BIOS(B0) method: %i:%s\n",T1,PCSX_B0Name(T1));
+			SDL_LogDebug(LOG_BIOS,"Unrecognized BIOS(B0) method: %i:%s",T1,PCSX_B0Name(T1));
 			return PCSX_HLEB0();
 		}
 		break;
@@ -235,12 +235,12 @@ uint32_t BIOS_Execute(uint32_t address)
 		switch (T1)
 		{
 		default:
-			fprintf(stderr,"Unrecognized BIOS(C0) method: %i:%s\n",T1,PCSX_C0Name(T1));
+			SDL_LogDebug(LOG_BIOS,"Unrecognized BIOS(C0) method: %i:%s",T1,PCSX_C0Name(T1));
 			return PCSX_HLEC0();
 		}
 		break;
 	default:
-		fprintf(stderr,"Invalid BIOS routine class.\n");
+		SDL_LogCritical(LOG_BIOS,"Invalid BIOS routine class");
 		abort();
 		break;
 	}

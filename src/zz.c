@@ -86,7 +86,7 @@ do \
 #undef ZZ_MARK_TARGET
 #undef ZZ_MARK
 	default:
-		fprintf(stderr,"ZZ: Unrecognized execution address.\n");
+		SDL_LogError(LOG_ZZ,"Unrecognized execution address");
 		break;
 	}
 #define ZZ_MARK_NATIVE(address,label,function) \
@@ -104,7 +104,7 @@ label: \
 #undef ZZ_MARK_TARGET
 #undef ZZ_MARK
 #undef ZZ_INCLUDE_CODE
-	fprintf(stderr,"ZZ: Reached end of function.\n");
+	SDL_LogCritical(LOG_ZZ,"Reached end of function");
 	abort();
 	ZZ_FORCEEXIT:
 		return jr_dest;

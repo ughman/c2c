@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdarg.h>
-#include <stdio.h>
 #include <string.h>
 
 
@@ -44,5 +43,16 @@
 #endif
 
 #define APP_TITLE APP_NAME " " APP_VERSION_STRING
+
+enum
+{
+	LOG_GAME = SDL_LOG_CATEGORY_APPLICATION,
+	LOG_EMU = SDL_LOG_CATEGORY_CUSTOM,
+	LOG_PCSX,
+	LOG_BIOS,
+	LOG_ZZ,
+	LOG_GOOL,
+	LOG__COUNT
+};
 
 #endif

@@ -17,13 +17,13 @@ uint32_t (*EMU_codemap[EMU_RAMWORDS])(uint32_t address);
 
 uint32_t EMU_ExecuteUnrecognizedCode(uint32_t pc)
 {
-	fprintf(stderr,"Unrecognized code at PC := %X\n",pc);
+	SDL_LogCritical(LOG_EMU,"Unrecognized code at PC := %X",pc);
 	abort();
 }
 
 uint32_t EMU_ExecuteBadEntryPointCode(uint32_t pc)
 {
-	fprintf(stderr,"Bad entry point for native code at PC := %X\n",pc);
+	SDL_LogCritical(LOG_EMU,"Bad entry point for native code at PC := %X",pc);
 	abort();
 }
 
@@ -93,7 +93,7 @@ normal:
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
 			if (codehandler != EMU_ExecuteUnrecognizedCode)
 			{
-				fprintf(stderr,"Reading code as data.\n");
+				SDL_LogError(LOG_EMU,"Reading code as data");
 			}
 		}
 		return EMU_ram[(address & 0x1FFFFF) >> 2] >> (address & 3) * 8;
@@ -123,7 +123,7 @@ normal:
 	case 0x1F801803:
 		return CDR_Read3();
 	default:
-		fprintf(stderr,"Unrecognized 8-bit read address %.8X.\n",address);
+		SDL_LogError(LOG_EMU,"Unrecognized 8-bit read address %.8X",address);
 		return PCSX_Read8(address);
 	}
 }
@@ -131,7 +131,7 @@ normal:
 uint16_t EMU_ReadU16(uint32_t address)
 {
 	if (address & 1)
-		fprintf(stderr,"Unaligned halfword load.\n");
+		SDL_LogError(LOG_EMU,"Unaligned halfword load");
 	if (address >= 0x80000000 && address <= 0x801FFFFF)
 	{
 normal:
@@ -139,7 +139,7 @@ normal:
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
 			if (codehandler != EMU_ExecuteUnrecognizedCode)
 			{
-				fprintf(stderr,"Reading code as data.\n");
+				SDL_LogError(LOG_EMU,"Reading code as data");
 			}
 		}
 		return EMU_ram[(address & 0x1FFFFF) >> 2] >> (address & 2) * 8;
@@ -243,7 +243,7 @@ normal:
 	case 0x1F801E5E:
 		return SPU_Voice_GetCurrentVolumeRight((address & 0x7C) >> 2);
 	default:
-		fprintf(stderr,"Unrecognized 16-bit read address %.8X.\n",address);
+		SDL_LogError(LOG_EMU,"Unrecognized 16-bit read address %.8X",address);
 		return PCSX_Read16(address);
 	}
 }
@@ -251,7 +251,7 @@ normal:
 uint32_t EMU_ReadU32(uint32_t address)
 {
 	if (address & 3)
-		fprintf(stderr,"Unaligned word load.\n");
+		SDL_LogError(LOG_EMU,"Unaligned word load");
 	if (address >= 0x80000000 && address <= 0x801FFFFF)
 	{
 normal:
@@ -259,7 +259,7 @@ normal:
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
 			if (codehandler != EMU_ExecuteUnrecognizedCode)
 			{
-				fprintf(stderr,"Reading code as data.\n");
+				SDL_LogError(LOG_EMU,"Reading code as data");
 			}
 		}
 		return EMU_ram[(address & 0x1FFFFF) >> 2];
@@ -298,7 +298,7 @@ normal:
 	case 0x1F801814:
 		return GPU_GetStatus();
 	default:
-		fprintf(stderr,"Unrecognized 32-bit read address %.8X.\n",address);
+		SDL_LogError(LOG_EMU,"Unrecognized 32-bit read address %.8X",address);
 		return PCSX_Read32(address);
 	}
 }
@@ -312,7 +312,7 @@ normal:
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
 			if (codehandler != EMU_ExecuteUnrecognizedCode)
 			{
-				fprintf(stderr,"Writing code.\n");
+				SDL_LogError(LOG_EMU,"Writing over code");
 			}
 		}
 		uint32_t *word = &EMU_ram[(address & 0x1FFFFF) >> 2];
@@ -351,7 +351,7 @@ normal:
 		CDR_Write3(value);
 		break;
 	default:
-		fprintf(stderr,"Unrecognized 8-bit write address %.8X.\n",address);
+		SDL_LogError(LOG_EMU,"Unrecognized 8-bit write address %.8X",address);
 		PCSX_Write8(address,value);
 		break;
 	}
@@ -360,7 +360,7 @@ normal:
 void EMU_Write16(uint32_t address,uint16_t value)
 {
 	if (address & 1)
-		fprintf(stderr,"Unaligned halfword store.\n");
+		SDL_LogError(LOG_EMU,"Unaligned halfword store");
 	if (address >= 0x80000000 && address <= 0x801FFFFF)
 	{
 normal:
@@ -368,7 +368,7 @@ normal:
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
 			if (codehandler != EMU_ExecuteUnrecognizedCode)
 			{
-				fprintf(stderr,"Writing code.\n");
+				SDL_LogError(LOG_EMU,"Writing over code");
 			}
 		}
 		uint32_t *word = &EMU_ram[(address & 0x1FFFFF) >> 2];
@@ -539,7 +539,7 @@ normal:
 		SPU_ConfigureReverb((address - 0x1F801DC0) / 2,value);
 		break;
 	default:
-		fprintf(stderr,"Unrecognized 16-bit write address %.8X.\n",address);
+		SDL_LogError(LOG_EMU,"Unrecognized 16-bit write address %.8X",address);
 		PCSX_Write16(address,value);
 		break;
 	}
@@ -548,7 +548,7 @@ normal:
 void EMU_Write32(uint32_t address,uint32_t value)
 {
 	if (address & 3)
-		fprintf(stderr,"Unaligned word store.\n");
+		SDL_LogError(LOG_EMU,"Unaligned word store");
 	if (address >= 0x80000000 && address <= 0x801FFFFF)
 	{
 normal:
@@ -556,7 +556,7 @@ normal:
 			uint32_t (*codehandler)(uint32_t) = EMU_codemap[(address & 0x1FFFFF) >> 2];
 			if (codehandler != EMU_ExecuteUnrecognizedCode)
 			{
-				fprintf(stderr,"Writing code.\n");
+				SDL_LogError(LOG_EMU,"Writing over code");
 			}
 		}
 		EMU_ram[(address & 0x1FFFFF) >> 2] = value;
@@ -627,7 +627,7 @@ normal:
 		GPU_WriteAlt(value);
 		break;
 	default:
-		fprintf(stderr,"Unrecognized 32-bit write address %.8X.\n",address);
+		SDL_LogError(LOG_EMU,"Unrecognized 32-bit write address %.8X",address);
 		PCSX_Write32(address,value);
 		break;
 	}
@@ -750,7 +750,7 @@ uint32_t EMU_Invoke(uint32_t address,int argc,...)
 	while (pc != 0xDEADBEEF)
 	{
 		if (pc & 3)
-			fprintf(stderr,"Unaligned program counter.\n");
+			SDL_LogError(LOG_EMU,"Program counter is unaligned");
 		pc = EMU_codemap[(pc & 0x1FFFFF) >> 2](pc);
 	}
 	SP += argc * 4;
@@ -802,7 +802,7 @@ void EMU_RunInterrupts(void)
 	while (pc != 0xDEADBEEF)
 	{
 		if (pc & 3)
-			fprintf(stderr,"Unaligned program counter.\n");
+			SDL_LogError(LOG_EMU,"Program counter is unaligned");
 		pc = EMU_codemap[(pc & 0x1FFFFF) >> 2](pc);
 	}
 }

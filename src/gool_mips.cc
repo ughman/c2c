@@ -22,7 +22,7 @@ static uint32_t dummy_r0; // for discarding writes to $R0
 
 static void GOOL_MIPS_OP_Invalid(struct goolenv *env,uint32_t instruction)
 {
-	fprintf(stderr,"GOOL_MIPS_OP_Invalid: %s\n",PCSX_Disassemble(env->oldpc));
+	SDL_LogCritical(LOG_GOOL,"Encountered unknown MIPS instruction %s",PCSX_Disassemble(env->oldpc));
 	abort();
 }
 

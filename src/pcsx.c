@@ -50,14 +50,14 @@ do \
 { \
 	localname = (type)SDL_LoadFunction(PCSX_library,libname); \
 	if (!localname) \
-		fprintf(stderr,"Failed to load symbol " #localname ".\n"); \
+		SDL_LogError(LOG_PCSX,"Failed to load symbol " #localname); \
 } while (0)
 
 void PCSX_Init(void)
 {
 	PCSX_library = SDL_LoadObject("psx.dll");
 	if (!PCSX_library)
-		fprintf(stderr,"Failed to load PCSX library.\n");
+		SDL_LogError(LOG_PCSX,"Failed to load PCSX library");
 	METHOD(PCSX_InitLibrary,"pcsxInit",void(*)(const char *,uint32_t **,struct pcsxinitinfo *));
 	METHOD(PCSX_Read8,"pcsxReadMemory8",uint8_t(*)(uint32_t));
 	METHOD(PCSX_Read16,"pcsxReadMemory16",uint16_t(*)(uint32_t));
