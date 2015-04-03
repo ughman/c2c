@@ -1,24 +1,20 @@
 #include "gte.h"
 #include "pcsx.h"
 
-uint32_t GTE_GetDataRegister(int reg)
+uint32_t GTE_GetRegister(int reg)
 {
-	return PCSX_ReadCOPData(2,reg);
+	if (reg < 32)
+		return PCSX_ReadCOPData(2,reg);
+	else
+		return PCSX_ReadCOPControl(2,reg - 32);
 }
 
-void GTE_SetDataRegister(int reg,uint32_t value)
+void GTE_SetRegister(int reg,uint32_t value)
 {
-	PCSX_WriteCOPData(2,reg,value);
-}
-
-uint32_t GTE_GetControlRegister(int reg)
-{
-	return PCSX_ReadCOPControl(2,reg);
-}
-
-void GTE_SetControlRegister(int reg,uint32_t value)
-{
-	PCSX_WriteCOPControl(2,reg,value);
+	if (reg < 32)
+		PCSX_WriteCOPData(2,reg,value);
+	else
+		PCSX_WriteCOPControl(2,reg - 32,value);
 }
 
 void GTE_Execute(uint32_t args)

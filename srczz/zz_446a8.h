@@ -43,7 +43,7 @@ ZZ_446A8_58:
 	ZZ_CLOCKCYCLES(3,0x800446A8);
 	goto ZZ_446A8;
 ZZ_446A8_64:
-	A0 = GTE_GetControlRegister(GTE_CREG_TRZ);
+	A0 = GTE_GetRegister(GTE_CREG_TRZ);
 	T9 = EMU_ReadU32(V1 + 16); //+ 0x10
 	T8 = EMU_ReadU32(V1 + 8); //+ 0x8
 	A0 = A0 - T9;

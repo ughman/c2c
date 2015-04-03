@@ -41,11 +41,6 @@ enum
 	GTE_DREG_ORGB,
 	GTE_DREG_LZCS,
 	GTE_DREG_LZCR,
-	GTE_DREG__COUNT
-};
-
-enum
-{
 	GTE_CREG_RT11_RT12,
 	GTE_CREG_RT13_RT21,
 	GTE_CREG_RT22_RT23,
@@ -78,14 +73,11 @@ enum
 	GTE_CREG_ZSF3,
 	GTE_CREG_ZSF4,
 	GTE_CREG_FLAG,
-	GTE_CREG__COUNT
+	GTE_REG__COUNT
 };
 
-extern uint32_t GTE_GetDataRegister(int reg);
-extern void GTE_SetDataRegister(int reg,uint32_t value);
-
-extern uint32_t GTE_GetControlRegister(int reg);
-extern void GTE_SetControlRegister(int reg,uint32_t value);
+extern uint32_t GTE_GetRegister(int reg);
+extern void GTE_SetRegister(int reg,uint32_t value);
 
 extern void GTE_Execute(uint32_t args);
 

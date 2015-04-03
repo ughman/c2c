@@ -322,8 +322,8 @@ ZZ_3EFAC_2C8:
 	ZZ_CLOCKCYCLES(4,0x8003EFAC);
 	goto ZZ_3EFAC;
 ZZ_3EFAC_2D8:
-	GTE_SetDataRegister(GTE_DREG_VXY0,T9);
-	GTE_SetDataRegister(GTE_DREG_VZ0,T8);
+	GTE_SetRegister(GTE_DREG_VXY0,T9);
+	GTE_SetRegister(GTE_DREG_VZ0,T8);
 	EMU_Write32(V1 + 128,T9); //+ 0x80
 	EMU_Write32(V1 + 132,T8); //+ 0x84
 	T8 = EMU_ReadU32(V1 + 296); //+ 0x128
@@ -336,8 +336,8 @@ ZZ_3EFAC_2D8:
 	ZZ_CLOCKCYCLES(11,0x8003EFAC);
 	goto ZZ_3EFAC;
 ZZ_3EFAC_304:
-	GTE_SetDataRegister(GTE_DREG_VXY1,T9);
-	GTE_SetDataRegister(GTE_DREG_VZ1,T8);
+	GTE_SetRegister(GTE_DREG_VXY1,T9);
+	GTE_SetRegister(GTE_DREG_VZ1,T8);
 	EMU_Write32(V1 + 144,T9); //+ 0x90
 	EMU_Write32(V1 + 148,T8); //+ 0x94
 	T8 = EMU_ReadU32(V1 + 296); //+ 0x128
@@ -350,8 +350,8 @@ ZZ_3EFAC_304:
 	ZZ_CLOCKCYCLES(11,0x8003EFAC);
 	goto ZZ_3EFAC;
 ZZ_3EFAC_330:
-	GTE_SetDataRegister(GTE_DREG_VXY2,T9);
-	GTE_SetDataRegister(GTE_DREG_VZ2,T8);
+	GTE_SetRegister(GTE_DREG_VXY2,T9);
+	GTE_SetRegister(GTE_DREG_VZ2,T8);
 	T7 = A0;
 	T0 = EMU_ReadU32(V1 + 288); //+ 0x120
 	GTE_Execute(2621488);
@@ -473,10 +473,10 @@ ZZ_3EFAC_42C:
 		ZZ_CLOCKCYCLES(2,0x8003F3F8);
 		goto ZZ_3EFAC_44C;
 	}
-	A0 = GTE_GetDataRegister(GTE_DREG_SXY0);
-	A1 = GTE_GetDataRegister(GTE_DREG_SZ1);
-	GTE_SetDataRegister(GTE_DREG_SXY1,A0);
-	GTE_SetDataRegister(GTE_DREG_SZ2,A1);
+	A0 = GTE_GetRegister(GTE_DREG_SXY0);
+	A1 = GTE_GetRegister(GTE_DREG_SZ1);
+	GTE_SetRegister(GTE_DREG_SXY1,A0);
+	GTE_SetRegister(GTE_DREG_SZ2,A1);
 	T6 = T5;
 	ZZ_CLOCKCYCLES(8,0x8003F410);
 	goto ZZ_3EFAC_464;
@@ -500,8 +500,8 @@ ZZ_3EFAC_464:
 	ZZ_CLOCKCYCLES(8,0x8003EFAC);
 	goto ZZ_3EFAC;
 ZZ_3EFAC_484:
-	GTE_SetDataRegister(GTE_DREG_VXY0,T9);
-	GTE_SetDataRegister(GTE_DREG_VZ0,T8);
+	GTE_SetRegister(GTE_DREG_VXY0,T9);
+	GTE_SetRegister(GTE_DREG_VZ0,T8);
 	T6 = T7;
 	T7 = A0;
 	GTE_Execute(1572865);
@@ -569,8 +569,8 @@ ZZ_3EFAC_50C:
 	ZZ_CLOCKCYCLES(4,0x8003EFAC);
 	goto ZZ_3EFAC;
 ZZ_3EFAC_51C:
-	GTE_SetDataRegister(GTE_DREG_VXY0,T9);
-	GTE_SetDataRegister(GTE_DREG_VZ0,T8);
+	GTE_SetRegister(GTE_DREG_VXY0,T9);
+	GTE_SetRegister(GTE_DREG_VZ0,T8);
 	EMU_Write32(V1 + 128,T9); //+ 0x80
 	EMU_Write32(V1 + 132,T8); //+ 0x84
 	T8 = EMU_ReadU32(V1 + 296); //+ 0x128
@@ -583,8 +583,8 @@ ZZ_3EFAC_51C:
 	ZZ_CLOCKCYCLES(11,0x8003EFAC);
 	goto ZZ_3EFAC;
 ZZ_3EFAC_548:
-	GTE_SetDataRegister(GTE_DREG_VXY1,T9);
-	GTE_SetDataRegister(GTE_DREG_VZ1,T8);
+	GTE_SetRegister(GTE_DREG_VXY1,T9);
+	GTE_SetRegister(GTE_DREG_VZ1,T8);
 	EMU_Write32(V1 + 144,T9); //+ 0x90
 	EMU_Write32(V1 + 148,T8); //+ 0x94
 	T8 = EMU_ReadU32(V1 + 296); //+ 0x128
@@ -597,8 +597,8 @@ ZZ_3EFAC_548:
 	ZZ_CLOCKCYCLES(11,0x8003EFAC);
 	goto ZZ_3EFAC;
 ZZ_3EFAC_574:
-	GTE_SetDataRegister(GTE_DREG_VXY2,T9);
-	GTE_SetDataRegister(GTE_DREG_VZ2,T8);
+	GTE_SetRegister(GTE_DREG_VXY2,T9);
+	GTE_SetRegister(GTE_DREG_VZ2,T8);
 	T7 = A0;
 	T0 = EMU_ReadU32(V1 + 288); //+ 0x120
 	GTE_Execute(2621488);
@@ -723,10 +723,10 @@ ZZ_3EFAC_674:
 		ZZ_CLOCKCYCLES(2,0x8003F640);
 		goto ZZ_3EFAC_694;
 	}
-	A0 = GTE_GetDataRegister(GTE_DREG_SXY0);
-	A1 = GTE_GetDataRegister(GTE_DREG_SZ1);
-	GTE_SetDataRegister(GTE_DREG_SXY1,A0);
-	GTE_SetDataRegister(GTE_DREG_SZ2,A1);
+	A0 = GTE_GetRegister(GTE_DREG_SXY0);
+	A1 = GTE_GetRegister(GTE_DREG_SZ1);
+	GTE_SetRegister(GTE_DREG_SXY1,A0);
+	GTE_SetRegister(GTE_DREG_SZ2,A1);
 	T6 = T5;
 	ZZ_CLOCKCYCLES(8,0x8003F658);
 	goto ZZ_3EFAC_6AC;
@@ -750,8 +750,8 @@ ZZ_3EFAC_6AC:
 	ZZ_CLOCKCYCLES(8,0x8003EFAC);
 	goto ZZ_3EFAC;
 ZZ_3EFAC_6CC:
-	GTE_SetDataRegister(GTE_DREG_VXY0,T9);
-	GTE_SetDataRegister(GTE_DREG_VZ0,T8);
+	GTE_SetRegister(GTE_DREG_VXY0,T9);
+	GTE_SetRegister(GTE_DREG_VZ0,T8);
 	T6 = T7;
 	T7 = A0;
 	GTE_Execute(1572865);
@@ -801,24 +801,24 @@ ZZ_3EFAC_728:
 	ZZ_CLOCKCYCLES(4,0x8003EFAC);
 	goto ZZ_3EFAC;
 ZZ_3EFAC_738:
-	GTE_SetDataRegister(GTE_DREG_VXY0,T9);
-	GTE_SetDataRegister(GTE_DREG_VZ0,T8);
+	GTE_SetRegister(GTE_DREG_VXY0,T9);
+	GTE_SetRegister(GTE_DREG_VZ0,T8);
 	T0 = EMU_ReadU32(S2);
 	RA = 0x8003F6F8; //ZZ_3EFAC_74C
 	T5 = A0;
 	ZZ_CLOCKCYCLES(5,0x8003EFAC);
 	goto ZZ_3EFAC;
 ZZ_3EFAC_74C:
-	GTE_SetDataRegister(GTE_DREG_VXY1,T9);
-	GTE_SetDataRegister(GTE_DREG_VZ1,T8);
+	GTE_SetRegister(GTE_DREG_VXY1,T9);
+	GTE_SetRegister(GTE_DREG_VZ1,T8);
 	T0 = EMU_ReadU32(S2 + 4); //+ 0x4
 	RA = 0x8003F70C; //ZZ_3EFAC_760
 	T6 = A0;
 	ZZ_CLOCKCYCLES(5,0x8003EFAC);
 	goto ZZ_3EFAC;
 ZZ_3EFAC_760:
-	GTE_SetDataRegister(GTE_DREG_VXY2,T9);
-	GTE_SetDataRegister(GTE_DREG_VZ2,T8);
+	GTE_SetRegister(GTE_DREG_VXY2,T9);
+	GTE_SetRegister(GTE_DREG_VZ2,T8);
 	T7 = A0;
 	T0 = EMU_ReadU32(V1 + 288); //+ 0x120
 	GTE_Execute(2621488);
@@ -938,10 +938,10 @@ ZZ_3EFAC_848:
 		ZZ_CLOCKCYCLES(2,0x8003F810);
 		goto ZZ_3EFAC_864;
 	}
-	A0 = GTE_GetDataRegister(GTE_DREG_SXY0);
-	A1 = GTE_GetDataRegister(GTE_DREG_SZ1);
-	GTE_SetDataRegister(GTE_DREG_SXY1,A0);
-	GTE_SetDataRegister(GTE_DREG_SZ2,A1);
+	A0 = GTE_GetRegister(GTE_DREG_SXY0);
+	A1 = GTE_GetRegister(GTE_DREG_SZ1);
+	GTE_SetRegister(GTE_DREG_SXY1,A0);
+	GTE_SetRegister(GTE_DREG_SZ2,A1);
 	T6 = T5;
 	ZZ_CLOCKCYCLES(7,0x8003F810);
 ZZ_3EFAC_864:
@@ -950,8 +950,8 @@ ZZ_3EFAC_864:
 	ZZ_CLOCKCYCLES(2,0x8003EFAC);
 	goto ZZ_3EFAC;
 ZZ_3EFAC_86C:
-	GTE_SetDataRegister(GTE_DREG_VXY0,T9);
-	GTE_SetDataRegister(GTE_DREG_VZ0,T8);
+	GTE_SetRegister(GTE_DREG_VXY0,T9);
+	GTE_SetRegister(GTE_DREG_VZ0,T8);
 	T6 = T7;
 	T7 = A0;
 	GTE_Execute(1572865);

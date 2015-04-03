@@ -38,7 +38,7 @@ ZZ_433B0:
 	T9 <<= 20;
 	T8 |= T9;
 	T2 += T8;
-	GTE_SetControlRegister(GTE_CREG_TRX,T2);
+	GTE_SetRegister(GTE_CREG_TRX,T2);
 	T8 = LO;
 	T9 = HI;
 	T1 = EMU_ReadS16(A0 + 10); //+ 0xA
@@ -62,7 +62,7 @@ ZZ_433B0:
 	T9 <<= 20;
 	T8 |= T9;
 	T2 += T8;
-	GTE_SetControlRegister(GTE_CREG_TRY,T2);
+	GTE_SetRegister(GTE_CREG_TRY,T2);
 	T8 = LO;
 	T9 = HI;
 	T0 = EMU_ReadS16(A0 + 16); //+ 0x10
@@ -83,7 +83,7 @@ ZZ_433B0:
 	T9 <<= 20;
 	T8 |= T9;
 	T7 = T2 + T8;
-	GTE_SetControlRegister(GTE_CREG_TRZ,T7);
+	GTE_SetRegister(GTE_CREG_TRZ,T7);
 	ZZ_JUMPREGISTER_BEGIN(RA);
 	ZZ_CLOCKCYCLES_JR(86);
 	ZZ_JUMPREGISTER(0x800446F0,ZZ_446A8_48);

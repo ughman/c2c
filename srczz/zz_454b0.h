@@ -18,9 +18,9 @@ ZZ_454B0:
 	EMU_Write32(V1,SP);
 	SP = A0;
 	FP = A1;
-	GTE_SetControlRegister(GTE_CREG_TRX,R0);
-	GTE_SetControlRegister(GTE_CREG_TRY,R0);
-	GTE_SetControlRegister(GTE_CREG_TRZ,R0);
+	GTE_SetRegister(GTE_CREG_TRX,R0);
+	GTE_SetRegister(GTE_CREG_TRY,R0);
+	GTE_SetRegister(GTE_CREG_TRZ,R0);
 	S7 = EMU_ReadU32(FP + 8); //+ 0x8
 	T2 = EMU_ReadU32(A2 + 124); //+ 0x7C
 	T1 = EMU_ReadU32(A2 + 128); //+ 0x80
@@ -124,8 +124,8 @@ ZZ_454B0_154:
 ZZ_454B0_168:
 	A2 = S7 << 8;
 	A2 >>= 8;
-	GTE_SetDataRegister(GTE_DREG_VXY0,A0);
-	GTE_SetDataRegister(GTE_DREG_VZ0,A1);
+	GTE_SetRegister(GTE_DREG_VXY0,A0);
+	GTE_SetRegister(GTE_DREG_VZ0,A1);
 	T9 = S6 << 24;
 	S6 >>= 8;
 	T0 = AT + S6;
@@ -147,8 +147,8 @@ ZZ_454B0_168:
 	T0 |= T8;
 	A3 = 0x1010000;
 	A3 |= 0x200;
-	T8 = GTE_GetControlRegister(GTE_CREG_FLAG);
-	A1 = GTE_GetDataRegister(GTE_DREG_SXY2);
+	T8 = GTE_GetRegister(GTE_CREG_FLAG);
+	A1 = GTE_GetRegister(GTE_DREG_SXY2);
 	T8 <<= 13;
 	if ((int32_t)T8 < 0)
 	{
@@ -292,22 +292,22 @@ ZZ_454B0_2FC:
 	ZZ_CLOCKCYCLES(3,0x8003EBD8);
 	goto ZZ_3EBD8;
 ZZ_454B0_308:
-	GTE_SetDataRegister(GTE_DREG_VXY1,EMU_ReadU32(V1 + 192)); //+ 0xC0
-	GTE_SetDataRegister(GTE_DREG_VZ1,EMU_ReadU32(V1 + 196)); //+ 0xC4
-	GTE_SetDataRegister(GTE_DREG_VXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
-	GTE_SetDataRegister(GTE_DREG_VZ2,EMU_ReadU32(V1 + 180)); //+ 0xB4
+	GTE_SetRegister(GTE_DREG_VXY1,EMU_ReadU32(V1 + 192)); //+ 0xC0
+	GTE_SetRegister(GTE_DREG_VZ1,EMU_ReadU32(V1 + 196)); //+ 0xC4
+	GTE_SetRegister(GTE_DREG_VXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
+	GTE_SetRegister(GTE_DREG_VZ2,EMU_ReadU32(V1 + 180)); //+ 0xB4
 	T5 = EMU_ReadU32(V1 + 152); //+ 0x98
 	T6 = EMU_ReadU32(V1 + 168); //+ 0xA8
 	GTE_Execute(2621488);
-	EMU_Write32(V1 + 192,GTE_GetDataRegister(GTE_DREG_SXY1)); //+ 0xC0
-	EMU_Write32(V1 + 196,GTE_GetDataRegister(GTE_DREG_SZ2)); //+ 0xC4
-	EMU_Write32(V1 + 176,GTE_GetDataRegister(GTE_DREG_SXY2)); //+ 0xB0
-	EMU_Write32(V1 + 180,GTE_GetDataRegister(GTE_DREG_SZ3)); //+ 0xB4
+	EMU_Write32(V1 + 192,GTE_GetRegister(GTE_DREG_SXY1)); //+ 0xC0
+	EMU_Write32(V1 + 196,GTE_GetRegister(GTE_DREG_SZ2)); //+ 0xC4
+	EMU_Write32(V1 + 176,GTE_GetRegister(GTE_DREG_SXY2)); //+ 0xB0
+	EMU_Write32(V1 + 180,GTE_GetRegister(GTE_DREG_SZ3)); //+ 0xB4
 	A2 = EMU_ReadU32(V1 + 112); //+ 0x70
-	GTE_SetDataRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 216)); //+ 0xD8
-	GTE_SetDataRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 220)); //+ 0xDC
-	GTE_SetDataRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 224)); //+ 0xE0
-	GTE_SetDataRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 228)); //+ 0xE4
+	GTE_SetRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 216)); //+ 0xD8
+	GTE_SetRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 220)); //+ 0xDC
+	GTE_SetRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 224)); //+ 0xE0
+	GTE_SetRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 228)); //+ 0xE4
 	if (!A2)
 	{
 		T8 = EMU_ReadS16(V1 + 156); //+ 0x9C
@@ -328,12 +328,12 @@ ZZ_454B0_364:
 	goto ZZ_45B10;
 ZZ_454B0_36C:
 	A2 = EMU_ReadU32(V1 + 112); //+ 0x70
-	GTE_SetDataRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 224)); //+ 0xE0
-	GTE_SetDataRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 228)); //+ 0xE4
-	GTE_SetDataRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 192)); //+ 0xC0
-	GTE_SetDataRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 196)); //+ 0xC4
-	GTE_SetDataRegister(GTE_DREG_SXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
-	GTE_SetDataRegister(GTE_DREG_SZ3,EMU_ReadU32(V1 + 180)); //+ 0xB4
+	GTE_SetRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 224)); //+ 0xE0
+	GTE_SetRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 228)); //+ 0xE4
+	GTE_SetRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 192)); //+ 0xC0
+	GTE_SetRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 196)); //+ 0xC4
+	GTE_SetRegister(GTE_DREG_SXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
+	GTE_SetRegister(GTE_DREG_SZ3,EMU_ReadU32(V1 + 180)); //+ 0xB4
 	if (!A2)
 	{
 		T5 = EMU_ReadU32(V1 + 168); //+ 0xA8
@@ -355,12 +355,12 @@ ZZ_454B0_3A0:
 	goto ZZ_45B10;
 ZZ_454B0_3B0:
 	A2 = EMU_ReadU32(V1 + 112); //+ 0x70
-	GTE_SetDataRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 192)); //+ 0xC0
-	GTE_SetDataRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 196)); //+ 0xC4
-	GTE_SetDataRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 208)); //+ 0xD0
-	GTE_SetDataRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 212)); //+ 0xD4
-	GTE_SetDataRegister(GTE_DREG_SXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
-	GTE_SetDataRegister(GTE_DREG_SZ3,EMU_ReadU32(V1 + 180)); //+ 0xB4
+	GTE_SetRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 192)); //+ 0xC0
+	GTE_SetRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 196)); //+ 0xC4
+	GTE_SetRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 208)); //+ 0xD0
+	GTE_SetRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 212)); //+ 0xD4
+	GTE_SetRegister(GTE_DREG_SXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
+	GTE_SetRegister(GTE_DREG_SZ3,EMU_ReadU32(V1 + 180)); //+ 0xB4
 	if (!A2)
 	{
 		T5 = EMU_ReadU32(V1 + 200); //+ 0xC8
@@ -400,22 +400,22 @@ ZZ_454B0_40C:
 	ZZ_CLOCKCYCLES(3,0x8003EBD8);
 	goto ZZ_3EBD8;
 ZZ_454B0_418:
-	GTE_SetDataRegister(GTE_DREG_VXY1,EMU_ReadU32(V1 + 192)); //+ 0xC0
-	GTE_SetDataRegister(GTE_DREG_VZ1,EMU_ReadU32(V1 + 196)); //+ 0xC4
-	GTE_SetDataRegister(GTE_DREG_VXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
-	GTE_SetDataRegister(GTE_DREG_VZ2,EMU_ReadU32(V1 + 180)); //+ 0xB4
+	GTE_SetRegister(GTE_DREG_VXY1,EMU_ReadU32(V1 + 192)); //+ 0xC0
+	GTE_SetRegister(GTE_DREG_VZ1,EMU_ReadU32(V1 + 196)); //+ 0xC4
+	GTE_SetRegister(GTE_DREG_VXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
+	GTE_SetRegister(GTE_DREG_VZ2,EMU_ReadU32(V1 + 180)); //+ 0xB4
 	T5 = EMU_ReadU32(V1 + 168); //+ 0xA8
 	T6 = EMU_ReadU32(V1 + 136); //+ 0x88
 	GTE_Execute(2621488);
-	EMU_Write32(V1 + 192,GTE_GetDataRegister(GTE_DREG_SXY1)); //+ 0xC0
-	EMU_Write32(V1 + 196,GTE_GetDataRegister(GTE_DREG_SZ2)); //+ 0xC4
-	EMU_Write32(V1 + 176,GTE_GetDataRegister(GTE_DREG_SXY2)); //+ 0xB0
-	EMU_Write32(V1 + 180,GTE_GetDataRegister(GTE_DREG_SZ3)); //+ 0xB4
+	EMU_Write32(V1 + 192,GTE_GetRegister(GTE_DREG_SXY1)); //+ 0xC0
+	EMU_Write32(V1 + 196,GTE_GetRegister(GTE_DREG_SZ2)); //+ 0xC4
+	EMU_Write32(V1 + 176,GTE_GetRegister(GTE_DREG_SXY2)); //+ 0xB0
+	EMU_Write32(V1 + 180,GTE_GetRegister(GTE_DREG_SZ3)); //+ 0xB4
 	A2 = EMU_ReadU32(V1 + 112); //+ 0x70
-	GTE_SetDataRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 224)); //+ 0xE0
-	GTE_SetDataRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 228)); //+ 0xE4
-	GTE_SetDataRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 208)); //+ 0xD0
-	GTE_SetDataRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 212)); //+ 0xD4
+	GTE_SetRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 224)); //+ 0xE0
+	GTE_SetRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 228)); //+ 0xE4
+	GTE_SetRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 208)); //+ 0xD0
+	GTE_SetRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 212)); //+ 0xD4
 	if (!A2)
 	{
 		T7 = EMU_ReadU32(V1 + 184); //+ 0xB8
@@ -437,12 +437,12 @@ ZZ_454B0_478:
 	goto ZZ_45B10;
 ZZ_454B0_480:
 	A2 = EMU_ReadU32(V1 + 112); //+ 0x70
-	GTE_SetDataRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 192)); //+ 0xC0
-	GTE_SetDataRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 196)); //+ 0xC4
-	GTE_SetDataRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 224)); //+ 0xE0
-	GTE_SetDataRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 228)); //+ 0xE4
-	GTE_SetDataRegister(GTE_DREG_SXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
-	GTE_SetDataRegister(GTE_DREG_SZ3,EMU_ReadU32(V1 + 180)); //+ 0xB4
+	GTE_SetRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 192)); //+ 0xC0
+	GTE_SetRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 196)); //+ 0xC4
+	GTE_SetRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 224)); //+ 0xE0
+	GTE_SetRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 228)); //+ 0xE4
+	GTE_SetRegister(GTE_DREG_SXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
+	GTE_SetRegister(GTE_DREG_SZ3,EMU_ReadU32(V1 + 180)); //+ 0xB4
 	if (!A2)
 	{
 		T5 = EMU_ReadU32(V1 + 200); //+ 0xC8
@@ -464,12 +464,12 @@ ZZ_454B0_4B4:
 	goto ZZ_45B10;
 ZZ_454B0_4C4:
 	A2 = EMU_ReadU32(V1 + 112); //+ 0x70
-	GTE_SetDataRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 216)); //+ 0xD8
-	GTE_SetDataRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 220)); //+ 0xDC
-	GTE_SetDataRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 192)); //+ 0xC0
-	GTE_SetDataRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 196)); //+ 0xC4
-	GTE_SetDataRegister(GTE_DREG_SXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
-	GTE_SetDataRegister(GTE_DREG_SZ3,EMU_ReadU32(V1 + 180)); //+ 0xB4
+	GTE_SetRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 216)); //+ 0xD8
+	GTE_SetRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 220)); //+ 0xDC
+	GTE_SetRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 192)); //+ 0xC0
+	GTE_SetRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 196)); //+ 0xC4
+	GTE_SetRegister(GTE_DREG_SXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
+	GTE_SetRegister(GTE_DREG_SZ3,EMU_ReadU32(V1 + 180)); //+ 0xB4
 	if (!A2)
 	{
 		T5 = EMU_ReadU32(V1 + 152); //+ 0x98
@@ -509,22 +509,22 @@ ZZ_454B0_520:
 	ZZ_CLOCKCYCLES(3,0x8003EBD8);
 	goto ZZ_3EBD8;
 ZZ_454B0_52C:
-	GTE_SetDataRegister(GTE_DREG_VXY1,EMU_ReadU32(V1 + 192)); //+ 0xC0
-	GTE_SetDataRegister(GTE_DREG_VZ1,EMU_ReadU32(V1 + 196)); //+ 0xC4
-	GTE_SetDataRegister(GTE_DREG_VXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
-	GTE_SetDataRegister(GTE_DREG_VZ2,EMU_ReadU32(V1 + 180)); //+ 0xB4
+	GTE_SetRegister(GTE_DREG_VXY1,EMU_ReadU32(V1 + 192)); //+ 0xC0
+	GTE_SetRegister(GTE_DREG_VZ1,EMU_ReadU32(V1 + 196)); //+ 0xC4
+	GTE_SetRegister(GTE_DREG_VXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
+	GTE_SetRegister(GTE_DREG_VZ2,EMU_ReadU32(V1 + 180)); //+ 0xB4
 	T5 = EMU_ReadU32(V1 + 136); //+ 0x88
 	T6 = EMU_ReadU32(V1 + 152); //+ 0x98
 	GTE_Execute(2621488);
-	EMU_Write32(V1 + 192,GTE_GetDataRegister(GTE_DREG_SXY1)); //+ 0xC0
-	EMU_Write32(V1 + 196,GTE_GetDataRegister(GTE_DREG_SZ2)); //+ 0xC4
-	EMU_Write32(V1 + 176,GTE_GetDataRegister(GTE_DREG_SXY2)); //+ 0xB0
-	EMU_Write32(V1 + 180,GTE_GetDataRegister(GTE_DREG_SZ3)); //+ 0xB4
+	EMU_Write32(V1 + 192,GTE_GetRegister(GTE_DREG_SXY1)); //+ 0xC0
+	EMU_Write32(V1 + 196,GTE_GetRegister(GTE_DREG_SZ2)); //+ 0xC4
+	EMU_Write32(V1 + 176,GTE_GetRegister(GTE_DREG_SXY2)); //+ 0xB0
+	EMU_Write32(V1 + 180,GTE_GetRegister(GTE_DREG_SZ3)); //+ 0xB4
 	A2 = EMU_ReadU32(V1 + 112); //+ 0x70
-	GTE_SetDataRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 208)); //+ 0xD0
-	GTE_SetDataRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 212)); //+ 0xD4
-	GTE_SetDataRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 216)); //+ 0xD8
-	GTE_SetDataRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 220)); //+ 0xDC
+	GTE_SetRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 208)); //+ 0xD0
+	GTE_SetRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 212)); //+ 0xD4
+	GTE_SetRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 216)); //+ 0xD8
+	GTE_SetRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 220)); //+ 0xDC
 	if (!A2)
 	{
 		T7 = EMU_ReadU32(V1 + 184); //+ 0xB8
@@ -546,12 +546,12 @@ ZZ_454B0_58C:
 	goto ZZ_45B10;
 ZZ_454B0_594:
 	A2 = EMU_ReadU32(V1 + 112); //+ 0x70
-	GTE_SetDataRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 216)); //+ 0xD8
-	GTE_SetDataRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 220)); //+ 0xDC
-	GTE_SetDataRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 192)); //+ 0xC0
-	GTE_SetDataRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 196)); //+ 0xC4
-	GTE_SetDataRegister(GTE_DREG_SXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
-	GTE_SetDataRegister(GTE_DREG_SZ3,EMU_ReadU32(V1 + 180)); //+ 0xB4
+	GTE_SetRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 216)); //+ 0xD8
+	GTE_SetRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 220)); //+ 0xDC
+	GTE_SetRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 192)); //+ 0xC0
+	GTE_SetRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 196)); //+ 0xC4
+	GTE_SetRegister(GTE_DREG_SXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
+	GTE_SetRegister(GTE_DREG_SZ3,EMU_ReadU32(V1 + 180)); //+ 0xB4
 	if (!A2)
 	{
 		T5 = EMU_ReadU32(V1 + 152); //+ 0x98
@@ -573,12 +573,12 @@ ZZ_454B0_5C8:
 	goto ZZ_45B10;
 ZZ_454B0_5D8:
 	A2 = EMU_ReadU32(V1 + 112); //+ 0x70
-	GTE_SetDataRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 192)); //+ 0xC0
-	GTE_SetDataRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 196)); //+ 0xC4
-	GTE_SetDataRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 224)); //+ 0xE0
-	GTE_SetDataRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 228)); //+ 0xE4
-	GTE_SetDataRegister(GTE_DREG_SXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
-	GTE_SetDataRegister(GTE_DREG_SZ3,EMU_ReadU32(V1 + 180)); //+ 0xB4
+	GTE_SetRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 192)); //+ 0xC0
+	GTE_SetRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 196)); //+ 0xC4
+	GTE_SetRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 224)); //+ 0xE0
+	GTE_SetRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 228)); //+ 0xE4
+	GTE_SetRegister(GTE_DREG_SXY2,EMU_ReadU32(V1 + 176)); //+ 0xB0
+	GTE_SetRegister(GTE_DREG_SZ3,EMU_ReadU32(V1 + 180)); //+ 0xB4
 	if (!A2)
 	{
 		T5 = EMU_ReadU32(V1 + 200); //+ 0xC8
@@ -602,12 +602,12 @@ ZZ_454B0_61C:
 	T5 = EMU_ReadU32(V1 + 136); //+ 0x88
 	ZZ_CLOCKCYCLES(1,0x80045AD0);
 ZZ_454B0_620:
-	GTE_SetDataRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 208)); //+ 0xD0
-	GTE_SetDataRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 212)); //+ 0xD4
-	GTE_SetDataRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 216)); //+ 0xD8
-	GTE_SetDataRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 220)); //+ 0xDC
-	GTE_SetDataRegister(GTE_DREG_SXY2,EMU_ReadU32(V1 + 224)); //+ 0xE0
-	GTE_SetDataRegister(GTE_DREG_SZ3,EMU_ReadU32(V1 + 228)); //+ 0xE4
+	GTE_SetRegister(GTE_DREG_SXY0,EMU_ReadU32(V1 + 208)); //+ 0xD0
+	GTE_SetRegister(GTE_DREG_SZ1,EMU_ReadU32(V1 + 212)); //+ 0xD4
+	GTE_SetRegister(GTE_DREG_SXY1,EMU_ReadU32(V1 + 216)); //+ 0xD8
+	GTE_SetRegister(GTE_DREG_SZ2,EMU_ReadU32(V1 + 220)); //+ 0xDC
+	GTE_SetRegister(GTE_DREG_SXY2,EMU_ReadU32(V1 + 224)); //+ 0xE0
+	GTE_SetRegister(GTE_DREG_SZ3,EMU_ReadU32(V1 + 228)); //+ 0xE4
 	T6 = EMU_ReadU32(V1 + 152); //+ 0x98
 	T7 = EMU_ReadU32(V1 + 168); //+ 0xA8
 	RA = EMU_ReadU32(V1 + 100); //+ 0x64

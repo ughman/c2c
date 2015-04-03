@@ -3,9 +3,9 @@ ZZ_4F260:
 	A0 <<= 4;
 	A1 <<= 4;
 	A2 <<= 4;
-	GTE_SetControlRegister(GTE_CREG_RFC,A0);
-	GTE_SetControlRegister(GTE_CREG_GFC,A1);
-	GTE_SetControlRegister(GTE_CREG_BFC,A2);
+	GTE_SetRegister(GTE_CREG_RFC,A0);
+	GTE_SetRegister(GTE_CREG_GFC,A1);
+	GTE_SetRegister(GTE_CREG_BFC,A2);
 	ZZ_JUMPREGISTER_BEGIN(RA);
 	ZZ_CLOCKCYCLES_JR(8);
 	ZZ_JUMPREGISTER(0x80017B84,ZZ_17AB0_D4);

@@ -21,7 +21,7 @@ ZZ_44754_24:
 	ZZ_CLOCKCYCLES(3,0x80044754);
 	goto ZZ_44754;
 ZZ_44754_30:
-	A0 = GTE_GetControlRegister(GTE_CREG_TRZ);
+	A0 = GTE_GetRegister(GTE_CREG_TRZ);
 	T9 = EMU_ReadU32(V1 + 16); //+ 0x10
 	T8 = EMU_ReadU32(V1 + 8); //+ 0x8
 	A0 = A0 - T9;
@@ -83,10 +83,10 @@ ZZ_44754_A8:
 	T5 = (int32_t)T5 >> 8;
 	T6 = (int32_t)T6 >> 8;
 	T6 = EMU_CheckedSubtract(R0,T6);
-	T7 = GTE_GetControlRegister(GTE_CREG_H);
-	GTE_SetControlRegister(GTE_CREG_TRX,T5);
-	GTE_SetControlRegister(GTE_CREG_TRY,T6);
-	GTE_SetControlRegister(GTE_CREG_TRZ,T7);
+	T7 = GTE_GetRegister(GTE_CREG_H);
+	GTE_SetRegister(GTE_CREG_TRX,T5);
+	GTE_SetRegister(GTE_CREG_TRY,T6);
+	GTE_SetRegister(GTE_CREG_TRZ,T7);
 	ZZ_JUMPREGISTER_BEGIN(RA);
 	ZZ_CLOCKCYCLES_JR(12);
 	ZZ_JUMPREGISTER(0x80044784,ZZ_44754_30);
