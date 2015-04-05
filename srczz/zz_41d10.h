@@ -72,7 +72,7 @@ ZZ_41D10_108:
 		goto ZZ_41D10_294;
 	}
 	V0 += T9;
-	GTE_Execute(20971526);
+	GTE_NormalClip();
 	if ((int32_t)T9 <= 0)
 	{
 		A3 = EMU_ReadU32(V1 + 236); //+ 0xEC
@@ -153,7 +153,7 @@ ZZ_41D10_160:
 		ZZ_CLOCKCYCLES(28,0x80041EE4);
 		goto ZZ_41D10_1D4;
 	}
-	GTE_Execute(16252970);
+	GTE_DepthCueTriple();
 	ZZ_CLOCKCYCLES(29,0x80041EE4);
 ZZ_41D10_1D4:
 	if ((int32_t)V0 >= 0)
@@ -264,7 +264,7 @@ ZZ_41D10_29C:
 	GTE_SetRegister(GTE_DREG_VXY2,T8);
 	GTE_SetRegister(GTE_DREG_VZ2,V0);
 	T8 = A3 + T9;
-	GTE_Execute(2621488);
+	GTE_RotateTranslateProjectTriple();
 	A0 = GTE_GetRegister(GTE_DREG_SXY0);
 	A1 = GTE_GetRegister(GTE_DREG_SZ1);
 	RA = 0x80041FFC; //ZZ_41D10_2EC
@@ -291,7 +291,7 @@ ZZ_41D10_30C:
 	GTE_SetRegister(GTE_DREG_VZ2,T8);
 	T8 = EMU_CheckedAdd(A3,1020);
 	T8 &= T2;
-	GTE_Execute(2621488);
+	GTE_RotateTranslateProjectTriple();
 	A0 = GTE_GetRegister(GTE_DREG_SXY0);
 	A1 = GTE_GetRegister(GTE_DREG_SZ1);
 	RA = 0x80042050; //ZZ_41D10_340
@@ -313,7 +313,7 @@ ZZ_41D10_360:
 	GTE_SetRegister(GTE_DREG_VXY1,T8);
 	T8 += T9;
 	GTE_SetRegister(GTE_DREG_VXY2,T8);
-	GTE_Execute(2621488);
+	GTE_RotateTranslateProjectTriple();
 	A0 = GTE_GetRegister(GTE_DREG_SXY1);
 	A1 = GTE_GetRegister(GTE_DREG_SZ2);
 	RA = 0x80042098; //ZZ_41D10_388

@@ -18,7 +18,7 @@ ZZ_18690:
 	A2 = A0 | V0;
 	GTE_SetRegister(GTE_DREG_VXY2,A2);
 	GTE_SetRegister(GTE_DREG_VZ2,T4);
-	GTE_Execute(2621488);
+	GTE_RotateTranslateProjectTriple();
 	A2 = GTE_GetRegister(GTE_CREG_FLAG);
 	if ((int32_t)A2 < 0)
 	{
@@ -86,7 +86,7 @@ ZZ_18690_F0:
 	GTE_SetRegister(GTE_DREG_VXY0,A2);
 	T4 = R0;
 	GTE_SetRegister(GTE_DREG_VZ0,T4);
-	GTE_Execute(1572865);
+	GTE_RotateTranslateProjectSingle();
 	V0 = EMU_ReadU32(T2 + 4); //+ 0x4
 	EMU_Write32(T1 + 12,V0); //+ 0xC
 	V0 = EMU_ReadU32(T2 + 8); //+ 0x8

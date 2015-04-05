@@ -462,7 +462,7 @@ ZZ_420F4_588:
 	ZZ_JUMPREGISTER(0x80011CB8,ZZ_11800_4B8);
 	ZZ_JUMPREGISTER_END();
 ZZ_420F4_5C4:
-	GTE_Execute(2621488);
+	GTE_RotateTranslateProjectTriple();
 	T5 = EMU_ReadU32(T5);
 	S4 = T3 & 0xE000;
 	S4 >>= 8;
@@ -700,7 +700,7 @@ ZZ_420F4_83C:
 	EMU_Write32(V1 + 440,GTE_GetRegister(GTE_DREG_VZ0)); //+ 0x1B8
 	ZZ_CLOCKCYCLES(2,0x80042938);
 ZZ_420F4_844:
-	GTE_Execute(2621488);
+	GTE_RotateTranslateProjectTriple();
 	T5 = EMU_ReadU32(T5);
 	S4 = T3 & 0xE000;
 	S4 >>= 8;
@@ -752,7 +752,7 @@ ZZ_420F4_8B8:
 	V0 = GTE_GetRegister(GTE_DREG_SXY2);
 	EMU_Write32(S7 + 8,T8); //+ 0x8
 	RA = EMU_ReadU32(V1 + 540); //+ 0x21C
-	GTE_Execute(1572865);
+	GTE_RotateTranslateProjectSingle();
 	T6 = EMU_ReadU32(T6);
 	A2 = T8 & T9;
 	T8 = T8 - RA;

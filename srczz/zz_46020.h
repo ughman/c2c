@@ -68,7 +68,7 @@ ZZ_46020_44:
 	}
 	ZZ_CLOCKCYCLES(14,0x8004609C);
 ZZ_46020_7C:
-	GTE_Execute(2621488);
+	GTE_RotateTranslateProjectTriple();
 	T5 = EMU_ReadU32(T5);
 	S4 = T3 & 0xE000;
 	S4 >>= 8;
@@ -247,7 +247,7 @@ ZZ_46020_200:
 	}
 	ZZ_CLOCKCYCLES(14,0x80046258);
 ZZ_46020_238:
-	GTE_Execute(2621488);
+	GTE_RotateTranslateProjectTriple();
 	T5 = EMU_ReadU32(T5);
 	S4 = T3 & 0xE000;
 	S4 >>= 8;
@@ -302,7 +302,7 @@ ZZ_46020_2AC:
 	T9 = GTE_GetRegister(GTE_DREG_SXY1);
 	V0 = GTE_GetRegister(GTE_DREG_SXY2);
 	RA = EMU_ReadU32(V1 + 540); //+ 0x21C
-	GTE_Execute(1572865);
+	GTE_RotateTranslateProjectSingle();
 	T6 = EMU_ReadU32(T6);
 	A2 = T8 & T9;
 	T8 = T8 - RA;

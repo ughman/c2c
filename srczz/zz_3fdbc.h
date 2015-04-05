@@ -39,7 +39,7 @@ ZZ_3FDBC_60:
 		goto ZZ_3FDBC_1E8;
 	}
 	V0 += T9;
-	GTE_Execute(20971526);
+	GTE_NormalClip();
 	if ((int32_t)T9 <= 0)
 	{
 		V0 >>= 5;
@@ -91,7 +91,7 @@ ZZ_3FDBC_C0:
 		ZZ_CLOCKCYCLES(9,0x8003FEA4);
 		goto ZZ_3FDBC_E8;
 	}
-	GTE_Execute(16252970);
+	GTE_DepthCueTriple();
 	ZZ_CLOCKCYCLES(10,0x8003FEA4);
 ZZ_3FDBC_E8:
 	if ((int32_t)V0 >= 0)

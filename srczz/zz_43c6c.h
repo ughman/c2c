@@ -14,7 +14,7 @@ ZZ_43C6C:
 	AT <<= T8;
 	GTE_SetRegister(GTE_DREG_RGBC,T5);
 	GTE_SetRegister(GTE_DREG_IR0,AT);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T5 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(13,0x80043CA0);
 ZZ_43C6C_34:
@@ -29,7 +29,7 @@ ZZ_43C6C_34:
 	A3 <<= T8;
 	GTE_SetRegister(GTE_DREG_RGBC,T6);
 	GTE_SetRegister(GTE_DREG_IR0,A3);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T6 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(10,0x80043CC8);
 ZZ_43C6C_5C:
@@ -43,7 +43,7 @@ ZZ_43C6C_5C:
 	AT <<= T8;
 	GTE_SetRegister(GTE_DREG_RGBC,T7);
 	GTE_SetRegister(GTE_DREG_IR0,AT);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T7 = GTE_GetRegister(GTE_DREG_RGB2);
 	T8 = T5 | T6;
 	T8 |= T7;
@@ -78,7 +78,7 @@ ZZ_43C6C_B0:
 	AT <<= T8;
 	GTE_SetRegister(GTE_DREG_RGBC,T5);
 	GTE_SetRegister(GTE_DREG_IR0,AT);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T5 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(13,0x80043D50);
 ZZ_43C6C_E4:
@@ -93,7 +93,7 @@ ZZ_43C6C_E4:
 	A3 <<= T8;
 	GTE_SetRegister(GTE_DREG_RGBC,T6);
 	GTE_SetRegister(GTE_DREG_IR0,A3);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T6 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(10,0x80043D78);
 ZZ_43C6C_10C:
@@ -108,7 +108,7 @@ ZZ_43C6C_10C:
 	AT <<= T8;
 	GTE_SetRegister(GTE_DREG_RGBC,T7);
 	GTE_SetRegister(GTE_DREG_IR0,AT);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T7 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(10,0x80043DA0);
 ZZ_43C6C_134:
@@ -123,7 +123,7 @@ ZZ_43C6C_134:
 	GTE_SetRegister(GTE_DREG_RGBC,A1);
 	GTE_SetRegister(GTE_DREG_IR0,A3);
 	T8 = T5 | T6;
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	A1 = GTE_GetRegister(GTE_DREG_RGB2);
 	T8 |= T7;
 	T8 |= A1;
@@ -381,7 +381,7 @@ ZZ_43C6C_3CC:
 	}
 	T5 = 0;
 	GTE_SetRegister(GTE_DREG_IR0,T8);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T5 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(14,0x80044070);
 ZZ_43C6C_404:
@@ -404,7 +404,7 @@ ZZ_43C6C_404:
 	}
 	T6 = 0;
 	GTE_SetRegister(GTE_DREG_IR0,T8);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T6 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(13,0x800440A4);
 ZZ_43C6C_438:
@@ -426,7 +426,7 @@ ZZ_43C6C_438:
 	}
 	T7 = 0;
 	GTE_SetRegister(GTE_DREG_IR0,T8);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T7 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(12,0x800440D4);
 ZZ_43C6C_468:
@@ -450,7 +450,7 @@ ZZ_43C6C_480:
 		goto ZZ_43C6C_49C;
 	}
 	A3 <<= 12;
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T5 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(7,0x80044108);
 ZZ_43C6C_49C:
@@ -462,7 +462,7 @@ ZZ_43C6C_49C:
 		goto ZZ_43C6C_4B0;
 	}
 	T0 <<= 12;
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T6 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(5,0x8004411C);
 ZZ_43C6C_4B0:
@@ -472,7 +472,7 @@ ZZ_43C6C_4B0:
 		ZZ_CLOCKCYCLES(3,0x800427E0);
 		goto ZZ_420F4_6EC;
 	}
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T7 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(7,0x800427E0);
 	goto ZZ_420F4_6EC;
@@ -517,7 +517,7 @@ ZZ_43C6C_4EC:
 	}
 	T5 = 0;
 	GTE_SetRegister(GTE_DREG_IR0,T8);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T5 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(14,0x80044190);
 ZZ_43C6C_524:
@@ -540,7 +540,7 @@ ZZ_43C6C_524:
 	}
 	T6 = 0;
 	GTE_SetRegister(GTE_DREG_IR0,T8);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T6 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(13,0x800441C4);
 ZZ_43C6C_558:
@@ -563,7 +563,7 @@ ZZ_43C6C_558:
 	}
 	T7 = 0;
 	GTE_SetRegister(GTE_DREG_IR0,T8);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T7 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(13,0x800441F8);
 ZZ_43C6C_58C:
@@ -585,7 +585,7 @@ ZZ_43C6C_58C:
 	}
 	A1 = 0;
 	GTE_SetRegister(GTE_DREG_IR0,T8);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	A1 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(12,0x80044228);
 ZZ_43C6C_5BC:
@@ -610,7 +610,7 @@ ZZ_43C6C_5D8:
 		goto ZZ_43C6C_5F4;
 	}
 	A3 <<= 12;
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T5 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(7,0x80044260);
 ZZ_43C6C_5F4:
@@ -622,7 +622,7 @@ ZZ_43C6C_5F4:
 		goto ZZ_43C6C_608;
 	}
 	T0 <<= 12;
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T6 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(5,0x80044274);
 ZZ_43C6C_608:
@@ -634,7 +634,7 @@ ZZ_43C6C_608:
 		goto ZZ_43C6C_61C;
 	}
 	A0 <<= 12;
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T7 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(5,0x80044288);
 ZZ_43C6C_61C:
@@ -644,7 +644,7 @@ ZZ_43C6C_61C:
 		ZZ_CLOCKCYCLES(3,0x80042AB0);
 		goto ZZ_420F4_9BC;
 	}
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	A1 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(7,0x80042AB0);
 	goto ZZ_420F4_9BC;

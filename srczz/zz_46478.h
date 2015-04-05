@@ -293,7 +293,7 @@ ZZ_46478_360:
 	GTE_SetRegister(GTE_DREG_IR3,A0);
 	T8 += S2;
 	T8 = EMU_ReadU8(T8);
-	GTE_Execute(6815785);
+	GTE_DepthCueColorLight();
 	T9 = EMU_CheckedAdd(T8,-255);
 	if (!T9)
 	{
@@ -317,7 +317,7 @@ ZZ_46478_360:
 	EMU_Write32(AT,GTE_GetRegister(GTE_DREG_RGB2));
 	T8 = EMU_ReadS16(V1 + 352); //+ 0x160
 	T9 = EMU_ReadS16(V1 + 354); //+ 0x162
-	GTE_Execute(1572865);
+	GTE_RotateTranslateProjectSingle();
 	if (!S5)
 	{
 		T8 >>= 3;

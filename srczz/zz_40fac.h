@@ -214,14 +214,14 @@ ZZ_40FAC_210:
 	GTE_SetRegister(GTE_DREG_VZ1,T8);
 	GTE_SetRegister(GTE_DREG_VXY2,T9);
 	GTE_SetRegister(GTE_DREG_VZ2,T8);
-	GTE_Execute(4907026);
+	GTE_Multiply_V1_Light();
 	T9 = GTE_GetRegister(GTE_DREG_IR2);
-	GTE_Execute(4874258);
+	GTE_Multiply_V0_Light();
 	T8 = GTE_GetRegister(GTE_DREG_IR1);
 	T9 <<= 16;
 	T8 &= 0xFFFF;
 	T9 |= T8;
-	GTE_Execute(4939794);
+	GTE_Multiply_V2_Light();
 	T8 = GTE_GetRegister(GTE_DREG_IR3);
 	EMU_Write32(V0 + 320,T9); //+ 0x140
 	EMU_Write32(V0 + 324,T8); //+ 0x144

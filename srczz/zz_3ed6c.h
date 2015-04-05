@@ -31,7 +31,7 @@ ZZ_3ED6C_40:
 	GTE_SetRegister(GTE_DREG_VZ0,T2);
 	A1 = EMU_CheckedAdd(A1,12);
 	A0 = EMU_CheckedAdd(A0,12);
-	GTE_Execute(4743186);
+	GTE_Multiply_V0_Rotation();
 	T0 = GTE_GetRegister(GTE_DREG_IR1);
 	T1 = GTE_GetRegister(GTE_DREG_IR2);
 	T2 = GTE_GetRegister(GTE_DREG_IR3);
@@ -76,7 +76,7 @@ ZZ_3ED6C_F0:
 		goto ZZ_3ED6C_238;
 	}
 	V0 += T9;
-	GTE_Execute(20971526);
+	GTE_NormalClip();
 	if ((int32_t)T9 <= 0)
 	{
 		V0 >>= 5;
@@ -128,7 +128,7 @@ ZZ_3ED6C_150:
 		ZZ_CLOCKCYCLES(9,0x8003EEE4);
 		goto ZZ_3ED6C_178;
 	}
-	GTE_Execute(16252970);
+	GTE_DepthCueTriple();
 	ZZ_CLOCKCYCLES(10,0x8003EEE4);
 ZZ_3ED6C_178:
 	if ((int32_t)V0 >= 0)

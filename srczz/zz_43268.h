@@ -9,7 +9,7 @@ ZZ_43268:
 	GTE_SetRegister(GTE_DREG_VZ0,T3);
 	T8 = T0 >> 16;
 	T9 = T2 << 16;
-	GTE_Execute(4743186);
+	GTE_Multiply_V0_Rotation();
 	T8 |= T9;
 	T9 = T3 >> 16;
 	GTE_SetRegister(GTE_DREG_VXY1,T8);
@@ -20,7 +20,7 @@ ZZ_43268:
 	T0 = GTE_GetRegister(GTE_DREG_IR1);
 	T1 = GTE_GetRegister(GTE_DREG_IR2);
 	T3 = GTE_GetRegister(GTE_DREG_IR3);
-	GTE_Execute(4775954);
+	GTE_Multiply_V1_Rotation();
 	GTE_SetRegister(GTE_DREG_VXY2,T8);
 	GTE_SetRegister(GTE_DREG_VZ2,T4);
 	T0 &= 0xFFFF;
@@ -29,7 +29,7 @@ ZZ_43268:
 	T8 = GTE_GetRegister(GTE_DREG_IR1);
 	T2 = GTE_GetRegister(GTE_DREG_IR2);
 	T9 = GTE_GetRegister(GTE_DREG_IR3);
-	GTE_Execute(4808722);
+	GTE_Multiply_V2_Rotation();
 	T8 <<= 16;
 	T0 |= T8;
 	T2 &= 0xFFFF;

@@ -18,7 +18,7 @@ ZZ_4EF50:
 	T0 |= T1;
 	GTE_SetRegister(GTE_DREG_VXY0,T0);
 	GTE_SetRegister(GTE_DREG_VZ0,T2);
-	GTE_Execute(4743186);
+	GTE_Multiply_V0_Rotation();
 	T0 = EMU_ReadU16(A1 + 2); //+ 0x2
 	T1 = EMU_ReadU32(A1 + 8); //+ 0x8
 	T2 = EMU_ReadS16(A1 + 14); //+ 0xE
@@ -29,7 +29,7 @@ ZZ_4EF50:
 	T5 = GTE_GetRegister(GTE_DREG_IR3);
 	GTE_SetRegister(GTE_DREG_VXY0,T0);
 	GTE_SetRegister(GTE_DREG_VZ0,T2);
-	GTE_Execute(4743186);
+	GTE_Multiply_V0_Rotation();
 	T0 = EMU_ReadU16(A1 + 4); //+ 0x4
 	T1 = EMU_ReadU32(A1 + 8); //+ 0x8
 	T2 = EMU_ReadU32(A1 + 16); //+ 0x10
@@ -41,7 +41,7 @@ ZZ_4EF50:
 	T8 = GTE_GetRegister(GTE_DREG_IR3);
 	GTE_SetRegister(GTE_DREG_VXY0,T0);
 	GTE_SetRegister(GTE_DREG_VZ0,T2);
-	GTE_Execute(4743186);
+	GTE_Multiply_V0_Rotation();
 	T3 &= 0xFFFF;
 	T6 <<= 16;
 	T6 |= T3;

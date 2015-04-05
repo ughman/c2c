@@ -2,7 +2,7 @@
 ZZ_4F2B0:
 	GTE_SetRegister(GTE_DREG_VXY0,EMU_ReadU32(A0));
 	GTE_SetRegister(GTE_DREG_VZ0,EMU_ReadU32(A0 + 4)); //+ 0x4
-	GTE_Execute(1572865);
+	GTE_RotateTranslateProjectSingle();
 	EMU_Write32(A1,GTE_GetRegister(GTE_DREG_SXY2));
 	EMU_Write32(A2,GTE_GetRegister(GTE_DREG_IR0));
 	V1 = GTE_GetRegister(GTE_CREG_FLAG);

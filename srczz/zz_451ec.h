@@ -134,7 +134,7 @@ ZZ_451EC_10C:
 	GTE_SetRegister(GTE_DREG_VZ1,A1);
 	A2 = S7 << 8;
 	A2 >>= 8;
-	GTE_Execute(2621488);
+	GTE_RotateTranslateProjectTriple();
 	T8 = EMU_ReadU32(S4 + 24); //+ 0x18
 	EMU_Write32(S7 + 4,T4); //+ 0x4
 	T9 = 0x4000000;

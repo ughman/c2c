@@ -56,7 +56,7 @@ ZZ_45B10_130:
 	GTE_SetRegister(GTE_CREG_RFC,T9);
 	GTE_SetRegister(GTE_CREG_GFC,T9);
 	GTE_SetRegister(GTE_CREG_BFC,T9);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	A3 <<= 13;
 	if ((int32_t)A3 >= 0)
 	{
@@ -72,7 +72,7 @@ ZZ_45B10_130:
 ZZ_45B10_174:
 	T5 = GTE_GetRegister(GTE_DREG_RGB2);
 	GTE_SetRegister(GTE_DREG_RGBC,T6);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T0 <<= 13;
 	if ((int32_t)T0 < 0)
 	{
@@ -88,7 +88,7 @@ ZZ_45B10_174:
 ZZ_45B10_1A0:
 	T6 = GTE_GetRegister(GTE_DREG_RGB2);
 	GTE_SetRegister(GTE_DREG_RGBC,T7);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T7 = GTE_GetRegister(GTE_DREG_RGB2);
 	T9 = 4080;
 	ZZ_CLOCKCYCLES(8,0x800427E0);
@@ -99,7 +99,7 @@ ZZ_45B10_1BC:
 	GTE_SetRegister(GTE_CREG_RFC,T9);
 	GTE_SetRegister(GTE_CREG_GFC,T9);
 	GTE_SetRegister(GTE_CREG_BFC,T9);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	A3 <<= 13;
 	if ((int32_t)A3 < 0)
 	{
@@ -115,7 +115,7 @@ ZZ_45B10_1BC:
 ZZ_45B10_1F0:
 	T5 = GTE_GetRegister(GTE_DREG_RGB2);
 	GTE_SetRegister(GTE_DREG_RGBC,T6);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T0 <<= 13;
 	if ((int32_t)T0 >= 0)
 	{
@@ -131,7 +131,7 @@ ZZ_45B10_1F0:
 ZZ_45B10_21C:
 	T6 = GTE_GetRegister(GTE_DREG_RGB2);
 	GTE_SetRegister(GTE_DREG_RGBC,T7);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T7 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(8,0x800427E0);
 	goto ZZ_420F4_6EC;
@@ -149,7 +149,7 @@ ZZ_45B10_23C:
 	GTE_SetRegister(GTE_CREG_RFC,T9);
 	GTE_SetRegister(GTE_CREG_GFC,T9);
 	GTE_SetRegister(GTE_CREG_BFC,T9);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	A3 <<= 13;
 	if ((int32_t)A3 >= 0)
 	{
@@ -165,7 +165,7 @@ ZZ_45B10_23C:
 ZZ_45B10_280:
 	T5 = GTE_GetRegister(GTE_DREG_RGB2);
 	GTE_SetRegister(GTE_DREG_RGBC,T6);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T0 <<= 13;
 	if ((int32_t)T0 < 0)
 	{
@@ -181,7 +181,7 @@ ZZ_45B10_280:
 ZZ_45B10_2AC:
 	T6 = GTE_GetRegister(GTE_DREG_RGB2);
 	GTE_SetRegister(GTE_DREG_RGBC,T7);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	A0 <<= 13;
 	if ((int32_t)A0 >= 0)
 	{
@@ -197,7 +197,7 @@ ZZ_45B10_2AC:
 ZZ_45B10_2D8:
 	T7 = GTE_GetRegister(GTE_DREG_RGB2);
 	GTE_SetRegister(GTE_DREG_RGBC,A1);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	A1 = GTE_GetRegister(GTE_DREG_RGB2);
 	T9 = 4080;
 	ZZ_CLOCKCYCLES(8,0x80042AB0);
@@ -208,7 +208,7 @@ ZZ_45B10_2F4:
 	GTE_SetRegister(GTE_CREG_RFC,T9);
 	GTE_SetRegister(GTE_CREG_GFC,T9);
 	GTE_SetRegister(GTE_CREG_BFC,T9);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	A3 <<= 13;
 	if ((int32_t)A3 < 0)
 	{
@@ -224,7 +224,7 @@ ZZ_45B10_2F4:
 ZZ_45B10_328:
 	T5 = GTE_GetRegister(GTE_DREG_RGB2);
 	GTE_SetRegister(GTE_DREG_RGBC,T6);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T0 <<= 13;
 	if ((int32_t)T0 >= 0)
 	{
@@ -240,7 +240,7 @@ ZZ_45B10_328:
 ZZ_45B10_354:
 	T6 = GTE_GetRegister(GTE_DREG_RGB2);
 	GTE_SetRegister(GTE_DREG_RGBC,T7);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	A0 <<= 13;
 	if ((int32_t)A0 < 0)
 	{
@@ -256,7 +256,7 @@ ZZ_45B10_354:
 ZZ_45B10_380:
 	T7 = GTE_GetRegister(GTE_DREG_RGB2);
 	GTE_SetRegister(GTE_DREG_RGBC,A1);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	A1 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(8,0x80042AB0);
 	goto ZZ_420F4_9BC;

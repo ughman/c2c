@@ -47,7 +47,7 @@ ZZ_43A8C_60:
 	A2 = T8 | T9;
 	GTE_SetRegister(GTE_DREG_VXY2,A2);
 	A2 = A0 | T9;
-	GTE_Execute(2621488);
+	GTE_RotateTranslateProjectTriple();
 	S4 = EMU_ReadU32(T4 + 4); //+ 0x4
 	S5 = EMU_ReadU32(T4 + 8); //+ 0x8
 	S6 = EMU_ReadU32(T4 + 12); //+ 0xC
@@ -60,7 +60,7 @@ ZZ_43A8C_60:
 	GTE_SetRegister(GTE_DREG_VXY0,A2);
 	V0 += T8;
 	V0 += T9;
-	GTE_Execute(1572865);
+	GTE_RotateTranslateProjectSingle();
 	EMU_Write32(S7 + 12,S4); //+ 0xC
 	T8 = EMU_ReadU32(V1 + 240); //+ 0xF0
 	V0 >>= 5;
@@ -118,7 +118,7 @@ ZZ_43A8C_FC:
 	GTE_SetRegister(GTE_CREG_RFC,T1);
 	GTE_SetRegister(GTE_CREG_GFC,T2);
 	GTE_SetRegister(GTE_CREG_BFC,T3);
-	GTE_Execute(7864336);
+	GTE_DepthCueSingle();
 	T0 = GTE_GetRegister(GTE_DREG_RGB2);
 	ZZ_CLOCKCYCLES(31,0x80043C04);
 ZZ_43A8C_178:

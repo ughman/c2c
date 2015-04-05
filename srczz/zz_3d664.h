@@ -61,7 +61,7 @@ ZZ_3D664_A4:
 	GTE_SetRegister(GTE_DREG_IR1,S0);
 	GTE_SetRegister(GTE_DREG_IR2,S1);
 	GTE_SetRegister(GTE_DREG_IR3,S2);
-	GTE_Execute(4841490);
+	GTE_Multiply_IR_Rotation();
 	S0 = GTE_GetRegister(GTE_DREG_IR1);
 	S1 = GTE_GetRegister(GTE_DREG_IR2);
 	S2 = GTE_GetRegister(GTE_DREG_IR3);
@@ -451,7 +451,7 @@ ZZ_3D664_3E0:
 	GTE_SetRegister(GTE_CREG_RT33_NONE,T2);
 	EMU_SMultiply(T6,T1);
 	GP = (int32_t)GP >> 12;
-	GTE_Execute(4743186);
+	GTE_Multiply_V0_Rotation();
 	GTE_SetRegister(GTE_CREG_RT11_RT12,T0);
 	GTE_SetRegister(GTE_CREG_RT22_RT23,T0);
 	AT = GP & 0xFFFF;
@@ -461,7 +461,7 @@ ZZ_3D664_3E0:
 	S0 = GTE_GetRegister(GTE_DREG_IR3);
 	EMU_SMultiply(T6,GP);
 	S7 = (int32_t)S7 >> 12;
-	GTE_Execute(4743186);
+	GTE_Multiply_V0_Rotation();
 	GTE_SetRegister(GTE_CREG_RT11_RT12,T4);
 	GTE_SetRegister(GTE_CREG_RT22_RT23,T4);
 	AT = SP & 0xFFFF;
@@ -471,7 +471,7 @@ ZZ_3D664_3E0:
 	S2 = GTE_GetRegister(GTE_DREG_IR2);
 	S3 = GTE_GetRegister(GTE_DREG_IR3);
 	EMU_SMultiply(T4,SP);
-	GTE_Execute(4743186);
+	GTE_Multiply_V0_Rotation();
 	T8 = (int32_t)T8 >> 12;
 	S4 = GTE_GetRegister(GTE_DREG_IR1);
 	S5 = GTE_GetRegister(GTE_DREG_IR2);
@@ -497,7 +497,7 @@ ZZ_3D664_3E0:
 	GTE_SetRegister(GTE_DREG_IR1,S3);
 	GTE_SetRegister(GTE_DREG_IR2,S0);
 	GTE_SetRegister(GTE_DREG_IR3,S4);
-	GTE_Execute(4841490);
+	GTE_Multiply_IR_Rotation();
 	S3 = GTE_GetRegister(GTE_DREG_IR1);
 	S0 = GTE_GetRegister(GTE_DREG_IR2);
 	S4 = GTE_GetRegister(GTE_DREG_IR3);
@@ -505,7 +505,7 @@ ZZ_3D664_3E0:
 	GTE_SetRegister(GTE_DREG_IR2,S7);
 	GTE_SetRegister(GTE_DREG_IR3,S1);
 	T0 = S3;
-	GTE_Execute(4841490);
+	GTE_Multiply_IR_Rotation();
 	T1 = S0;
 	S2 = GTE_GetRegister(GTE_DREG_IR1);
 	S7 = GTE_GetRegister(GTE_DREG_IR2);

@@ -79,7 +79,24 @@ enum
 extern uint32_t GTE_GetRegister(int reg);
 extern void GTE_SetRegister(int reg,uint32_t value);
 
-extern void GTE_Execute(uint32_t args);
+extern void GTE_RotateTranslateProjectSingle(void);
+extern void GTE_RotateTranslateProjectTriple(void);
+
+extern void GTE_NormalClip(void);
+
+extern void GTE_Multiply_V0_Rotation(void);
+extern void GTE_Multiply_V1_Rotation(void);
+extern void GTE_Multiply_V2_Rotation(void);
+extern void GTE_Multiply_IR_Rotation(void);
+extern void GTE_Multiply_V0_Light(void);
+extern void GTE_Multiply_V1_Light(void);
+extern void GTE_Multiply_V2_Light(void);
+extern void GTE_Multiply_IR_Light(void);
+extern void GTE_MultiplyAdd_V0_Rotation_Translation(void);
+
+extern void GTE_DepthCueSingle(void);
+extern void GTE_DepthCueTriple(void);
+extern void GTE_DepthCueColorLight(void);
 
 #ifdef __cplusplus
 }
