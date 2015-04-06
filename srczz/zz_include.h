@@ -21,9 +21,9 @@
 #include "zz_12294.h"
 #include "zz_123bc.h"
 #include "zz_123f0.h"
-#include "zz_1254c.h"
+ZZ_MARK_NATIVE(0x8001254C,0x800125F8,ZZ_1254C,NS_1254C);
 #include "zz_125f8.h"
-#include "zz_12688.h"
+ZZ_MARK_NATIVE(0x80012688,0x800126BC,ZZ_12688,NS_VerifyChecksum);
 #include "zz_126bc.h"
 #include "zz_12ae4.h"
 #include "zz_12c88.h"
@@ -33,7 +33,7 @@
 #include "zz_12fe8.h"
 #include "zz_130fc.h"
 #include "zz_13148.h"
-#include "zz_13164.h"
+ZZ_MARK_NATIVE(0x80013164,0x80013304,ZZ_13164,NS_13164);
 #include "zz_13304.h"
 #include "zz_137cc.h"
 #include "zz_1398c.h"
@@ -596,7 +596,7 @@
 #include "zz_4a624.h"
 #include "zz_4a6bc.h"
 #include "zz_4a71c.h"
-#include "zz_4a864.h"
+ZZ_MARK_NATIVE(0x8004A864,0x8004A900,ZZ_4A864,CORE_VSync);
 #include "zz_4a900.h"
 #include "zz_4a910.h"
 #include "zz_4a940.h"
