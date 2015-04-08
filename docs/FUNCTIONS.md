@@ -543,19 +543,19 @@ Unlabeled functions have not yet been reverse engineered and can be found under 
 * `800493F4`
 * `8004940C`
 * `80049424`
-* `8004943C`
-* `8004944C`
-* `8004945C`
-* `8004946C`
-* `8004947C`
-* `8004948C`
-* `8004949C`
-* `800494AC`
-* `800494BC`
-* `800494CC`
+* `8004943C` - `BIOS_AToI`
+* `8004944C` - `BIOS_StrCat`
+* `8004945C` - `BIOS_StrCmp`
+* `8004946C` - `BIOS_StrNCmp`
+* `8004947C` - `BIOS_StrCpy`
+* `8004948C` - `BIOS_StrLen`
+* `8004949C` - `BIOS_BCopy`
+* `800494AC` - `BIOS_BZero`
+* `800494BC` - `BIOS_MemCpy`
+* `800494CC` - `BIOS_MemSet`
 * `800494DC`
 * `800494EC`
-* `80049D48`
+* `80049D48` - `BIOS_MemChr`
 * `80049D58`
 * `80049DC4` - `main`, not yet reverse-engineered
 * `80049E6C`
