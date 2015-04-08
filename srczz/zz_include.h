@@ -5,7 +5,7 @@
 #include "zz_116c0.h"
 #include "zz_116d4.h"
 #include "zz_11764.h"
-#include "zz_117bc.h"
+ZZ_MARK_NATIVE(0x800117BC,0x80011800,ZZ_117BC,CORE_Main);
 #include "zz_11800.h"
 #include "zz_11e24.h"
 #include "zz_11e80.h"
