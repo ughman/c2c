@@ -9,6 +9,7 @@ extern "C" {
 #endif
 
 extern int CORE_Main(void);
+extern void CORE_Start(void);
 extern void CORE_VSync(int32_t count,int32_t timeout);
 
 #ifdef __cplusplus

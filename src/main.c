@@ -1,6 +1,7 @@
 #include "common.h"
 #include <stdio.h>
 #include "emu.h"
+#include "core.h"
 
 int main(int argc,char **argv)
 {
@@ -17,7 +18,7 @@ int main(int argc,char **argv)
 	SDL_LogSetAllPriority(SDL_LOG_PRIORITY_DEBUG);
 #endif
 	EMU_Init();
-	EMU_Invoke(0x80049DC4,0);
+	CORE_Start();
 	SDL_Quit();
 	return EXIT_SUCCESS;
 }

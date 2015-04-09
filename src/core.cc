@@ -11,6 +11,26 @@ int CORE_Main(void)
 	return 0;
 }
 
+void CORE_Start(void)
+{
+	for (uint32_t i = 0x8005F53C;i < 0x8006F488;i += 4)
+	{
+		EMU_Write32(i,0);
+	}
+	V0 = EMU_ReadU32(0x8005F420);
+	V0 = EMU_CheckedAdd(V0,-8);
+	SP = V0 | 0x80000000;
+	A1 = V0 - EMU_ReadU32(0x8005F41C) - 0x6F488;
+	EMU_Write32(0x8005CDC4,A1);
+	EMU_Write32(0x8005CDC0,0x8006F488);
+	EMU_Write32(0x8005F5B8,RA); // $RA is garbage here
+	GP = 0x8005F414;
+	FP = SP;
+	EMU_Invoke(0x8001144C,2,0x8006F48C,A1);
+	CORE_Main();
+	EMU_Break(1);
+}
+
 void CORE_VSync(int32_t count,int32_t timeout)
 {
 	timeout <<= 15;

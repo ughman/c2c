@@ -557,7 +557,7 @@ Unlabeled functions have not yet been reverse engineered and can be found under 
 * `800494EC`
 * `80049D48` - `BIOS_MemChr`
 * `80049D58`
-* `80049DC4` - `main`, not yet reverse-engineered
+* `80049DC4` - `CORE_Start`
 * `80049E6C`
 * `80049F44`
 * `80049F54`

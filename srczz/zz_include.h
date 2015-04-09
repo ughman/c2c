@@ -553,7 +553,7 @@ ZZ_MARK_NATIVE(0x800494CC,0x800494D8,ZZ_494CC,BIOS_MemSet);
 #include "zz_494ec.h"
 ZZ_MARK_NATIVE(0x80049D48,0x80049D54,ZZ_49D48,BIOS_MemChr);
 #include "zz_49d58.h"
-#include "zz_49dc4.h"
+ZZ_MARK_NATIVE(0x80049DC4,0x80049E6C,Main,CORE_Start);
 #include "zz_49e6c.h"
 #include "zz_49f44.h"
 #include "zz_49f54.h"
