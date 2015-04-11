@@ -69,7 +69,7 @@ As an example of hand-decompilation of code, the C code from above could be chan
 	V0 = EMU_ReadU16(S3 + 4) - 20U < 2;
 ```
 
-Furthermore, `V0` is actually used directly after this code as a condition for a branch and then discarded, so `EMU_ReadU16(S3 + 4) - 20 < 2` could be placed directly into the expression and V0 removed. Eventually, a decompiled function will not even rely on MIPS registers and can use real C arguments and local variables.
+Furthermore, `V0` is actually used directly after this code as a condition for a branch and then discarded, so `EMU_ReadU16(S3 + 4) - 20U < 2` could be placed directly into the expression and V0 removed. Eventually, a decompiled function will not even rely on MIPS registers and can use real C arguments and local variables.
 
 Decompiled functions may call functions which have yet to be decompiled by calling `EMU_Invoke`. This allows decompilation to begin at non-leaf functions.
 
