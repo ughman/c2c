@@ -63,7 +63,7 @@ As an example of hand-decompilation of code, the C code from above could be chan
 	S3 = A0;
 	if (V0 == S3)
 		EMU_Write32(V1,0);
-	V0 = EMU_ReadU16(S3 + 4) - 20 < 2;
+	V0 = EMU_ReadU16(S3 + 4) - 20U < 2;
 ```
 
 Furthermore, `V0` is actually used directly after this code as a condition for a branch and then discarded, so `EMU_ReadU16(S3 + 4) - 20 < 2` could be placed directly into the expression and V0 removed. Eventually, a decompiled function will not even rely on MIPS registers and can use real C arguments and local variables.
