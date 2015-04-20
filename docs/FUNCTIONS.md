@@ -10,7 +10,7 @@ Unlabeled functions have not yet been reverse engineered and can be found under 
 * `800116D4`
 * `80011764`
 * `800117BC` - `CORE_Main`
-* `80011800`
+* `80011800` - `CORE_Loop`
 * `80011E24`
 * `80011E80`
 * `80011E88`
