@@ -74,7 +74,7 @@ Furthermore, `V0` is actually used directly after this code as a condition for a
 Decompiled functions may call functions which have yet to be decompiled by calling `EMU_Invoke`. This allows decompilation to begin at non-leaf functions.
 
 ### The Main Code ###
-The main body of code is located in `src/` and contains the core code of the project as well as interoperability code for accessing the emulator. Decompiled functions should be moved into this section of the code base and given proper function names.
+The main body of the code is located in `src/` and contains the core code of the project as well as interoperability code for accessing the emulator. Decompiled functions should be moved into this section of the code base and given proper function names.
 
 ## Compiling ##
 At the moment, C2C is only available for compilation and execution on Windows systems. You may be able to rig a non-windows build with some work, however.
